@@ -11,9 +11,11 @@ public class pruebas {
 		Contacto contacto = new Contacto(mail, null);
 		
 		Clientes cliente1 = new Clientes("71050002Z", "Paco", "Martinez", "Sanchez", direccion, contacto, "paco@gmail.com", 100000.1);
-		Cuenta cuenta1 = new Cuenta(cliente1.getDni(), 122231, 122313.3);
+		cuentaNomina cuenta1 = new cuentaNomina(cliente1.getDni(), 122231, 122313.3);
 		
 		System.out.println(cuenta1.getDni());
+		
+		
 		
 	}
 }
