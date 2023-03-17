@@ -2,9 +2,9 @@ package sesion4;
 
 public class Cuenta {
 
-	private String dni;
-	private int numCuenta;
-	private double saldoTotCuenta;
+	protected String dni;
+	protected int numCuenta;
+	protected double saldoTotCuenta;
 	
 	public Cuenta(String dni, int numCuenta, double saldoTotCuenta) {
 		this.dni = dni;

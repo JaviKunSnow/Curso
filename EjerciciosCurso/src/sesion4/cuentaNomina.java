@@ -44,10 +44,10 @@ public class cuentaNomina extends Cuenta {
 
 	@Override
 	public void addSaldoTotCuenta(double saldoTotCuenta) {
-		if(saldoTotCuenta > 1500) {
-			this.addSaldoTotCuenta(saldoTotCuenta*0.01);
+		if(saldoTotCuenta > 1500.0) {
+			this.saldoTotCuenta += (saldoTotCuenta*0.01);
 		} else {
-			this.addSaldoTotCuenta(saldoTotCuenta*0.01);;
+			this.saldoTotCuenta += saldoTotCuenta;
 		}
 		
 	}
