@@ -8,16 +8,18 @@ abstract public class Persona {
 	private String apellido2;
 	private Direccion direccion;
 	private Contacto contacto;
+	private Buzon buzon;
 
-	public Persona(String dni, String nombre, String apellido1, String apellido2, Direccion direccion, Contacto contacto) {
+	public Persona(String dni, String nombre, String apellido1, String apellido2, Direccion direccion, Contacto contacto, Buzon buzon) {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
 		this.apellido2 = apellido2;
 		this.direccion = direccion;
 		this.contacto = contacto;
+		this.buzon = buzon;
 	}
-	
+
 	public String getDni() {
 		return dni;
 	}
@@ -66,6 +68,12 @@ abstract public class Persona {
 		this.contacto = contacto;
 	}
 
-	
+	public Buzon getBuzon() {
+		return buzon;
+	}
+
+	public void setBuzon(Buzon buzon) {
+		this.buzon = buzon;
+	}
 	
 }

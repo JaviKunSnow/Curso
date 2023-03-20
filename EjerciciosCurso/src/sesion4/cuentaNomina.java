@@ -52,13 +52,16 @@ public class cuentaNomina extends Cuenta {
 		
 	}
 
-	@Override
-	public void realizarTransCom(Cuenta cuenta, double cambio) {
-		if(cambio < this.getSaldoTotCuenta()) {
-			this.setSaldoTotCuenta(this.getSaldoTotCuenta() - (cambio*0.005));
-			cuenta.addSaldoTotCuenta(cambio);
-		}
+	public void llamaRealizarTrans(Cuenta cuentaOrigen, Cuenta cuentaDestino, double cambio) {
+		realizarTrans(this, cuentaDestino, cambio);
 	}
+
+	public void llamaRealizarTransCom(Cuenta cuentaDestino, Cuenta cuentaOrigen, double cambio, double comision) {
+		// TODO Auto-generated method stub
+		realizarTransCom(this, cuentaOrigen, cambio, comision);
+	}
+
+	
 
 		
 
