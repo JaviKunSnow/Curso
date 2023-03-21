@@ -44,21 +44,16 @@ public class cuentaNomina extends Cuenta {
 
 	@Override
 	public void addSaldoTotCuenta(double saldoTotCuenta) {
-		if(saldoTotCuenta > 1500.0) {
-			this.saldoTotCuenta += (saldoTotCuenta*0.01);
-		} else {
-			this.saldoTotCuenta += saldoTotCuenta;
-		}
-		
+		this.saldoTotCuenta += saldoTotCuenta;
 	}
 
 	public void llamaRealizarTrans(Cuenta cuentaOrigen, Cuenta cuentaDestino, double cambio) {
 		realizarTrans(this, cuentaDestino, cambio);
 	}
 
-	public void llamaRealizarTransCom(Cuenta cuentaDestino, Cuenta cuentaOrigen, double cambio, double comision) {
+	public void llamaRealizarTransCom(Cuenta cuentaOrigen, Cuenta cuentaDestino, double cambio, double comision) {
 		// TODO Auto-generated method stub
-		realizarTransCom(this, cuentaOrigen, cambio, comision);
+		realizarTransCom(this, cuentaDestino, cambio, comision);
 	}
 
 	

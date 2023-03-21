@@ -21,7 +21,7 @@ public class pruebas {
 		
 		Clientes cliente1 = new Clientes("71050002Z", "Paco", "Martinez", "Sanchez", direccion, contacto, buzon1, "paco@gmail.com", 100000.1);
 		Clientes cliente2 = new Clientes("71055602Z", "Pepe", "Gomez", "Sanchez", direccion, contacto, buzon2, "pepe@gmail.com", 100000.1);
-		//cuentaNomina cuenta1 = new cuentaNomina(cliente1.getDni(), 122231, 122.3);
+		
 		Mensaje mensaje1 = new Mensaje(cliente1, cliente2, "Hola pepe", "2012");
 		
 		buzon1.llamaEnviar(buzon1, buzon2, cliente1.getNombre(), mensaje1);
@@ -32,11 +32,17 @@ public class pruebas {
 			System.out.println(entry.getValue().getMensaje());
 		}
 		
-		/*
+		cuentaNomina cuenta1 = new cuentaNomina(cliente1.getDni(), 122231, 122.3);
+		cuentaNomina cuenta2 = new cuentaNomina(cliente2.getDni(), 124431, 500.3);
+		
 		System.out.println(cuenta1.getSaldoTotCuenta());
 		cuenta1.addSaldoTotCuenta(2000.20);
 		System.out.println(cuenta1.getSaldoTotCuenta());
-		*/
+		
+		cuenta1.llamaRealizarTrans(cuenta1, cuenta2, 1000);
+		System.out.println(cuenta1.getSaldoTotCuenta());
+		cuenta1.llamaRealizarTransCom(cuenta1, cuenta2, 500, 5.0);
+		System.out.println(cuenta1.getSaldoTotCuenta());
 		
 		
 	}

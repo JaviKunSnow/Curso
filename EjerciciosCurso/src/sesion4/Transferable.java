@@ -7,7 +7,7 @@ public interface Transferable {
 		cuentaDestino.addSaldoTotCuenta(cambio);
 	}
 	
-	default void realizarTransCom(Cuenta cuentaDestino, Cuenta cuentaOrigen, double cambio, double comision) {
+	default void realizarTransCom(Cuenta cuentaOrigen, Cuenta cuentaDestino, double cambio, double comision) {
 		cuentaOrigen.addSaldoTotCuenta(-cambio);
 		cuentaOrigen.addSaldoTotCuenta(-comision);
 		cuentaDestino.addSaldoTotCuenta(cambio);
