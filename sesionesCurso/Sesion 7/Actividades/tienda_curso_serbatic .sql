@@ -1,3 +1,6 @@
+create database tienda;
+use tienda;
+
 CREATE TABLE `productos` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `id_categoria` int,
