@@ -18,7 +18,6 @@ class HiloAtomico implements Runnable {
     public void run() {
         for (int i = 0; i < 1000; i++) {
             contadorAtomico.incrementAndGet();
-            contadorAtomico.
            // contador++;
         }
     }

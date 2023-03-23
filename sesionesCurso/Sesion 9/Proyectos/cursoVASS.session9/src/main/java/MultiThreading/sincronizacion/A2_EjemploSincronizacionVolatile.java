@@ -10,8 +10,9 @@ import java.io.IOException;
 class HiloVolatile2 implements Runnable {
 
     //COMENTAR Y DESCOMENTAR LAS VARIABLES PARA PODER HACER LAS PRUEBAS EN LOS  CASOS
-      public static  boolean pleaseStop = false;
+    //  public static  boolean pleaseStop = false;
    // public volatile boolean pleaseStop = false;
+	public static volatile boolean pleaseStop = false;
   //  public static boolean pleaseStop = false;
    // public boolean pleaseStop = false;
     private int contador = 1;

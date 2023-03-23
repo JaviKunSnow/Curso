@@ -13,7 +13,7 @@ import model.modelPedidos;
 public class pedidosDao {
 
 	private static Connection con;
-
+	
 	public static boolean insertarPedido(modelPedidos pedido) {
 		con = Conexion.getConexion();
 		
@@ -31,7 +31,6 @@ public class pedidosDao {
                
                stmt.executeUpdate();
                
-               System.out.println("funciona");
                Conexion.desconectar();
                return true;
                
@@ -62,6 +61,42 @@ public class pedidosDao {
 			PreparedStatement sentenciaSQL = con.prepareStatement("select id from pedidos where id_usuario = ? order by id desc LIMIT 1");
 			
 			sentenciaSQL.setInt(1, id);
+			
+			ResultSet rs = sentenciaSQL.executeQuery();
+			if (rs.next()) {
+				return rs.getInt(1);
+
+			} else {
+				System.out.println("No se puede desplazar el cursor");
+			}
+
+			if (con != null) {
+				// ** Operaciones
+				Conexion.desconectar();
+			} else {
+				System.out.println("Conexion no realizada");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			if (con != null) {
+				try {
+					con.rollback();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		}
+		return 0;
+
+	}
+	
+	public static int devolverCuentaRegistros() {
+		con = Conexion.getConexion();
+		
+		try {
+			PreparedStatement sentenciaSQL = con.prepareStatement("select count(*) from pedidos");
 			
 			ResultSet rs = sentenciaSQL.executeQuery();
 			if (rs.next()) {
