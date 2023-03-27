@@ -1,0 +1,62 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+
+
+	<display-name>Archetype Created Web Application</display-name>
+
+
+	<context-param>
+		<param-name>dname</param-name>
+		<param-value>sun.jdbc.odbc.JdbcOdbcDriver</param-value>
+	</context-param>
+
+
+
+	
+
+	<servlet>
+		<servlet-name>IndexServlet</servlet-name>
+		<display-name>IndexServlet</display-name>
+		<description></description>
+		<servlet-class>ztic.com.controlador.IndexServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Login</servlet-name>
+		<display-name>Login</display-name>
+		<description></description>
+		<servlet-class>ztic.com.controlador.Login</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>MetodosServletInterface</servlet-name>
+		<display-name>MetodosServletInterface</display-name>
+		<description></description>
+		<servlet-class>ztic.com.controlador.MetodosServletInterface</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>FuncionalidadInterfaceServlet</servlet-name>
+		<display-name>FuncionalidadInterfaceServlet</display-name>
+		<description></description>
+		<servlet-class>ztic.com.controlador.FuncionalidadInterfaceServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>IndexServlet</servlet-name>
+		<url-pattern>/IndexServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Login</servlet-name>
+		<url-pattern>/Login</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>MetodosServletInterface</servlet-name>
+		<url-pattern>/MetodosServletInterface</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>FuncionalidadInterfaceServlet</servlet-name>
+		<url-pattern>/FuncionalidadInterfaceServlet</url-pattern>
+	</servlet-mapping>
+
+
+</web-app>
