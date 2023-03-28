@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class EjmploServlet
@@ -57,6 +58,15 @@ public class EjmploServlet extends HttpServlet {
 		}
 		
 		// acceso a datos
+		
+		
+		// sesion
+		
+		HttpSession sesion = request.getSession();
+		
+		sesion.setAttribute("usuario", parametro);
+		
+		sesion.setAttribute("password", parametro2);
 		
 		
 		// mandar a respuesta
