@@ -1,27 +1,23 @@
 package controlador;
 
 import java.io.IOException;
-import java.util.HashMap;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class carritoServlet
+ * Servlet implementation class loginServlet
  */
-@WebServlet("/carrito")
-public class carritoServlet extends HttpServlet {
+@WebServlet("/login")
+public class loginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	int contadorCarrito = 0;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public carritoServlet() {
+    public loginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,33 +26,14 @@ public class carritoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		HttpSession sesion = request.getSession();
-		HashMap <Integer, Integer> carrito = new HashMap<>();
-		
-		String id = request.getParameter("id");
-		Integer idparse = Integer.parseInt(id);
-		
-		if(sesion.getAttribute("carrito") != null) {
-			carrito = (HashMap) sesion.getAttribute("carrito");
-		}
-		
-		if(carrito.containsKey(idparse)) {
-			carrito.replace(idparse, carrito.get(idparse) + 1);
+		request.getSession().setAttribute("usuario", request.getParameter("usuario"));
+		if(request.getSession().getAttribute("comprando") != null) {
+			request.getRequestDispatcher("carrito.jsp").forward(request, response);
+		} else if(request.getSession().getAttribute("perfil") != null) {
+			request.getRequestDispatcher("perfil.jsp").forward(request, response);
 		} else {
-			carrito.put(idparse, 1);
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
-		
-		if(sesion.getAttribute("carritoContador") != null) {
-			sesion.setAttribute("carritoContador", contadorCarrito++);
-		} else {
-			sesion.setAttribute("carritoContador", 1);
-		}
-		
-		sesion.setAttribute("carrito", carrito);
-		
-		request.getRequestDispatcher("index.jsp").forward(request, response);
-		
 	}
 
 	/**
@@ -68,4 +45,3 @@ public class carritoServlet extends HttpServlet {
 	}
 
 }
- 

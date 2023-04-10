@@ -8,20 +8,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import modelo.Articulo;
 /**
- * Servlet implementation class carritoServlet
+ * Servlet implementation class FinalizarCompra
  */
-@WebServlet("/carrito")
-public class carritoServlet extends HttpServlet {
+@WebServlet("/finalizar")
+public class FinalizarCompra extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	int contadorCarrito = 0;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public carritoServlet() {
+    public FinalizarCompra() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,33 +28,10 @@ public class carritoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		HttpSession sesion = request.getSession();
-		HashMap <Integer, Integer> carrito = new HashMap<>();
-		
-		String id = request.getParameter("id");
-		Integer idparse = Integer.parseInt(id);
-		
-		if(sesion.getAttribute("carrito") != null) {
-			carrito = (HashMap) sesion.getAttribute("carrito");
-		}
-		
-		if(carrito.containsKey(idparse)) {
-			carrito.replace(idparse, carrito.get(idparse) + 1);
-		} else {
-			carrito.put(idparse, 1);
-		}
-		
-		if(sesion.getAttribute("carritoContador") != null) {
-			sesion.setAttribute("carritoContador", contadorCarrito++);
-		} else {
-			sesion.setAttribute("carritoContador", 1);
-		}
-		
-		sesion.setAttribute("carrito", carrito);
-		
-		request.getRequestDispatcher("index.jsp").forward(request, response);
-		
+		// TODO Auto-generated method stub
+		request.getSession().setAttribute("carrito",new HashMap<Integer, Articulo>());
+		request.getRequestDispatcher("compraFinalizada.jsp").forward(request, response);
+	    request.getSession().removeAttribute("comprando");	
 	}
 
 	/**
@@ -68,4 +43,3 @@ public class carritoServlet extends HttpServlet {
 	}
 
 }
- 

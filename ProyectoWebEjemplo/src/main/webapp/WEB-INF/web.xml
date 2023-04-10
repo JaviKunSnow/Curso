@@ -4,6 +4,26 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <filter>
+  	<filter-name>loginFilter</filter-name>
+  	<display-name>loginFilter</display-name>
+  	<description></description>
+  	<filter-class>filtros.loginFilter</filter-class>
+  </filter>
+  <filter>
+  	<filter-name>perfilFilter</filter-name>
+  	<display-name>perfilFilter</display-name>
+  	<description></description>
+  	<filter-class>filtros.perfilFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>loginFilter</filter-name>
+  	<servlet-name>carritoFinalizarServlet</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>perfilFilter</filter-name>
+  	<servlet-name>perfilServlet</servlet-name>
+  </filter-mapping>
   <servlet>
   	<servlet-name>cerrarSesionServlet</servlet-name>
   	<display-name>cerrarSesionServlet</display-name>
@@ -16,6 +36,36 @@
   	<description></description>
   	<servlet-class>controlador.carritoServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>carritoVistaServlet</servlet-name>
+  	<display-name>carritoVistaServlet</display-name>
+  	<description></description>
+  	<servlet-class>controlador.carritoVistaServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>loginServlet</servlet-name>
+  	<display-name>loginServlet</display-name>
+  	<description></description>
+  	<servlet-class>controlador.loginServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>carritoFinalizarServlet</servlet-name>
+  	<display-name>carritoFinalizarServlet</display-name>
+  	<description></description>
+  	<servlet-class>controlador.carritoFinalizarServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>perfilServlet</servlet-name>
+  	<display-name>perfilServlet</display-name>
+  	<description></description>
+  	<servlet-class>controlador.perfilServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>catalogoServlet</servlet-name>
+  	<display-name>catalogoServlet</display-name>
+  	<description></description>
+  	<servlet-class>controlador.catalogoServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>cerrarSesionServlet</servlet-name>
   	<url-pattern>/cerrarSesionServlet</url-pattern>
@@ -23,6 +73,26 @@
   <servlet-mapping>
   	<servlet-name>carritoServlet</servlet-name>
   	<url-pattern>/carritoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>carritoVistaServlet</servlet-name>
+  	<url-pattern>/carritoVistaServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>loginServlet</servlet-name>
+  	<url-pattern>/loginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>carritoFinalizarServlet</servlet-name>
+  	<url-pattern>/carritoFinalizarServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>perfilServlet</servlet-name>
+  	<url-pattern>/perfilServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>catalogoServlet</servlet-name>
+  	<url-pattern>/catalogoServlet</url-pattern>
   </servlet-mapping>
  
   

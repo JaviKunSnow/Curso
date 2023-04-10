@@ -6,8 +6,8 @@
                 </a>
                 <form class="col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" action="./index.php" method="post">
                 <ul class="nav">
-                    <input type="submit" class="btn text-white" name="home" value="Inicio">
-                    <input type="submit" class="btn text-white" name="home" value="Tienda">
+                    <a href="" class="btn text-white">inicio</a>
+                    <a href="perfil" class="btn text-white">perfil</a>
                     <input type="submit" class="btn text-white" name="home" value="Contacto">
                     </ul>
                 </form>
@@ -16,7 +16,7 @@
                 	<section class="text-end">
                 		<a href="perfil" class='btn btn-outline-light me-2'><%=request.getSession().getAttribute("usuario")%></a>
                         <a href="cerrar" class='btn btn-outline-light me-2'>cerrar sesion</a>
-                        <a href="carrito" class='btn btn-warning'>
+                        <a href="carritoVista" class='btn btn-warning'>
                         <%if(request.getSession().getAttribute("carritoContador") != null) {%>
                         	<%=request.getSession().getAttribute("carritoContador")%><%
                         	} else {%>
@@ -24,7 +24,17 @@
                         	<%}%>
                         	</a>
                 	</section>
-                	<% } %>
+                	<% } else {%>
+                		<section class="text-end">
+                		<a href="login" class='btn btn-outline-light me-2'>iniciar sesion</a>
+                        <a href="carritoVista" class='btn btn-warning'>
+                         	<%if(request.getSession().getAttribute("carritoContador") != null) {%>
+                              <%=request.getSession().getAttribute("carritoContador")%><%
+                            } else {%>
+                              0	
+                            <%}%>  
+                        </a>
+                	<%}%>
                	</form>
             </section>
         </section>

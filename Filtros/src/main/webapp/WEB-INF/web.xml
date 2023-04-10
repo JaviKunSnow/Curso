@@ -1,0 +1,148 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <filter>
+  	<filter-name>SessionFilter</filter-name>
+  	<display-name>SessionFilter</display-name>
+  	<description></description>
+  	<filter-class>filtros.SessionFilter</filter-class>
+  </filter>
+  
+  <filter>
+  	<filter-name>ComprobarCarritoFilter</filter-name>
+  	<display-name>ComprobarCarritoFilter</display-name>
+  	<description></description>
+  	<filter-class>filtros.ComprobarCarritoFilter</filter-class>
+  </filter>
+  
+   <filter>
+  	<filter-name>MiPrimerFiltro</filter-name>
+  	<display-name>MiPrimerFiltro</display-name>
+  	<description></description>
+  	<filter-class>filtros.MiPrimerFiltro</filter-class>
+  </filter>
+   <filter>
+   	<filter-name>MiSegundoFiltro</filter-name>
+   	<display-name>MiSegundoFiltro</display-name>
+   	<description></description>
+   	<filter-class>filtros.MiSegundoFiltro</filter-class>
+   </filter>
+    	
+  <filter-mapping>
+  	<filter-name>SessionFilter</filter-name>
+  	<url-pattern>/finalizar</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>SessionFilter</filter-name>
+  	<url-pattern>/perfil.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>ComprobarCarritoFilter</filter-name>
+  	<url-pattern>/finalizar</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+  	<filter-name>MiPrimerFiltro</filter-name>
+  	<url-pattern>/prueba</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+  	<filter-name>MiSegundoFiltro</filter-name>
+  	<url-pattern>/prueba</url-pattern>
+  </filter-mapping>
+  
+  <listener>
+  	<listener-class>configuracion.MiListener</listener-class>
+  </listener>
+  <servlet>
+  	<servlet-name>CatalogoServlet</servlet-name>
+  	<display-name>CatalogoServlet</display-name>
+  	<description></description>
+  	<servlet-class>controlador.CatalogoServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AgregarArticuloServlet</servlet-name>
+  	<display-name>AgregarArticuloServlet</display-name>
+  	<description></description>
+  	<servlet-class>controlador.AgregarArticuloServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>FinalizarCompra</servlet-name>
+  	<display-name>FinalizarCompra</display-name>
+  	<description></description>
+  	<servlet-class>controlador.FinalizarCompra</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>LoginServlet</servlet-name>
+  	<display-name>LoginServlet</display-name>
+  	<description></description>
+  	<servlet-class>controlador.LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>CerrarSessionServlet</servlet-name>
+  	<display-name>CerrarSessionServlet</display-name>
+  	<description></description>
+  	<servlet-class>controlador.CerrarSessionServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>VaciarCarritoServlet</servlet-name>
+  	<display-name>VaciarCarritoServlet</display-name>
+  	<description></description>
+  	<servlet-class>controlador.VaciarCarritoServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>PruebaFiltro</servlet-name>
+  	<display-name>PruebaFiltro</display-name>
+  	<description></description>
+  	<servlet-class>controlador.PruebaFiltro</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>RedireccionServlet</servlet-name>
+  	<display-name>RedireccionServlet</display-name>
+  	<description></description>
+  	<servlet-class>controlador.RedireccionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>CatalogoServlet</servlet-name>
+  	<url-pattern>/CatalogoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AgregarArticuloServlet</servlet-name>
+  	<url-pattern>/AgregarArticuloServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>FinalizarCompra</servlet-name>
+  	<url-pattern>/FinalizarCompra</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LoginServlet</servlet-name>
+  	<url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>CerrarSessionServlet</servlet-name>
+  	<url-pattern>/CerrarSessionServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>VaciarCarritoServlet</servlet-name>
+  	<url-pattern>/VaciarCarritoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>PruebaFiltro</servlet-name>
+  	<url-pattern>/prueba</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>RedireccionServlet</servlet-name>
+  	<url-pattern>/RedireccionServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  <welcome-file-list>
+  <welcome-file>/prueba</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+      <welcome-file>home.jsp</welcome-file>
+  </welcome-file-list>
+  
+</web-app>
