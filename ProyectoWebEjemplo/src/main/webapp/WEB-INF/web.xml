@@ -16,6 +16,12 @@
   	<description></description>
   	<filter-class>filtros.perfilFilter</filter-class>
   </filter>
+  <filter>
+  	<filter-name>validarLoginFilter</filter-name>
+  	<display-name>validarLoginFilter</display-name>
+  	<description></description>
+  	<filter-class>filtros.validarLoginFilter</filter-class>
+  </filter>
   <filter-mapping>
   	<filter-name>loginFilter</filter-name>
   	<servlet-name>carritoFinalizarServlet</servlet-name>
@@ -23,6 +29,10 @@
   <filter-mapping>
   	<filter-name>perfilFilter</filter-name>
   	<servlet-name>perfilServlet</servlet-name>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>validarLoginFilter</filter-name>
+  	<servlet-name>loginServlet</servlet-name>
   </filter-mapping>
   <servlet>
   	<servlet-name>cerrarSesionServlet</servlet-name>

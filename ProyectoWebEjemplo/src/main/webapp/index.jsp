@@ -12,35 +12,35 @@
 <body style="padding-bottom: 70px; padding-top: 70px;">
     <%@ include file="header.jsp"%>
     <main>
-   
-                <div class="album py-5 bg-body-tertiary">
-                    <div class="container">
+   			<div class="album py-5 bg-body-tertiary">
+    <div class="container">
 
-                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                        <% List<articulo> catalogo = (List<articulo>) request.getSession().getAttribute("catalogo"); %>
-    					<% for (articulo articulo : catalogo) { %>
-                            <div class="col">
-                                <div class="card shadow-sm">
-                                    <img src="<%= articulo.getImagen()%>"></img>
-                                    <div class="card-body">
-                                        <title><%= articulo.getNombre() %></title>
-                                        <p class="card-text"><%= articulo.getDescripcion() %></p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <small class="text-body-secondary"><%= articulo.getPrecio() %> €</small>
-                                            <div class="btn-group">
-                                            <form action="carrito">
-                                            	<input type="hidden" id="id" value="<%= articulo.getId()%>">
-                                            	<input type="number" id="cantidad" min="1">
-                                            	<input type="submit" class="btn btn-sm btn-outline-secondary" value="al carrito">
-                                            </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                             <% } %>
-                     </div>
-                 </div>
-            </main>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <% List<articulo> catalogo = (List<articulo>) request.getAttribute("catalogo"); %>
+        <% for (articulo articulo : catalogo) { %>
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="<%=articulo.getImagen()%>"></img>
+                    <div class="card-body">
+                        <title><%=articulo.getNombre() %></title>
+                        <p class="card-text"><%=articulo.getDescripcion() %></p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-body-secondary"><%=articulo.getPrecio() %> €</small>
+                            <div class="btn-group">
+                            <form action="carrito" method="post">
+                                <input type="hidden" id="id" name="id" value="<%=articulo.getId()%>">
+                                <input type="number" id="cantidad" name="cantidad" min="1">
+                                <input type="submit" class="btn btn-sm btn-outline-secondary" value="al carrito">
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             <% } %>
+     </div>
+ </div>
+                 
+ </main>
     <%@ include file="footer.jsp"%>
 </body>
 </html>

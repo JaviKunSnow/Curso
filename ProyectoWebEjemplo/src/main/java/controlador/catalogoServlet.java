@@ -16,7 +16,7 @@ import modelo.articulo;
 /**
  * Servlet implementation class catalogoServlet
  */
-//@WebServlet("")
+@WebServlet("")
 public class catalogoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     articuloDAO articuloDAO;   
@@ -39,15 +39,21 @@ public class catalogoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		List <articulo> catalogo = articuloDAO.obtenerCatalogo();
-		request.getSession().setAttribute("catalogo", catalogo);
 		
 		if(request.getSession(false) == null) {
 			request.getSession();
 			request.getSession().setAttribute("carrito", new HashMap<Integer, articulo>());
 		} 
 		
+		request.setAttribute("catalogo", catalogo);
+		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

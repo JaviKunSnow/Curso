@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,16 +14,27 @@ import modelo.articulo;
 
 public class articuloDAO {
 
-	private static Connection conexion;
+	private Connection con;
+	
+	public articuloDAO() {
+		try {
+			//Class.forName("com.mysql.cj.jdbc.Driver");
+			String url = "jdbc:mysql://localhost:3306/tienda";
+			String usuario = "root";
+			String contrasenia = "";
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			this.con = DriverManager.getConnection(url, usuario, contrasenia);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public List<articulo> obtenerCatalogo() {
-		
-		conexion = Conexion.getConexion();
 		
 		List<articulo> catalogo = new ArrayList<>();
 		try {
 			
-			Statement statement = conexion.createStatement();
+			Statement statement = con.createStatement();
 			ResultSet resultSet = statement.executeQuery("SELECT * FROM productos");
 			
 			while (resultSet.next()) {
@@ -43,5 +55,40 @@ public class articuloDAO {
 		}
 		
 		return catalogo;
+	}
+	
+	public articulo devolverArticuloId(int id) {
+		articulo articulo = new articulo(0, null, null, 0, null);
+		
+		try {
+			PreparedStatement sentenciaSQL = con.prepareStatement("select * from productos where id = ?");
+			
+			sentenciaSQL.setInt(1, id);
+			
+			ResultSet rs = sentenciaSQL.executeQuery();
+			if (rs.next()) {
+				articulo.setId(rs.getInt("id"));
+				articulo.setNombre(rs.getString("nombre"));
+				articulo.setPrecio(rs.getDouble("precio"));
+				articulo.setImagen(rs.getString("imagen"));
+
+			}
+			
+			return articulo;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			if (con != null) {
+				try {
+					con.rollback();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		}
+		return null;
+
 	}
 }
