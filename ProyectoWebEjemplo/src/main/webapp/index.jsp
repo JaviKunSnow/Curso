@@ -1,3 +1,5 @@
+<%@ page import="java.util.List" %>
+<%@ page import="modelo.articulo" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -15,79 +17,29 @@
                     <div class="container">
 
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        <% List<articulo> catalogo = (List<articulo>) request.getSession().getAttribute("catalogo"); %>
+    					<% for (articulo articulo : catalogo) { %>
                             <div class="col">
                                 <div class="card shadow-sm">
-                                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-                                        xmlns="http://www.w3.org/2000/svg" role="img"
-                                        aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
-                                        focusable="false">
-                                        <title>Placeholder</title>
-                                        <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%"
-                                            fill="#eceeef" dy=".3em">Thumbnail</text>
-                                    </svg>
+                                    <img src="<%= articulo.getImagen()%>"></img>
                                     <div class="card-body">
-                                        <p class="card-text">This is a wider card with supporting text below as a
-                                            natural lead-in to additional content. This content is a little bit longer.
-                                        </p>
+                                        <title><%= articulo.getNombre() %></title>
+                                        <p class="card-text"><%= articulo.getDescripcion() %></p>
                                         <div class="d-flex justify-content-between align-items-center">
-                                            <small class="text-body-secondary">9 mins</small>
+                                            <small class="text-body-secondary"><%= articulo.getPrecio() %> €</small>
                                             <div class="btn-group">
-                                                <a href="carrito?id=1"
-                                                    class="btn btn-sm btn-outline-secondary">al carrito</a>
+                                            <form action="carrito">
+                                            	<input type="hidden" id="id" value="<%= articulo.getId()%>">
+                                            	<input type="number" id="cantidad" min="1">
+                                            	<input type="submit" class="btn btn-sm btn-outline-secondary" value="al carrito">
+                                            </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <div class="card shadow-sm">
-                                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-                                            xmlns="http://www.w3.org/2000/svg" role="img"
-                                            aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
-                                            focusable="false">
-                                            <title>Placeholder</title>
-                                            <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%"
-                                                fill="#eceeef" dy=".3em">Thumbnail</text>
-                                        </svg>
-                                        <div class="card-body">
-                                            <p class="card-text">This is a wider card with supporting text below as a
-                                                natural lead-in to additional content. This content is a little bit
-                                                longer.</p>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <small class="text-body-secondary">9 mins</small>
-                                                <div class="btn-group">
-                                                    <a href="carrito?id=2"
-                                                        class="btn btn-sm btn-outline-secondary">aÃ±adir</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="card shadow-sm">
-                                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
-                                            xmlns="http://www.w3.org/2000/svg" role="img"
-                                            aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
-                                            focusable="false">
-                                            <title>Placeholder</title>
-                                            <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%"
-                                                fill="#eceeef" dy=".3em">Thumbnail</text>
-                                        </svg>
-                                        <div class="card-body">
-                                            <p class="card-text">This is a wider card with supporting text below as a
-                                                natural lead-in to additional content. This content is a little bit
-                                                longer.</p>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <small class="text-body-secondary">9 mins</small>
-                                                <div class="btn-group">
-                                                    <a href="carrito?id=3"
-                                                        class="btn btn-sm btn-outline-secondary">aÃ±adir</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                             <% } %>
+                     </div>
+                 </div>
             </main>
     <%@ include file="footer.jsp"%>
 </body>

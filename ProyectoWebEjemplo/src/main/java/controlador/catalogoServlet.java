@@ -1,6 +1,7 @@
 package controlador;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -8,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import dao.articuloDAO;
 import modelo.articulo;
 
@@ -26,6 +28,10 @@ public class catalogoServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    public void init() {
+    	articuloDAO = new articuloDAO();
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -33,24 +39,15 @@ public class catalogoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		List <articulo> catalogo = articuloDAO.obtenerCatalogo();
+		request.getSession().setAttribute("catalogo", catalogo);
 		
 		if(request.getSession(false) == null) {
 			request.getSession();
-			request.getSession().setAttribute("catalogo", catalogo);
-		} else {
-			request.getSession().setAttribute("catalogo", catalogo);
-		}
+			request.getSession().setAttribute("carrito", new HashMap<Integer, articulo>());
+		} 
 		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }
