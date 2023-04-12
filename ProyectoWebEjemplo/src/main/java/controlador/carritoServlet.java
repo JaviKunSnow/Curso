@@ -57,6 +57,8 @@ public class carritoServlet extends HttpServlet {
 		HttpSession sesion = request.getSession();
 		HashMap<Integer, articulo> carrito = (HashMap<Integer, articulo>) session.getAttribute("carrito");
 		Integer contador = 0;
+		boolean cookieContador = false;
+		boolean cookieCarrito = false;
 		if(carrito == null) {
 			carrito = new HashMap();
 		}
@@ -84,36 +86,64 @@ public class carritoServlet extends HttpServlet {
 		}
 
 			Cookie[] cookies = request.getCookies();
-			for(Cookie cookieit : cookies) {
-				cookieit.setValue(getServletInfo());
-			}
+			
 			for(int i = 0; i < cookies.length; i++) {
+				
 				if(cookies[i].getName().equals("carrito")) {
 					try {
 						String json = mapper.writeValueAsString(carrito);
 						String url = URLEncoder.encode(json, "UTF-8");
-						System.out.println("entra viejo");
+						System.out.println("entra viejo carrito");
 						System.out.println(url);
 						cookies[i].setValue(url);
-						  //System.out.println(json);
+						cookieCarrito = true;
+						
 					} catch (JsonProcessingException e) {
 						e.printStackTrace();
 					}
 					
-				} else {
+				} else if(cookies[i].getName().equals("carritoContador")) {
 					try {
-						String json = mapper.writeValueAsString(carrito);
-						String url = URLEncoder.encode(json, "UTF-8");
-						Cookie cookie = new Cookie("carrito", url);
-						cookie.setMaxAge(1000);
-						response.addCookie(cookie);
-						System.out.println("entra nuevo");
-						  //System.out.println(json);
+						String json = mapper.writeValueAsString(contador);
+						String urlencode = URLEncoder.encode(json, "UTF-8");
+						System.out.println("entra viejo contador");
+						System.out.println(urlencode);
+						cookies[i].setValue(urlencode);
+						cookieContador = true;
+						
 					} catch (JsonProcessingException e) {
 						e.printStackTrace();
 					}
 				}
 			}
+			
+		if(!cookieCarrito) {
+			try {
+				String json = mapper.writeValueAsString(carrito);
+				String url = URLEncoder.encode(json, "UTF-8");
+				Cookie cookie = new Cookie("carrito", url);
+				cookie.setMaxAge(1000);
+				response.addCookie(cookie);
+				System.out.println("entra nuevo cookie carrito");
+				
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(!cookieContador) {
+			try {
+				String json = mapper.writeValueAsString(contador);
+				String urlencode = URLEncoder.encode(json, "UTF-8");
+				Cookie cookie = new Cookie("carrito", urlencode);
+				cookie.setMaxAge(1000);
+				response.addCookie(cookie);
+				System.out.println("entra nueva cookie contador");
+				
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		sesion.setAttribute("carrito", carrito);
 
