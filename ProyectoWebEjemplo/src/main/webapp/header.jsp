@@ -16,24 +16,12 @@
                 	<section class="text-end">
                 		<a href="perfil" class='btn btn-outline-light me-2'><%=request.getSession().getAttribute("usuario")%></a>
                         <a href="cerrar" class='btn btn-outline-light me-2'>cerrar sesion</a>
-                        <a href="carritoVista" class='btn btn-warning'>
-                        <%if(request.getSession().getAttribute("carritoContador") != null) {%>
-                        	<%=request.getSession().getAttribute("carritoContador")%><%
-                        	} else {%>
-                        	0	
-                        	<%}%>
-                        	</a>
+                        <button id="botonCarrito" class="btn btn-warning">0</button>
                 	</section>
                 	<% } else {%>
                 		<section class="text-end">
                 		<a href="login" class='btn btn-outline-light me-2'>iniciar sesion</a>
-                        <a href="carritoVista" class='btn btn-warning'>
-                         	<%if(request.getSession().getAttribute("carritoContador") != null) {%>
-                              <%=request.getSession().getAttribute("carritoContador")%><%
-                            } else {%>
-                              0	
-                            <%}%>  
-                        </a>
+                        <button id="botonCarrito" class="btn btn-warning">0</button>
                 	<%}%>
                	</form>
             </section>

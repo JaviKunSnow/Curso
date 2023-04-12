@@ -1,6 +1,9 @@
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="modelo.articulo" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
     <!doctype html>
-    <html lang="en">
+    <html lang="es">
 
     <head>
         <meta charset="UTF-8">
@@ -27,27 +30,35 @@
                             <thead class="text-muted">
                                 <tr class="small text-uppercase">
                                     <th scope="col">Producto</th>
+                                    <th scope="col" width="200">Descripcion</th>
                                     <th scope="col" width="200">cantidad</th>
                                     <th scope="col" width="200">Precio</th>
                                     <th scope="col" class="text-right d-none d-md-block" width="200"></th>
                                 </tr>
                             </thead>
                             <tbody>
+                            	<% HashMap <Integer, articulo> carrito = (HashMap <Integer, articulo>)request.getSession().getAttribute("carrito"); %>
+            					<% for(Map.Entry<Integer, articulo> entry : carrito.entrySet()) { %>
+            					<% articulo articulo = entry.getValue(); %>
                                 <tr>
                                     <td>
-                                    zapatillas
+                                    <%= articulo.getNombre() %>
                                     </td>
-                                    <td>1</td>
+                                    <td><%= articulo.getDescripcion() %></td>
+                                    <td><%= articulo.getCantidad() %></td>
                                     <td>
-                                        <div class="price-wrap"> <var class="price">$99</var></div>
+                                        <div class="price-wrap"> <var class="price"><%= articulo.getPrecio() %>$</var></div>
                                     </td>
                                     <td class="text-right d-none d-md-block"> <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip" data-abc="true"> <i class="fa fa-heart"></i></a> <a href="" class="btn btn-light btn-round" data-abc="true"> Remove</a> </td>
                                 </tr>
+                                <% } %>
                             </tbody>
                         </table>
                     </div>
                 </div>
+            
             </aside>
+            
             <aside class="col-lg-3">
                 <div class="card">
                     <div class="card-body">

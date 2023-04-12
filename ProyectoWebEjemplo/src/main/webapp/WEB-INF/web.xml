@@ -76,6 +76,12 @@
   	<description></description>
   	<servlet-class>controlador.catalogoServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>carritoAjaxServlet</servlet-name>
+  	<display-name>carritoAjaxServlet</display-name>
+  	<description></description>
+  	<servlet-class>controlador.carritoAjaxServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>cerrarSesionServlet</servlet-name>
   	<url-pattern>/cerrarSesionServlet</url-pattern>
@@ -103,6 +109,10 @@
   <servlet-mapping>
   	<servlet-name>catalogoServlet</servlet-name>
   	<url-pattern>/catalogoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>carritoAjaxServlet</servlet-name>
+  	<url-pattern>/carritoAjaxServlet</url-pattern>
   </servlet-mapping>
  
   
