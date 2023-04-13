@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Tenemos que modificar las directrices del fichero xml, para ello iremos 
+	a la documentación y copiaremos lo que nos sea necesarioa -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+		
+
+     <!-- Para asignar valor a las propiedades podemos utilizar la etiqueta property dentro de la etiqueta bean y asignar un valor
+	 -->
+	<bean id="student" class="com.springcore.previos.inyeccion.ejemplos.a3_beanscope.Student">	
+		<property name="studentName" value="Gregorio" ></property>
+		<property name="id" value="1" ></property>
+		
+		<!-- Utilizamos un innerBean para darle valor al objeto definido dentro de la clase student.
+		     Consiste simplemente en anidar un bean dentro de la etiqueta property correspondiente
+			 De la siguiente manera, se le asignaria un valor de memoria al atributo
+		 -->
+		<property name="mathCheat">	
+			<bean  class="com.springcore.previos.inyeccion.ejemplos.a3_beanscope.MathCheat"></bean>
+		</property>		
+	</bean>
+	
+	<bean id="student2" class="com.springcore.previos.inyeccion.ejemplos.a3_beanscope.Student">	
+		<!-- Esta es la manera de configurar el xml para que los valores sean establecidos mediante setters -->
+		<property name="studentName" value="Fernandez" ></property>
+		<property name="id" value="2" ></property>
+		<!-- Si no especificamos la propiedad expresamente, obtendrá el valor por defecto -->
+	</bean>
+	
+	
+	<!-- Para pasar este bean como argumento al constructor debe de estar previamente definido, si no dara un error. Comentarlo para ver el error -->
+	<!-- VAMOS A PROBAR EL SCOPE EN ESTE OBJETO, CAMBIARLO PARA VER LA SALIDA DIFERENTE EN LA CONSOLA -->
+	<!-- SCOPES POSIBLES PARA UN BEAN
+		- singleton (por defecto): una única instancia del bean por aplicación
+        - prototype: el bean se instancia cada vez que se solicita una petición al contexto
+        - request [Spring MVC]
+        - session [Spring MVC]
+        - global session [Spring MVC]	
+	 -->
+	<bean id="mathCheat" class="com.springcore.previos.inyeccion.ejemplos.a3_beanscope.MathCheat" scope="singleton"></bean>	
+	
+	
+	
+	<!-- Bean con valores inyectados a traves del constructor -->
+	<bean id="student3" class="com.springcore.previos.inyeccion.ejemplos.a3_beanscope.Student">			
+		<constructor-arg name="studentName" value="ParametroConstructor" ></constructor-arg>
+		<constructor-arg  name="id" value="3" ></constructor-arg>
+		<constructor-arg name="mathCheat" ref="mathCheat" type="com.springcore.previos.inyeccion.ejemplos.a3_beanscope.MathCheat"></constructor-arg>
+	</bean>
+	
+	
+	
+	
+	<!-- Volvemos a utilizar el bean definido anteriormente. IMPORTANTISIMO EL ATRIBUTO REF en esta ocasion -->
+	<bean id="student4" class="com.springcore.previos.inyeccion.ejemplos.a3_beanscope.OtraClaseUsandoMathCheat">	
+		<property name="studentName" value="OtraClaseUsandoMathCheat" />
+		<property name="id" value="4" />
+		<property name="mathCheat" ref="mathCheat"/>			
+	</bean>
+	
+	
+	
+</beans>

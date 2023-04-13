@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Tenemos que modificar las directrices del fichero xml, para ello iremos 	a la documentación y copiaremos lo que nos sea necesarioa -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+		
+
+     <!-- Para asignar valor a las propiedades podemos utilizar la etiqueta property dentro de la etiqueta bean y asignar un valor-->
+     <!-- Para poder hacer la asignación del valor, Spring necesitará tener un metodo set en la clase para ese "property" -->
+	<bean id="student" class="com.springcore.previos.inyeccion.ejemplos.a2_settersYconstructor.Student">
+	<!-- atributos de la etiqueta property,
+	   name: nombre del atributo, 
+	   value: valor que queremos darle al atributo,
+	   type:especificar el tipo del atributo o dependencia
+	 -->
+		<property name="studentName" value="Gregorio" ></property>
+		<property name="id" value="1" ></property>		
+	</bean>
+	
+	<bean id="student2" class="com.springcore.previos.inyeccion.ejemplos.a2_settersYconstructor.Student">	
+		<!-- Esta es la manera de configurar el xml para que los valores sean establecidos mediante setters -->
+		<property name="studentName" value="Fernandez" ></property>
+		<property name="id" value="2" ></property>
+	</bean>
+	
+		
+	<!-- Bean con valores inyectados a traves del constructor -->
+	<bean id="student3" class="com.springcore.previos.inyeccion.ejemplos.a2_settersYconstructor.Student">	
+		
+		<!-- atributos de la etiqueta constructor-arg
+	     name: nombre del atributo
+	     value: valor que queremos darle al atributo	
+	     type:especificar el tipo del atributo o dependencia
+	     ref:especificar el id del bean al que se referencia
+	     -->
+		<constructor-arg name="studentName" value="ParametroConstructor" type="String"></constructor-arg>
+		<constructor-arg name="id" value="3"  type="int"></constructor-arg>				
+	</bean>
+	
+	
+	<!-- Si quitamos de aquí alguno de los parametros, no serán cargados y tendrán su valor por defecto -->
+	<!-- Bean con valores inyectados a traves del constructor -->
+	<bean id="student4" class="com.springcore.previos.inyeccion.ejemplos.a2_settersYconstructor.Student">			
+		<!-- atributos de la etiqueta constructor-arg
+	     name: nombre del atributo
+	     value: valor que queremos darle al atributo	
+	     type:especificar el tipo del atributo o dependencia
+	     ref:especificar el id del bean al que se referencia
+	     -->		
+		<constructor-arg name="id" value="3"  type="int"></constructor-arg>				
+	</bean>
+	
+</beans>

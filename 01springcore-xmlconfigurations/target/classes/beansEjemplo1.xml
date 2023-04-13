@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Tenemos que modificar las directrices del fichero xml, para ello iremos 	a la documentación y copiaremos lo que nos sea necesarioa -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Copiaremos las clases directamente desde el fichero de la clase con la opcion del menu contextual Copy Qualified name -->
+		
+	<!--  las propiedades de la etiqueta bean que conoceremos incialmente son: 
+	      - id: hace referencia al nombre que vamos a darle a nuestro bean y con el que recuperaremos el bean a la hora de utilizarlo
+		  - class: la ruta dentro del classpath donde tenemos alojada la clase que queremos instanciar
+	 -->	
+	 
+	 
+	<bean id = "airtel" class="com.springcore.previos.inyeccion.ejemplos.a1_inyeccionbasica.Airtel"></bean>
+	
+	<bean id = "vodafone" class="com.springcore.previos.inyeccion.ejemplos.a1_inyeccionbasica.Vodafone"></bean>
+		
+	<!--*** No podríamos utilizar un bean para una interfaz ya que recuerda que no pueden ser instanciadas!! ***-->	
+	<!--*** <bean id = "sim" class="com.springcore.previos.ejemplo2.Sim"></bean> MAL ***-->
+	
+	<!-- Lo que haríamos realmente sería definir la interfaz en el código y aquí utilizar cualquiera de los beans definidos anteriormente 
+	     Es decir, utilizamos un tipo interfaz para luego recoger un bean que hayamos definido en este fichero -->
+	
+	<bean id = "sim" class="com.springcore.previos.inyeccion.ejemplos.a1_inyeccionbasica.Vodafone"></bean>
+	
+</beans>

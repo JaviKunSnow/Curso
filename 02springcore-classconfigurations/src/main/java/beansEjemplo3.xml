@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!-- PARA PODER UTILIZAR ANOTACIONES NECESITAMOS CARGAR EL ESQUEMA QUE PERMITE 
+	UTILIZARLAS -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<!-- Con esta linea le decimos al proyecto que existe configuracion por anotaciones en nuestro proyecto -->
+	<context:annotation-config />
+
+	<bean id="humanHeart"
+		class="com.springcore.previos.inyeccion.ejemplos.a6_autowiredYqualifier.Heart">
+		<property name="nombre" value="Humano"></property>
+		<property name="numero" value="1"></property>
+	</bean>
+
+	<bean id="octopusHeart"
+		class="com.springcore.previos.inyeccion.ejemplos.a6_autowiredYqualifier.Heart">
+		<property name="nombre" value="Pulpo"></property>
+		<property name="numero" value="3"></property>
+	</bean> 
+
+<!-- En este caso no estamos referenciando a ningun objeto heart para este bean, pero la clase tiene
+     unas anotaciones que permiten a Spring detectar el objeto necesario y hacer la inyeccion
+     -->
+	<bean id="human" class="com.springcore.previos.inyeccion.ejemplos.a6_autowiredYqualifier.HeartContainer"></bean>
+
+	<!-- Podemos construir luego objetos con diferentes tipos de corazon para casos mas concretos que el de por defecto -->
+	<bean id="octopus"	class="com.springcore.previos.inyeccion.ejemplos.a6_autowiredYqualifier.HeartContainer">
+		<property name="heart" ref="octopusHeart"></property>
+	</bean>
+	
+	
+
+
+
+</beans>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Tenemos que modificar las directrices del fichero xml, para ello iremos 
+	a la documentación y copiaremos lo que nos sea necesarioa -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+     <!-- Si no utilizamos property en el bean podemos utilizar autowire -->
+     <!-- Este id debe de conincidir con el nombre del atributo
+          Por defecto, el atributo autowire esta a null -->
+	<bean id="heart" class="com.springcore.previos.inyeccion.ejemplos.a4_autowire.Heart" autowire="byName"></bean>
+	
+
+
+	<!-- En esta ocasion, el autowire sostiene el valor byName, de tal modo que va a ir al fichero de la clase Human
+	     y buscar un atributo que coincida	con alguno de los beans  -->
+	<!-- Spring buscara un bean definido en este fichero con el id=heart y un atributo en la clase Human heart -->
+	<bean id="human" class="com.springcore.previos.inyeccion.ejemplos.a4_autowire.Human" 	autowire="byType">	</bean> 
+
+
+	<!-- En este caso lo que está haciendo Spring es lo mismo que en el anterior, pero lo vinculara por tipo  -->
+	<bean id="human2" class="com.springcore.previos.inyeccion.ejemplos.a4_autowire.Human" autowire="byType">	</bean>
+	
+<!-- Este último caso sería para que, si en la clase definida en el bean existe un constructor, lo llame, podemos pasarle argumentos
+     o buscara un constructor que encaje con los parametros, si no existe, dara error claramente-->
+	<bean id="human3" class="com.springcore.previos.inyeccion.ejemplos.a4_autowire.Human" autowire="constructor">	
+		<constructor-arg name="nombre" value="ParametroConstructor" ></constructor-arg>
+	</bean>	
+	
+	<bean id="human4" class="com.springcore.previos.inyeccion.ejemplos.a4_autowire.Human" autowire="constructor">
+		<constructor-arg name="heart" ref="heart"> </constructor-arg>
+    </bean>	
+
+
+</beans>

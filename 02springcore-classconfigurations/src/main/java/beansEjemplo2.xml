@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!-- PARA PODER UTILIZAR ANOTACIONES NECESITAMOS CARGAR EL ESQUEMA QUE PERMITE 
+	UTILIZARLAS -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<!-- Con esta linea le decimos al proyecto que existe configuracion por anotaciones en nuestro proyecto -->
+	<context:annotation-config />
+
+    <!-- TAMPOCO SERÁ NECESARIO DEFINIR EL ESCANEO U OTRAS CONFIGURACIONES YA QUE LO CONSEGUIREMOS TODO POR ANOTACIONES -->
+	<context:component-scan base-package="com.springcore.previos.inyeccion.ejemplos.a1_anotacionpersonalizada"></context:component-scan>
+
+	<bean id="userDTO"	class="com.springcore.previos.inyeccion.ejemplos.a1_anotacionpersonalizada.UserRegisterDTO">
+	   <property name="name" value="Javi"></property>
+	   <property name="age" value="2"></property>
+	</bean>
+
+	
+
+
+</beans>
+

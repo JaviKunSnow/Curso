@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+
+
+
+	<!-- TAMBIEN NECESITAMOS ACTIVAR LAS ANOTACIONES PARA QUE ESTEN DISPONIBLES 
+		PARA SU USO EN LA APLICACION -->
+	<context:annotation-config />
+	<!-- ESTA DIRECTIVA LO QUE LE DICE A SPRING ES QUE BUSQUE LOS BEANS QUE TENGAN LA ANOTACION COMPONENT EN LA RUTA QUE LE PASAMOS COMO PAQUETE BASE -->
+	<!-- TAMPOCO SERÁ NECESARIO DEFINIR EL ESCANEO U OTRAS CONFIGURACIONES YA QUE LO CONSEGUIREMOS TODO POR ANOTACIONES -->
+	<context:component-scan base-package="com.springcore.anottations"></context:component-scan>
+	
+	<!-- De esta manera vamos a poder indicarle al bean como poder ejecutar metodos init y destroy para poder controlar el ciclo de vida de este bean -->
+	<!-- Hay que tener en cuenta que los beans se destruyen al destruir el contenedor de IOC y eso ocurre al cerrar el objeto context. -->
+	<!-- Revisar el vídeo de selenium express nº 9 -->
+	<bean id="student" class="com.springcore.previos.inyeccion.ejemplos.a5_ciclodevida.StudentDAO" init-method="init" destroy-method="destroy">
+		<property name="driver" value="com.mysql.cj.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/curso"></property>
+		<property name="user" value="root"></property>
+		<property name="password" value=""></property>
+	</bean>
+
+
+</beans>

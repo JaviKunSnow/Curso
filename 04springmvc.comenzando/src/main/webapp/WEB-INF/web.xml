@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- IMPORTANTE!!! La etiqueta de web-app debe de estar definida de la siguiente 
+	manera para que podamos utilizar EL por defecto en nuestas jsp -->
+<!-- SI NO USAR LA DIRECTIVA isELIgnored en la jsp -->
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+            http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	version="4.0">
+
+	<!-- Este es el mappeo para el Dispatcher Servlet que nos ofrece Spring 
+		Su configuración es sencilla, tan solo hay que tener importadas las librerias 
+		de Spring, crear un servlet y en vez de hacerlo manual, hacerlo sobre una 
+		clase existente. Recuerda marchar el check en el formulario de creación del 
+		servlet y elegir la clase DispatcherServlet del paquete de Spring Una vez 
+		hecho esto, el framwework nos exige que creemos un fichero xml con el nombre 
+		del controlador principal También necesitamos tener la propiedad del servlet 
+		LOAD-ON-STARTUP -->
+	<display-name>Archetype Created Web Application</display-name>
+
+	<servlet>
+		<servlet-name>MiDespachador</servlet-name>
+
+
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- Podemos especificar en esta configuración donde esta ubicado el fichero 
+			de configuración del despachador utilizando la etiqueta init-param y param-value 
+			De esa forma podemos cambiar el nombre del fichero para evitar que Spring 
+			tenga que buscar en el nombre por defecto. Recordad, el nombre por defecto 
+			es el nombre que le hayamnos dado al despachador de Spring -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/MiDespachador-servlet.xml</param-value>
+			<!-- <param-value>/WEB-INF/DispatcherReferenciadoXML.xml</param-value> 
+				DESCOMENTAR PARA PROBAR CON LOS DOS TIPOS, POR DEFECTO Y CONFIGURADO -->
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MiDespachador</servlet-name>
+		<!-- Establecemos este partron para que cualquier petición sea recogida 
+			por nuestro front-controller -->
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+
+	<welcome-file-list>
+		<!-- Si queremos que la aplicacion entre por un servlet se lo podemos indicar 
+			de esta manera poniendo la url sin la barra -->
+		<!-- Establecemos como punto de entrada el controlador 1 -->
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+
+
+</web-app>

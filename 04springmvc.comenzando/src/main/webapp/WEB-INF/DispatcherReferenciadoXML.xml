@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+
+
+
+<!-- Este fichero es solo para cargar un fichero por nombre en la configuracion del xml, de momento, no nos sirve para mas -->
+
+
+	<!-- IGUAL QUE EN LA PARTE DEL CORE, SCANEAMOS LAS CLASES QUE PUEDAN SER 
+		COMPONENTES O ESTEREOTIPOS DE @Component -->
+	<context:component-scan		base-package="com.springmvc.controllers, com.springmvc.ejemploCafe"></context:component-scan>
+
+
+
+<!-- CONFIGURACION DEL VIEW RESOLVER -->
+	<bean id="viewResolver"	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view/" />
+		<property name="suffix" value=".jsp" />		
+	</bean>
+	
+</beans>
