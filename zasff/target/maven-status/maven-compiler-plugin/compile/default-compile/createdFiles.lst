@@ -1,0 +1,9 @@
+controller\NavigationController.class
+model\VO\UsuarioVO.class
+model\DTO\UsuarioDTO.class
+controller\usuario\UserController.class
+configuracion\ConfigClass2.class
+controller\StartAppController.class
+repository\UserRepositoryImpl.class
+service\usuario\UserService.class
+configuracion\ConfigApp.class

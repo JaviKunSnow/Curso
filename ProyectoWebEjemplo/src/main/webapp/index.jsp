@@ -27,7 +27,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <small class="text-body-secondary"><%=articulo.getPrecio() %> €</small>
                             <div class="btn-group">
-                            <form id="formAjax" method="post">
+                            <form id="formAjax<%=articulo.getId()%>" method="post">
                                 <input type="hidden" id="id" name="id" value="<%=articulo.getId()%>">
                                 <input type="number" id="cantidad" name="cantidad" min="1">
                                 <input type="submit" class="btn btn-sm btn-outline-secondary" id="enviar" value="al carrito">
@@ -45,7 +45,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-            $("#formAjax").submit(function (e) { 
+            $("form[id^='formAjax']").submit(function (e) { 
                 
                 let form = {
                 	id: $("#id").val(),
