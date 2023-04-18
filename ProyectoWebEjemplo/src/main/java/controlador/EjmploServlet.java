@@ -49,14 +49,6 @@ public class EjmploServlet extends HttpServlet {
 		
 		// validaciones
 		
-		if(parametro.isEmpty() && parametro.isBlank()) {
-			
-		}
-		
-		if(parametro2.isEmpty() && parametro2.isBlank()) {
-			
-		}
-		
 		// acceso a datos
 		
 		

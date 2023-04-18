@@ -29,7 +29,7 @@
                             <div class="btn-group">
                             <form id="formAjax<%=articulo.getId()%>" method="post">
                                 <input type="hidden" id="id" name="id" value="<%=articulo.getId()%>">
-                                <input type="number" id="cantidad" name="cantidad" min="1">
+                                <input type="number" id="<%=articulo.getId()%>cantidad" name="cantidad" min="1">
                                 <input type="submit" class="btn btn-sm btn-outline-secondary" id="enviar" value="al carrito">
                             </form>
                             </div>
@@ -46,10 +46,10 @@
     <script>
         $(document).ready(function () {
             $("form[id^='formAjax']").submit(function (e) { 
-                
+            	let formId = $(this).attr('id');
                 let form = {
                 	id: $("#id").val(),
-                	cantidad: $("#cantidad").val(),
+                	cantidad: $("#" + formId + "cantidad").val(),
                 };
                 console.log("entra");
                 $.ajax({
