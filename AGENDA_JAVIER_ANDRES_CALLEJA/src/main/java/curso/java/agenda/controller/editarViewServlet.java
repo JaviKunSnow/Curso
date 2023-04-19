@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class homeServlet
+ * Servlet implementation class editarViewServlet
  */
-@WebServlet("")
-public class homeServlet extends HttpServlet {
+@WebServlet("/editarViewServlet")
+public class editarViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public homeServlet() {
+    public editarViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,8 @@ public class homeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		
+		request.getRequestDispatcher("editar.jsp").forward(request, response);
 	}
 
 	/**
