@@ -1,15 +1,20 @@
 package curso.java.agenda.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import curso.java.agenda.modelo.contacto;
 
@@ -46,6 +51,8 @@ public class addContactServlet extends HttpServlet {
 		boolean comprobarMail = false;
 		int contador = 0;
 		HashMap <Integer, contacto> contactos = new HashMap<Integer, contacto>();;
+		ObjectMapper mapper = new ObjectMapper();
+		
 		
 		if(request.getSession().getAttribute("contactos") != null) {
 			contactos = (HashMap<Integer, contacto>) request.getSession().getAttribute("contactos");
@@ -60,7 +67,7 @@ public class addContactServlet extends HttpServlet {
 			compNombre = true;
 		} else {
 			String error = "el nombre no tiene que estar vacio.";
-			request.getSession().setAttribute("errorNombre", error);
+			request.setAttribute("errorNombre", error);
 		}
 		
 		
@@ -68,35 +75,64 @@ public class addContactServlet extends HttpServlet {
 			compApellido = true;
 		} else {
 			String error = "Los apellidos no tiene que estar vacio.";
-			request.getSession().setAttribute("errorApellidos", error);
+			request.setAttribute("errorApellidos", error);
 		}
 		
 		if(!email.isEmpty() && email.contains("@")) {
 			
 		} else {
 			String error = "El email esta vacio o es incorrecto.";
-			request.getSession().setAttribute("errorMail", error);
+			request.setAttribute("errorMail", error);
 		}
 		
 		if(contactos != null) {
 			for(Entry<Integer, contacto> contacto : contactos.entrySet()) {
 				if(contacto.getValue().getEmail().equalsIgnoreCase(email)) {
 					String error = "El email ya esta en uso.";
-					request.getSession().setAttribute("errorMail", error);
+					request.setAttribute("errorMail", error);
 					comprobarMail = true;
 				}
 			}
 		}
 		
 		if(compNombre && compApellido && !comprobarMail) {
-			contacto contacto = new contacto(nombre, apellidos, email, Integer.parseInt(telefono));
-			if(contactos != null) {
+			if(contactos.size() != 0) {
 				contador = contactos.size();
-				contactos.put(++contador, contacto);
-			} else {
-				contactos.put(++contador, contacto);
 			}
+			contacto contacto = new contacto(++contador, nombre, apellidos, email, Integer.parseInt(telefono));
+			contactos.put(contacto.getId(), contacto);
 			
+		}
+		
+		Cookie[] cookies = request.getCookies();
+		
+		for(int i = 0; i < cookies.length; i++) {
+			
+			if(cookies[i].getName().equals("contactos")) {
+				try {
+					String json = mapper.writeValueAsString(contactos);
+					String url = URLEncoder.encode(json, "UTF-8");
+					System.out.println("entra viejo contactos");
+					System.out.println(url);
+					cookies[i].setValue(url);
+					
+				} catch (JsonProcessingException e) {
+					e.printStackTrace();
+				}
+				
+			} else {
+				try {
+					String json = mapper.writeValueAsString(contactos);
+					String url = URLEncoder.encode(json, "UTF-8");
+					Cookie cookie = new Cookie("contactos", url);
+					cookie.setMaxAge(1000);
+					response.addCookie(cookie);
+					System.out.println("entra nuevo cookie contactos");
+					
+				} catch (JsonProcessingException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		
 		request.getSession().setAttribute("contactos", contactos);

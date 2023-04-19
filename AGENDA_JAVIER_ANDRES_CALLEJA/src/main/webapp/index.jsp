@@ -15,31 +15,47 @@
 </head>
 <body>
     <h2>Contactos</h2>
-    <form action="addContactServlet" method="post">
+    <form action="<%if(request.getAttribute("editar") != null) {%>
+    	editContactServlet
+    	<% } else { %>
+    	addContactServlet
+    	<% } %>" method="post">
+    	<%if(request.getAttribute("editar") != null) {%>
+    	<input type="hidden" name="id" value="<%= request.getAttribute("id")%>">
+    	<% } %>
         <p>
+        
             <label for="nombre">Nombre: </label>
-            <input type="text" name="nombre">
-            <% if(request.getSession().getAttribute("errorNombre") != null) {%>
-            	<div style="color: red;"><%=request.getSession().getAttribute("errorNombre") %></div>
+            <input type="text" name="nombre" <% if(request.getAttribute("editar") != null) { %>
+            value="<%=((contacto)request.getAttribute("contacto")).getNombre() %>"
+            <% } %>>
+            <% if(request.getAttribute("errorNombre") != null) {%>
+            	<div style="color: red;"><%=request.getAttribute("errorNombre") %></div>
             <% } %>
         </p>
         <p>
             <label for="apellidos">Apellidos: </label>
-            <input type="text" name="apellidos">
-            <% if(request.getSession().getAttribute("errorApellidos") != null) {%>
-            	<div style="color: red;"><%=request.getSession().getAttribute("errorApellidos") %></div>
+            <input type="text" name="apellidos" <% if(request.getAttribute("editar") != null) { %>
+            value="<%=((contacto)request.getAttribute("contacto")).getApellidos() %>"
+            <% } %>>
+            <% if(request.getAttribute("errorApellidos") != null) {%>
+            	<div style="color: red;"><%=request.getAttribute("errorApellidos") %></div>
             <% } %>
         </p>
         <p>
             <label for="email">Email: </label>
-            <input type="email" name="email">
-            <% if(request.getSession().getAttribute("errorMail") != null) {%>
-            	<div style="color: red;"><%=request.getSession().getAttribute("errorMail") %></div>
+            <input type="email" name="email" <% if(request.getAttribute("editar") != null) { %>
+            value="<%=((contacto)request.getAttribute("contacto")).getEmail() %>"
+            <% } %>>
+            <% if(request.getAttribute("errorMail") != null) {%>
+            	<div style="color: red;"><%=request.getAttribute("errorMail") %></div>
             <% } %>
         </p>
         <p>
             <label for="telefono">Telefono: </label>
-            <input type="number" name="telefono">
+            <input type="number" name="telefono" <% if(request.getAttribute("editar") != null) { %>
+            value="<%=((contacto)request.getAttribute("contacto")).getTelefono() %>"
+            <% } %>>
             
         </p>
         <P>
@@ -60,15 +76,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                        	<% HashMap <Integer, contacto> contactos = (HashMap<Integer, contacto>) request.getSession().getAttribute("contactos");%>
-                            <% for (Entry<Integer, contacto> contacto : contactos.entrySet()) { %>
+                        	<% HashMap <Integer, contacto> contactos = (HashMap<Integer, contacto>) request.getSession().getAttribute("contactos");
+                            for (Entry<Integer, contacto> contacto : contactos.entrySet()) { %>
 	                            <tr class="">
 	                                <td scope="row"><%=contacto.getValue().getNombre() %></td>
 	                                <td><%=contacto.getValue().getApellidos() %></td>
 	                                <td><%=contacto.getValue().getEmail() %></td>
 	                                <td><%=contacto.getValue().getTelefono() %></td>
-	                                <td><a href="editarViewServlet?id=<%= contacto.getValue().getId()%>">Editar</a></td>
-	                                <td><a href="">Eliminar</a></td>
+	                                <td><a href="editContactServlet?id=<%= contacto.getValue().getId()%>">Editar</a></td>
+	                                <td><a href="deleteContactServlet?id=<%= contacto.getValue().getId()%>">Eliminar</a></td>
 	                                <td><a></a></td>
 	                            </tr>
                             <% } %>

@@ -10,8 +10,12 @@ public class contacto {
 	private int telefono;
 	
 	
-	public contacto(String nombre, String apellidos, String email, int telefono) {
-		this.id = ++contadorId;
+	public contacto() {
+	}
+
+	public contacto(int id, String nombre, String apellidos, String email, int telefono) {
+//		this.id = ++contadorId;
+		this.id = id;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.email = email;
@@ -20,6 +24,10 @@ public class contacto {
 
 	public int getId() {
 		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public String getNombre() {

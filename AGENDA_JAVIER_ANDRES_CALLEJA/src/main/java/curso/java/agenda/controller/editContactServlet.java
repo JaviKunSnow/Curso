@@ -31,8 +31,18 @@ public class editContactServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		HashMap <Integer, contacto> contactos = new HashMap<Integer, contacto>();
+		contactos = (HashMap<Integer, contacto>) request.getSession().getAttribute("contactos");
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+		boolean editar = true;
+		contacto contacto = contactos.get(id);
+		
+		request.setAttribute("contacto", contacto);
+		request.setAttribute("id", id);
+		request.setAttribute("editar", editar);
+		request.getRequestDispatcher("").forward(request, response);
 	}
 
 	/**
@@ -76,28 +86,13 @@ public class editContactServlet extends HttpServlet {
 			request.getSession().setAttribute("errorMail", error);
 		}
 		
-		if(contactos != null) {
-			for(Entry<Integer, contacto> contacto : contactos.entrySet()) {
-				if(contacto.getValue().getEmail().equalsIgnoreCase(email)) {
-					String error = "El email ya esta en uso.";
-					request.getSession().setAttribute("errorMail", error);
-					comprobarMail = true;
-				}
-			}
-		}
 		
 		if(compNombre && compApellido && !comprobarMail) {
-			contacto contacto = new contacto(nombre, apellidos, email, Integer.parseInt(telefono));
-			contactos.put(id, contacto);
-			
-			request.getSession().setAttribute("contactos", contactos);
-			
-			request.getRequestDispatcher("").forward(request, response);
-		} else {
-			request.getRequestDispatcher("editar.jsp").forward(request, response);
-		}
+			contacto contacto = new contacto(id, nombre, apellidos, email, Integer.parseInt(telefono));
+			contactos.replace(id, contacto);
+		} 
 		
-		
+		request.getRequestDispatcher("").forward(request, response);
 		
 	}
 
