@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="curso.java.tienda.model.articulo" %>
+<%@ page import="curso.java.tienda.model.Usuario" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -27,7 +28,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <small class="text-body-secondary"><%=articulo.getPrecio() %> €</small>
                             <div class="btn-group">
-                            <form id="form" action="carritoServlet" method="post">
+                            <form id="form" action="carrito" method="post">
                                 <input type="hidden" id="id" name="id" value="<%=articulo.getId()%>">
                                 <input type="number" id="cantidad" name="cantidad" min="1">
                                 <input type="submit" class="btn btn-sm btn-outline-secondary" id="enviar" value="al carrito">

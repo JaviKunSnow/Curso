@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import curso.java.tienda.config.Conexion;
 import curso.java.tienda.model.articulo;
 
 
@@ -17,19 +18,20 @@ public class articuloDAO {
 	private Connection con;
 	
 	public articuloDAO() {
-		try {
-			//Class.forName("com.mysql.cj.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3306/tienda";
-			String usuario = "root";
-			String contrasenia = "";
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			this.con = DriverManager.getConnection(url, usuario, contrasenia);
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			//Class.forName("com.mysql.cj.jdbc.Driver");
+//			String url = "jdbc:mysql://localhost:3306/tienda";
+//			String usuario = "root";
+//			String contrasenia = "";
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+//			this.con = DriverManager.getConnection(url, usuario, contrasenia);
+//		} catch (ClassNotFoundException | SQLException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 	public List<articulo> obtenerCatalogo() {
+		con = Conexion.getConexion();
 		
 		List<articulo> catalogo = new ArrayList<>();
 		try {
@@ -58,6 +60,8 @@ public class articuloDAO {
 	}
 	
 	public articulo devolverArticuloId(int id) {
+		con = Conexion.getConexion();
+		
 		articulo articulo = new articulo(0, null, null, 0, null);
 		
 		try {

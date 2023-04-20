@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import curso.java.tienda.dao.articuloDAO;
 import curso.java.tienda.model.articulo;
 
@@ -55,6 +58,7 @@ public class carritoServlet extends HttpServlet {
 		HttpSession sesion = request.getSession();
 		HashMap<Integer, articulo> carrito = (HashMap<Integer, articulo>) session.getAttribute("carrito");
 		Integer contador = 0;
+		Integer contadorCarrito = 0;
 		if(carrito == null) {
 			carrito = new HashMap();
 		}
@@ -71,73 +75,13 @@ public class carritoServlet extends HttpServlet {
 			articulo articulo = articuloDAO.devolverArticuloId(id);
 			articulo.setCantidad(cantidad);
 			carrito.put(id, articulo);
-		}
-
-		if (sesion.getAttribute("carritoContador") == null) {
-			contador = cantidad;
-			sesion.setAttribute("carritoContador", String.valueOf(contador));
-		} else {
-			String cont = (String) sesion.getAttribute("carritoContador");
-			contador = Integer.parseInt(cont);
-			contador = contador + cantidad;
-			sesion.setAttribute("carritoContador", String.valueOf(contador));
-		}
-
-			Cookie[] cookies = request.getCookies();
-			
-			for(int i = 0; i < cookies.length; i++) {
-				
-				if(cookies[i].getName().equals("carrito")) {
-					try {
-						String json = mapper.writeValueAsString(carrito);
-						String url = URLEncoder.encode(json, "UTF-8");
-						System.out.println("entra viejo carrito");
-						System.out.println(url);
-						cookies[i].setValue(url);
-						
-					} catch (JsonProcessingException e) {
-						e.printStackTrace();
-					}
-					
-				} else {
-					try {
-						String json = mapper.writeValueAsString(carrito);
-						String url = URLEncoder.encode(json, "UTF-8");
-						Cookie cookie = new Cookie("carrito", url);
-						cookie.setMaxAge(1000);
-						response.addCookie(cookie);
-						System.out.println("entra nuevo cookie carrito");
-						
-					} catch (JsonProcessingException e) {
-						e.printStackTrace();
-					}
-				}
-					
-				if(cookies[i].getName().equals("carritoContador")) {
-					try {
-						String json = mapper.writeValueAsString(contador);
-						String urlencode = URLEncoder.encode(json, "UTF-8");
-						System.out.println("entra viejo contador");
-						System.out.println(urlencode);
-						cookies[i].setValue(urlencode);
-						
-					} catch (JsonProcessingException e) {
-						e.printStackTrace();
-					}
-				} else {
-					try {
-						String json = mapper.writeValueAsString(contador);
-						String urlencode = URLEncoder.encode(json, "UTF-8");
-						Cookie cookie = new Cookie("carritoContador", urlencode);
-						cookie.setMaxAge(1000);
-						response.addCookie(cookie);
-						System.out.println("entra nueva cookie contador");
-						
-					} catch (JsonProcessingException e) {
-						e.printStackTrace();
-					}
-				}
+			if (sesion.getAttribute("carritoContador") == null) {
+				sesion.setAttribute("carritoContador", String.valueOf(1));
+			} else {
+				contadorCarrito = Integer.parseInt((String)sesion.getAttribute("carritoContador"));
+				sesion.setAttribute("carritoContador", String.valueOf(++contadorCarrito));
 			}
+		}
 		
 		sesion.setAttribute("carrito", carrito);
 

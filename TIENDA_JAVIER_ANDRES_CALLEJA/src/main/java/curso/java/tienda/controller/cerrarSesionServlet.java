@@ -31,7 +31,7 @@ public class cerrarSesionServlet extends HttpServlet {
 			request.getSession().invalidate();
 		}
 		
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		request.getRequestDispatcher("").forward(request, response);
 	}
 
 	/**

@@ -33,9 +33,8 @@ public class carritoVistaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		HashMap<Integer, articulo> carrito = (HashMap<Integer, articulo>) session.getAttribute("carrito");
 		
-		request.getRequestDispatcher("carrito.jsp").forward(request, response);
+		request.getRequestDispatcher("/view/carrito.jsp").forward(request, response);
 	}
 
 	/**

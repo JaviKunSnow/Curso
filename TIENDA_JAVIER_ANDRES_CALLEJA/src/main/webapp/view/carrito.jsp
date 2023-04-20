@@ -1,6 +1,7 @@
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="curso.java.tienda.model.articulo" %>
+<%@ page import="curso.java.tienda.model.Usuario" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
     <!doctype html>
     <html lang="es">
@@ -37,17 +38,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            	<% HashMap <Integer, articulo> carrito = (HashMap <Integer, articulo>)request.getSession().getAttribute("carrito"); %>
-            					<% for(Map.Entry<Integer, articulo> entry : carrito.entrySet()) { %>
-            					<% articulo articulo = entry.getValue(); %>
+                            	<%--<%  HashMap<String, articulo> carrito = (HashMap<Integer, articulo>) session.getAttribute("carrito");
+                            	HashMap<Integer, articulo> nuevoCarrito = new HashMap<Integer, articulo>();
+
+                            	for(Map.Entry<String, articulo> entry : carrito.entrySet()) {
+                            	    Integer clave = Integer.parseInt(entry.getKey());
+                            	    articulo valor = entry.getValue();
+
+                            	    nuevoCarrito.put(clave, valor);
+                            	} --%>
+            					<%for(Map.Entry<Integer, articulo> entry : ((HashMap<Integer, articulo>) session.getAttribute("carrito")).entrySet()) { %>
                                 <tr>
                                     <td>
-                                    <%= articulo.getNombre() %>
+                                    <%= entry.getValue().getNombre() %>
                                     </td>
-                                    <td><%= articulo.getDescripcion() %></td>
-                                    <td><%= articulo.getCantidad() %></td>
+                                    <td><%= entry.getValue().getDescripcion() %></td>
+                                    <td><%= entry.getValue().getCantidad() %></td>
                                     <td>
-                                        <div class="price-wrap"> <var class="price"><%= articulo.getPrecio() %>$</var></div>
+                                        <div class="price-wrap"> <var class="price"><%= entry.getValue().getPrecio() %>$</var></div>
                                     </td>
                                     <td class="text-right d-none d-md-block"> <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip" data-abc="true"> <i class="fa fa-heart"></i></a> <a href="" class="btn btn-light btn-round" data-abc="true"> Remove</a> </td>
                                 </tr>

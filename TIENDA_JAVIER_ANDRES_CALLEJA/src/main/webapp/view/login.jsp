@@ -1,3 +1,4 @@
+<%@ page import="curso.java.tienda.model.Usuario" %>
 <html>
 <head>
 <meta charset="UTF-8">

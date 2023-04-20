@@ -54,41 +54,9 @@ public class catalogoServlet extends HttpServlet {
 			request.getSession().setAttribute("carrito", new HashMap<Integer, articulo>());
 		} 
 		
-		Cookie[] cookies = request.getCookies();
-		
-		if(cookies != null) {
-			for(int i = 0; i < cookies.length; i++) {
-				if(cookies[i].getName().equals("carrito")) {
-					try {
-						String json = cookies[i].getValue();
-						String urldecode = URLDecoder.decode(json,"UTF-8");
-						HashMap <Integer, articulo> carrito = mapper.readValue(urldecode, HashMap.class);
-						
-						System.out.println("guarda cookie carrito en la nueva sesion");
-						System.out.println(urldecode);
-						
-						request.getSession().setAttribute("carrito", carrito);
-						
-					} catch (JsonProcessingException e) {
-						e.printStackTrace();
-					}
-					
-				} else if(cookies[i].getName().equals("carritoContador")) {
-					String json = cookies[i].getValue();
-					String urldecode = URLDecoder.decode(json,"UTF-8");
-					int contador = mapper.readValue(urldecode, Integer.class);
-					
-					System.out.println("guarda cookie carrito en la nueva sesion");
-					System.out.println(contador);
-					
-					request.getSession().setAttribute("carritoContador", String.valueOf(contador));
-				}
-			}
-		}
-		
 		request.setAttribute("catalogo", catalogo);
 		
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		request.getRequestDispatcher("/view/index.jsp").forward(request, response);
 	
 	}
 	

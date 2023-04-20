@@ -27,9 +27,9 @@ public class perfilServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getSession().getAttribute("usuario") == null) {
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("/view/login.jsp").forward(request, response);
 		} else {
-			request.getRequestDispatcher("perfil.jsp").forward(request, response);
+			request.getRequestDispatcher("/view/perfil.jsp").forward(request, response);
 		}
 		
 	}

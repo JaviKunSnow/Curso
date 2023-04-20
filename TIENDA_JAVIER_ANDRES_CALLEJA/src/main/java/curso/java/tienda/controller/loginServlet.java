@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import curso.java.tienda.dao.UsuarioDAO;
+import curso.java.tienda.model.Usuario;
+
 /**
  * Servlet implementation class loginServlet
  */
@@ -28,8 +31,18 @@ public class loginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/view/login.jsp").forward(request, response);
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		boolean validado = true;
 		Enumeration <?> nombres = request.getParameterNames();
+		UsuarioDAO UsuarioDAO = new UsuarioDAO();
 		
 		while(nombres.hasMoreElements()) {
 			
@@ -46,26 +59,26 @@ public class loginServlet extends HttpServlet {
 		}
 		
 		if(!validado) {
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("/view/login.jsp").forward(request, response);
 		} else {
-			request.getSession().setAttribute("usuario", request.getParameter("usuario"));
-			if(request.getSession().getAttribute("comprando") != null) {
-				request.getRequestDispatcher("carrito.jsp").forward(request, response);
-			} else if(request.getSession().getAttribute("perfil") != null) {
-				request.getRequestDispatcher("perfil.jsp").forward(request, response);
+			if(!UsuarioDAO.validarUsuario(request.getParameter("usuario"), request.getParameter("password"))) {
+				request.setAttribute("errorusuario", "el usuario es incorrecto.");
+				request.setAttribute("errorpassword", "la contraseña es incorrecta.");
+				request.getRequestDispatcher("/view/login.jsp").forward(request, response);
 			} else {
-				request.getRequestDispatcher("login.jsp").forward(request, response);
+				Usuario usuario = UsuarioDAO.recogerUsuarioPorEmail(request.getParameter("usuario"));
+				request.getSession().setAttribute("usuario", usuario);
+				if(request.getSession().getAttribute("comprando") != null) {
+					request.getRequestDispatcher("/view/carrito.jsp").forward(request, response);
+				} else if(request.getSession().getAttribute("perfil") != null) {
+					request.getRequestDispatcher("/view/perfil.jsp").forward(request, response);
+				} else {
+					request.getRequestDispatcher("").forward(request, response);
+				}
 			}
 		}
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		}
+	{
 	}
 
 }

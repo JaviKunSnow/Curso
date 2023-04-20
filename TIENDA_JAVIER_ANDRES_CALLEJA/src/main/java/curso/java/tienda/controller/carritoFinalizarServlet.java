@@ -29,7 +29,7 @@ public class carritoFinalizarServlet extends HttpServlet {
 		
 		if(request.getSession().getAttribute("usuario") == null) {
 			
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("/view/login.jsp").forward(request, response);
 		}
 		
 	}
