@@ -1,4 +1,4 @@
-package controlador;
+package curso.java.tienda.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class loginServlet
+ * Servlet implementation class perfilServlet
  */
-@WebServlet("/login")
-public class loginServlet extends HttpServlet {
+@WebServlet("/perfil")
+public class perfilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public loginServlet() {
+    public perfilServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,14 +26,12 @@ public class loginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().setAttribute("usuario", request.getParameter("usuario"));
-		if(request.getSession().getAttribute("comprando") != null) {
-			request.getRequestDispatcher("carrito.jsp").forward(request, response);
-		} else if(request.getSession().getAttribute("perfil") != null) {
-			request.getRequestDispatcher("perfil.jsp").forward(request, response);
-		} else {
+		if(request.getSession().getAttribute("usuario") == null) {
 			request.getRequestDispatcher("login.jsp").forward(request, response);
+		} else {
+			request.getRequestDispatcher("perfil.jsp").forward(request, response);
 		}
+		
 	}
 
 	/**

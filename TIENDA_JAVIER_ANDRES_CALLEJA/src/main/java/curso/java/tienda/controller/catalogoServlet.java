@@ -1,4 +1,4 @@
-package controlador;
+package curso.java.tienda.controller;
 
 import java.io.IOException;
 import java.net.URLDecoder;
@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import dao.articuloDAO;
-import modelo.articulo;
+import curso.java.tienda.dao.articuloDAO;
+import curso.java.tienda.model.articulo;
 
 /**
  * Servlet implementation class catalogoServlet

@@ -1,23 +1,28 @@
-package controlador;
+package curso.java.tienda.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import curso.java.tienda.model.articulo;
 
 /**
- * Servlet implementation class carritoFinalizarServlet
+ * Servlet implementation class carritoVistaServlet
  */
-@WebServlet("/carritoFinal")
-public class carritoFinalizarServlet extends HttpServlet {
+@WebServlet("/carritoVista")
+public class carritoVistaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public carritoFinalizarServlet() {
+    public carritoVistaServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,19 +32,17 @@ public class carritoFinalizarServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if(request.getSession().getAttribute("usuario") == null) {
-			
-			request.getRequestDispatcher("login.jsp").forward(request, response);
-		}
+		HttpSession session = request.getSession();
+		HashMap<Integer, articulo> carrito = (HashMap<Integer, articulo>) session.getAttribute("carrito");
 		
+		request.getRequestDispatcher("carrito.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
 	}
 
 }

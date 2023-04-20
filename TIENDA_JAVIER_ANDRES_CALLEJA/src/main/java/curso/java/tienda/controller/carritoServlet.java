@@ -1,9 +1,9 @@
-package controlador;
+package curso.java.tienda.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,40 +13,41 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import dao.articuloDAO;
-import modelo.articulo;
+import curso.java.tienda.dao.articuloDAO;
+import curso.java.tienda.model.articulo;
 
 /**
- * Servlet implementation class carritoAjaxServlet
+ * Servlet implementation class carritoServlet
  */
-@WebServlet("/carritoAjax")
-public class carritoAjaxServlet extends HttpServlet {
+@WebServlet("/carrito")
+public class carritoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public carritoAjaxServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	int contadorCarrito = 0;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	public carritoServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		HttpSession session = request.getSession();
 		articuloDAO articuloDAO = new articuloDAO();
 		ObjectMapper mapper = new ObjectMapper();
@@ -139,14 +140,8 @@ public class carritoAjaxServlet extends HttpServlet {
 			}
 		
 		sesion.setAttribute("carrito", carrito);
-		
-		String respuesta = (String) session.getAttribute("carritoContador");
-		
-		response.setContentType("text/plain");
-		PrintWriter out = response.getWriter();
-        out.print(respuesta);
-        out.flush();
-		
+
+		request.getRequestDispatcher("").forward(request, response);
 	}
 
 }

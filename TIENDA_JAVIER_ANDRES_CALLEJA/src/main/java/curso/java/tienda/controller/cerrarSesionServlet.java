@@ -1,4 +1,4 @@
-package controlador;
+package curso.java.tienda.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class perfilServlet
+ * Servlet implementation class cerrarSesionServlet
  */
-@WebServlet("/perfil")
-public class perfilServlet extends HttpServlet {
+@WebServlet("/cerrar")
+public class cerrarSesionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public perfilServlet() {
+    public cerrarSesionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,12 @@ public class perfilServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("perfil.jsp").forward(request, response);
+		// TODO Auto-generated method stub
+		if(request.getSession(false) != null) {
+			request.getSession().invalidate();
+		}
+		
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 	/**
@@ -34,7 +39,7 @@ public class perfilServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
 	}
 
 }

@@ -19,7 +19,7 @@
     </head>
 
     <body style="padding-bottom: 70px; padding-top: 70px;">
-        <%@ include file="/fragments/header.jsp" %>
+        <%@ include file="/view/fragments/header.jsp" %>
             <main>
                 <div class="container-fluid">
         <div class="row">
@@ -75,7 +75,7 @@
         </div>
     </div>
             </main>
-            <%@ include file="/fragments/footer.jsp" %>
+            <%@ include file="/view/fragments/footer.jsp" %>
     </body>
 
     </html>
