@@ -27,6 +27,10 @@ public class carritoFinalizarServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		if(request.getSession().getAttribute("usuario") == null) {
+			
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		}
 		
 	}
 
