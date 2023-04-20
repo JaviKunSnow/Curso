@@ -68,7 +68,7 @@
                         </dl>
                         <hr> 
                         <a href="#" class="btn btn-out btn-primary btn-square btn-main" data-abc="true">Continua comprando</a> 
-                        <a href="carritoFinal" class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Finalizar compra</a>
+                        <a href="carritoFinalizar" class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Finalizar compra</a>
                     </div>
                 </div>
             </aside>
