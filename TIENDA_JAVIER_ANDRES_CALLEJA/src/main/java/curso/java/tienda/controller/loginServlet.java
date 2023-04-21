@@ -61,12 +61,12 @@ public class loginServlet extends HttpServlet {
 		if(!validado) {
 			request.getRequestDispatcher("/view/login.jsp").forward(request, response);
 		} else {
-			if(!UsuarioDAO.validarUsuario(request.getParameter("usuario"), request.getParameter("password"))) {
+			Usuario usuario = UsuarioDAO.validarUsuario(request.getParameter("usuario"), request.getParameter("password"));
+			if(usuario == null) {
 				request.setAttribute("errorusuario", "el usuario es incorrecto.");
 				request.setAttribute("errorpassword", "la contraseña es incorrecta.");
 				request.getRequestDispatcher("/view/login.jsp").forward(request, response);
 			} else {
-				Usuario usuario = UsuarioDAO.recogerUsuarioPorEmail(request.getParameter("usuario"));
 				request.getSession().setAttribute("usuario", usuario);
 				if(request.getSession().getAttribute("comprando") != null) {
 					request.getRequestDispatcher("/view/carrito.jsp").forward(request, response);

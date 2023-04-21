@@ -90,7 +90,7 @@ public class UsuarioDAO {
 		return usuario;
 	}
 	
-	public boolean validarUsuario(String nombre, String clave) {
+	public Usuario validarUsuario(String nombre, String clave) {
 		
 		con = Conexion.getConexion();
 		
@@ -104,7 +104,22 @@ public class UsuarioDAO {
 			ResultSet resultSet = sentenciaSQL.executeQuery();
 			
 			if(resultSet.next()) {
-				return true;
+				Usuario usuario = new Usuario();
+				
+				usuario.setId(resultSet.getInt("id"));
+				usuario.setId_rol(resultSet.getInt("id_rol"));
+				usuario.setEmail(resultSet.getString("email"));
+				usuario.setClave(resultSet.getString("clave"));
+				usuario.setNombre(resultSet.getString("nombre"));
+				usuario.setApellido1(resultSet.getString("apellido1"));
+				usuario.setApellido2(resultSet.getString("apellido2"));
+				usuario.setDireccion(resultSet.getString("direccion"));
+				usuario.setProvincia(resultSet.getString("provincia"));
+				usuario.setLocalidad(resultSet.getString("localidad"));
+				usuario.setTelefono(resultSet.getString("telefono"));
+				usuario.setDni(resultSet.getString("dni"));
+				
+				return usuario;
 			}
 			
 			
@@ -112,7 +127,7 @@ public class UsuarioDAO {
 			e.printStackTrace();
 		}
 		
-		return false;
+		return null;
 	}
 
 }

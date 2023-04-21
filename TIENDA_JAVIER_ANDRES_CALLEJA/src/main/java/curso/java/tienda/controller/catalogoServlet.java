@@ -47,7 +47,6 @@ public class catalogoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		List <articulo> catalogo = articuloDAO.obtenerCatalogo();
-		ObjectMapper mapper = new ObjectMapper();
 		
 		if(request.getSession(false) == null) {
 			request.getSession();
