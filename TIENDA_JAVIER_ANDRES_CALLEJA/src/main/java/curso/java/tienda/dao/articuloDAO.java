@@ -31,6 +31,7 @@ public class articuloDAO {
 	}
 	
 	public List<articulo> obtenerCatalogo() {
+		
 		con = Conexion.getConexion();
 		
 		List<articulo> catalogo = new ArrayList<>();
