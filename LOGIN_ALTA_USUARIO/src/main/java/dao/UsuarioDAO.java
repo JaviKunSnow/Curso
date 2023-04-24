@@ -29,12 +29,12 @@ public class UsuarioDAO {
 		
 	}
 	
-	public boolean findByEmailPassword(Usuario usuario) {
+	public boolean findByEmailPassword(String email, String password) {
 		StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
 		
 		for(Entry<Integer, Usuario> entry : Usuarios.entrySet()) {
-			if(entry.getValue().getEmail().equals(usuario.getEmail())) {
-				if(encryptor.checkPassword(usuario.getPass(), entry.getValue().getPass())) {
+			if(entry.getValue().getEmail().equals(email)) {
+				if(encryptor.checkPassword(password, entry.getValue().getPass())) {
 					return true;
 				}
 			}

@@ -30,4 +30,8 @@ public class HomeView {
 		
 	}
 	
+	public void logeado() {
+		System.out.println("login correcto.");
+	}
+	
 }

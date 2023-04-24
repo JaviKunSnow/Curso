@@ -1,10 +1,12 @@
 package view;
 
 import java.util.Scanner;
+import controller.LoginController;
 
 public class LoginView {
 	
 	static Scanner teclado = new Scanner(System.in);
+	LoginController loginController = new LoginController();
 	
 	public void logearte() {
 		
@@ -24,6 +26,7 @@ public class LoginView {
 			
 		} while(!email.contains("@") && email.isEmpty() && password1.isEmpty());
 		
+		loginController.logearte(email, password1);
 		
 	}
 	
