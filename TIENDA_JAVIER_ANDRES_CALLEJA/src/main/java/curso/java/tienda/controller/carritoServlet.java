@@ -13,9 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import curso.java.tienda.dao.articuloDAO;
 import curso.java.tienda.model.articulo;
 
@@ -53,7 +50,6 @@ public class carritoServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		articuloDAO articuloDAO = new articuloDAO();
-		ObjectMapper mapper = new ObjectMapper();
 
 		HttpSession sesion = request.getSession();
 		HashMap<Integer, articulo> carrito = (HashMap<Integer, articulo>) session.getAttribute("carrito");
