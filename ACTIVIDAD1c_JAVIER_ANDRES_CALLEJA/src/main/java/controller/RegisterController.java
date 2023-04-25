@@ -1,6 +1,5 @@
 package controller;
 
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.jasypt.util.password.PasswordEncryptor;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 

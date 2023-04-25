@@ -31,6 +31,8 @@ public class UsuarioDAO {
 			
 			Conexion.desconectar();
 			
+			return true;
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -1,4 +1,4 @@
-package config;
+package curso.java.tienda.config;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,8 +12,8 @@ public class Propiedades {
 	
 	static String ruta;
 	
-	public void darRuta(HttpServletRequest request)  {
-		ruta = request.getServletContext().getRealPath("");
+	public void darRuta(String rutaCompartida)  {
+		ruta = rutaCompartida;
 	}
 	
 	public static List<String> recogerDatosBD() {

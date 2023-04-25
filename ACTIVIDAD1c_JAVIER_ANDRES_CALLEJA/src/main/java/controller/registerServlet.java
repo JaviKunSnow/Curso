@@ -82,10 +82,12 @@ public class registerServlet extends HttpServlet {
 						request.getRequestDispatcher("login.jsp").forward(request, response);
 					}
 				} else {
-					request.setAttribute("error".concat(pass2), "la contraseña no coincide.");
+					request.setAttribute("error".concat(pass2), "la contraseï¿½a no coincide.");
+					request.getRequestDispatcher("register.jsp").forward(request, response);
 				}
 			} else {
 				request.setAttribute("error".concat(email), "El " + email + " no es correcto.");
+				request.getRequestDispatcher("register.jsp").forward(request, response);
 			}
 		}
 		

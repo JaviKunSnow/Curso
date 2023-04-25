@@ -1,6 +1,6 @@
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Map" %>
-<%@ page import="curso.java.tienda.model.articulo" %>
+<%@ page import="curso.java.tienda.model.Articulo" %>
 <%@ page import="curso.java.tienda.model.Usuario" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
     <!doctype html>
@@ -38,16 +38,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            	<%--<%  HashMap<String, articulo> carrito = (HashMap<Integer, articulo>) session.getAttribute("carrito");
-                            	HashMap<Integer, articulo> nuevoCarrito = new HashMap<Integer, articulo>();
-
-                            	for(Map.Entry<String, articulo> entry : carrito.entrySet()) {
-                            	    Integer clave = Integer.parseInt(entry.getKey());
-                            	    articulo valor = entry.getValue();
-
-                            	    nuevoCarrito.put(clave, valor);
-                            	} --%>
-            					<%for(Map.Entry<Integer, articulo> entry : ((HashMap<Integer, articulo>) session.getAttribute("carrito")).entrySet()) { %>
+            					<%for(Map.Entry<Integer, Articulo> entry : ((HashMap<Integer, Articulo>) session.getAttribute("carrito")).entrySet()) { %>
                                 <tr>
                                     <td>
                                     <%= entry.getValue().getNombre() %>

@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="curso.java.tienda.model.articulo" %>
+<%@ page import="curso.java.tienda.model.Articulo" %>
 <%@ page import="curso.java.tienda.model.Usuario" %>
 <html>
 <head>
@@ -17,20 +17,19 @@
     <div class="container">
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <% List<articulo> catalogo = (List<articulo>) request.getAttribute("catalogo"); %>
-        <% for (articulo articulo : catalogo) { %>
-            <div class="col">
+        <% List<Articulo> catalogo = (List<Articulo>) request.getAttribute("catalogo"); %>
+        <% for (Articulo articulo : catalogo) { %>
+        	<div class="col">
                 <div class="card shadow-sm">
-                    <img src="<%=articulo.getImagen()%>"></img>
+                    <img src=""></img>
                     <div class="card-body">
-                        <title><%=articulo.getNombre() %></title>
+                        <h2><%=articulo.getNombre() %></h2>
                         <p class="card-text"><%=articulo.getDescripcion() %></p>
                         <div class="d-flex justify-content-between align-items-center">
                             <small class="text-body-secondary"><%=articulo.getPrecio() %> €</small>
                             <div class="btn-group">
                             <form id="form" action="carrito" method="post">
                                 <input type="hidden" id="id" name="id" value="<%=articulo.getId()%>">
-                                <input type="number" id="cantidad" name="cantidad" min="1">
                                 <input type="submit" class="btn btn-sm btn-outline-secondary" id="enviar" value="al carrito">
                             </form>
                             </div>
@@ -38,6 +37,7 @@
                     </div>
                 </div>
              <% } %>
+     	</div>
      </div>
  </div>
                  

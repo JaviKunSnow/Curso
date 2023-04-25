@@ -3,13 +3,16 @@ package curso.java.tienda.config;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
 public class Conexion {
     
-	static String bd = "tienda";
-	static String login = "root";
-	static String password = "";
-	static String host = "127.0.0.1"; //localhost
+	static List<String> propiedades = Propiedades.recogerDatosBD();
+	
+	static String bd = propiedades.get(0);
+	static String login = propiedades.get(1);
+	static String password = propiedades.get(2);
+	static String host = propiedades.get(3); //localhost
 	
 	static String url = "jdbc:mysql://";
 	static Connection conexion; //atributo para  guardar el objeto Connection
@@ -29,17 +32,17 @@ public class Conexion {
     public static boolean crearConexion() {
 	    try {
 	        //cargo el driver
+	    	
+	    	
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 	        conexion = DriverManager.getConnection(url + host + "/"+ bd, login, password);    
                 
             conexion.setAutoCommit(true);
 	        
 	    } catch (SQLException e) {
-	    	e.printStackTrace();
 	    	return false;
 	    }
 	    catch (Exception e) {
-	    	e.printStackTrace();
 	    	return false;
 	    }
 	    return true;

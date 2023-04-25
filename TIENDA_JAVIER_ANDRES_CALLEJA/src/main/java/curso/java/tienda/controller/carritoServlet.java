@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import curso.java.tienda.dao.articuloDAO;
-import curso.java.tienda.model.articulo;
+import curso.java.tienda.model.Articulo;
 
 /**
  * Servlet implementation class carritoServlet
@@ -52,7 +52,7 @@ public class carritoServlet extends HttpServlet {
 		articuloDAO articuloDAO = new articuloDAO();
 
 		HttpSession sesion = request.getSession();
-		HashMap<Integer, articulo> carrito = (HashMap<Integer, articulo>) session.getAttribute("carrito");
+		HashMap<Integer, Articulo> carrito = (HashMap<Integer, Articulo>) session.getAttribute("carrito");
 		Integer contador = 0;
 		Integer contadorCarrito = 0;
 		if(carrito == null) {
@@ -61,22 +61,15 @@ public class carritoServlet extends HttpServlet {
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 
-		int cantidad = Integer.parseInt(request.getParameter("cantidad"));
 
 		if (carrito.containsKey(id)) {
-			articulo articulo = carrito.get(id);
-			articulo.setCantidad(articulo.getCantidad() + cantidad);
+			Articulo articulo = carrito.get(id);
+			articulo.setCantidad(articulo.getCantidad() + 1);
 			carrito.replace(id, articulo);
 		} else {
-			articulo articulo = articuloDAO.devolverArticuloId(id);
-			articulo.setCantidad(cantidad);
+			Articulo articulo = articuloDAO.devolverArticuloId(id);
+			articulo.setCantidad(1);
 			carrito.put(id, articulo);
-			if (sesion.getAttribute("carritoContador") == null) {
-				sesion.setAttribute("carritoContador", String.valueOf(1));
-			} else {
-				contadorCarrito = Integer.parseInt((String)sesion.getAttribute("carritoContador"));
-				sesion.setAttribute("carritoContador", String.valueOf(++contadorCarrito));
-			}
 		}
 		
 		sesion.setAttribute("carrito", carrito);

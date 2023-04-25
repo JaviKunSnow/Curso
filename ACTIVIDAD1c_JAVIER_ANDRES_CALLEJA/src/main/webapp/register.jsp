@@ -20,7 +20,7 @@
 		<input type="password" name="pass1">
 		</P>
 		<% if(request.getAttribute("errorpass1") != null) {
-			request.getAttribute("erroruser");
+			request.getAttribute("errorpass1");
 		}%>
 		<P>
 		<label for="user">repetir Password: </label>

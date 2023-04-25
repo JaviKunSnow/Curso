@@ -1,4 +1,4 @@
-package config;
+package curso.java.tienda.config;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,8 +10,8 @@ public class PropiedadesLog {
 	private static Logger Log = Logger.getLogger(PropiedadesLog.class);
 	static String ruta;
 	
-	public void darRuta(HttpServletRequest request)  {
-		ruta = request.getServletContext().getRealPath("");
+	public void darRuta(String rutaCompartida)  {
+		ruta = rutaCompartida;
 	}
 	
 	public void registerAccess(String email) {

@@ -10,11 +10,38 @@ import java.util.List;
 
 import curso.java.tienda.config.Conexion;
 import curso.java.tienda.model.Usuario;
-import curso.java.tienda.model.articulo;
 
 public class UsuarioDAO {
 
 	Connection con;
+	
+	public boolean insert(String clave, String email, String nombre, String apellidos) {
+		
+		con = Conexion.getConexion();
+		
+		try {
+		
+			PreparedStatement sentenciaSQL = con.prepareStatement("insert into usuario (id, rol_id, clave, email, nombre, apellidos, baja) values(null, null, ?, ?, ?, ?, 1)");
+			
+			sentenciaSQL.setString(1, clave);
+			sentenciaSQL.setString(2, email);
+			sentenciaSQL.setString(3, nombre);
+			sentenciaSQL.setString(4, apellidos);
+			
+			sentenciaSQL.executeUpdate();
+			
+			Conexion.desconectar();
+			
+			return true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return false;
+		
+	}
 	
 	public List<Usuario> obtenerUsuarios() {
 		con = Conexion.getConexion();
@@ -23,7 +50,7 @@ public class UsuarioDAO {
 		try {
 			
 			Statement statement = con.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM usuarios");
+			ResultSet resultSet = statement.executeQuery("SELECT * FROM usuario");
 			
 			while (resultSet.next()) {
 				
@@ -32,15 +59,10 @@ public class UsuarioDAO {
 				String email = resultSet.getString("email");
 				String clave = resultSet.getString("clave");
 				String nombre = resultSet.getString("nombre");
-				String apellido1 = resultSet.getString("apellido1");
-				String apellido2 = resultSet.getString("apellido2");
-				String direccion = resultSet.getString("direccion");
-				String provincia = resultSet.getString("provincia");
-				String localidad = resultSet.getString("localidad");
-				String telefono = resultSet.getString("telefono");
-				String dni = resultSet.getString("dni");
+				String apellidos = resultSet.getString("apellido1");
+				boolean baja = resultSet.getBoolean("baja");
 				
-				Usuario usuario = new Usuario(id, id_rol, clave, email, nombre, apellido1, apellido2, direccion, localidad, provincia, telefono, dni);
+				Usuario usuario = new Usuario(id, id_rol, clave, email, nombre, apellidos, baja);
 				usuarios.add(usuario);
 				
 			}
@@ -60,7 +82,7 @@ public class UsuarioDAO {
 		
 		try {
 			
-			PreparedStatement sentenciaSQL = con.prepareStatement("SELECT * FROM usuarios where email = ?");
+			PreparedStatement sentenciaSQL = con.prepareStatement("SELECT * FROM usuario where email = ?");
 			
 			sentenciaSQL.setString(1, email);
 			
@@ -73,13 +95,8 @@ public class UsuarioDAO {
 				usuario.setEmail(resultSet.getString("email"));
 				usuario.setClave(resultSet.getString("clave"));
 				usuario.setNombre(resultSet.getString("nombre"));
-				usuario.setApellido1(resultSet.getString("apellido1"));
-				usuario.setApellido2(resultSet.getString("apellido2"));
-				usuario.setDireccion(resultSet.getString("direccion"));
-				usuario.setProvincia(resultSet.getString("provincia"));
-				usuario.setLocalidad(resultSet.getString("localidad"));
-				usuario.setTelefono(resultSet.getString("telefono"));
-				usuario.setDni(resultSet.getString("dni"));
+				usuario.setApellidos(resultSet.getString("apellidos"));
+				usuario.setBaja(resultSet.getBoolean("baja"));
 				
 			}
 			
@@ -96,7 +113,7 @@ public class UsuarioDAO {
 		
 		try {
 			
-			PreparedStatement sentenciaSQL = con.prepareStatement("SELECT * FROM usuarios where email = ? AND clave = ?");
+			PreparedStatement sentenciaSQL = con.prepareStatement("SELECT * FROM usuario where email = ? AND clave = ?");
 			
 			sentenciaSQL.setString(1, nombre);
 			sentenciaSQL.setString(2, clave);
@@ -111,13 +128,8 @@ public class UsuarioDAO {
 				usuario.setEmail(resultSet.getString("email"));
 				usuario.setClave(resultSet.getString("clave"));
 				usuario.setNombre(resultSet.getString("nombre"));
-				usuario.setApellido1(resultSet.getString("apellido1"));
-				usuario.setApellido2(resultSet.getString("apellido2"));
-				usuario.setDireccion(resultSet.getString("direccion"));
-				usuario.setProvincia(resultSet.getString("provincia"));
-				usuario.setLocalidad(resultSet.getString("localidad"));
-				usuario.setTelefono(resultSet.getString("telefono"));
-				usuario.setDni(resultSet.getString("dni"));
+				usuario.setApellidos(resultSet.getString("apellidos"));
+				usuario.setBaja(resultSet.getBoolean("baja"));
 				
 				return usuario;
 			}

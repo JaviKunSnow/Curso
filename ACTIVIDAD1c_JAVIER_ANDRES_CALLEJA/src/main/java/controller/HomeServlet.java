@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import config.Propiedades;
+import config.PropiedadesLog;
+
 /**
  * Servlet implementation class HomeServlet
  */
@@ -27,6 +30,12 @@ public class HomeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		Propiedades Propiedades = new Propiedades();
+		PropiedadesLog propLog = new PropiedadesLog();
+		
+		Propiedades.darRuta(request);
+		propLog.darRuta(request);
+		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 

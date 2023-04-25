@@ -14,8 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import curso.java.tienda.config.Propiedades;
+import curso.java.tienda.config.PropiedadesLog;
 import curso.java.tienda.dao.articuloDAO;
-import curso.java.tienda.model.articulo;
+import curso.java.tienda.model.Articulo;
 
 /**
  * Servlet implementation class catalogoServlet
@@ -43,11 +45,18 @@ public class catalogoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		List <articulo> catalogo = articuloDAO.obtenerCatalogo();
+		String ruta = request.getServletContext().getRealPath("");
+		Propiedades propiedades = new Propiedades();
+		PropiedadesLog proLog = new PropiedadesLog();
+		
+		propiedades.darRuta(ruta);
+		proLog.darRuta(ruta);
+		
+		List <Articulo> catalogo = articuloDAO.obtenerCatalogo();
 		
 		if(request.getSession(false) == null) {
 			request.getSession();
-			request.getSession().setAttribute("carrito", new HashMap<Integer, articulo>());
+			request.getSession().setAttribute("carrito", new HashMap<Integer, Articulo>());
 		} 
 		
 		request.setAttribute("catalogo", catalogo);

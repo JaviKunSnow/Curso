@@ -1,4 +1,4 @@
-package controller;
+package curso.java.tienda.controller;
 
 import java.io.IOException;
 import java.util.Enumeration;
@@ -9,21 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import config.PropiedadesLog;
-import dao.UsuarioDAO;
-import model.Usuario;
+import org.jasypt.util.password.StrongPasswordEncryptor;
+
+import curso.java.tienda.config.PropiedadesLog;
+import curso.java.tienda.dao.UsuarioDAO;
+import curso.java.tienda.model.Usuario;
 
 /**
- * Servlet implementation class loginServlet
+ * Servlet implementation class registerServlet
  */
-@WebServlet("/login")
-public class loginServlet extends HttpServlet {
+@WebServlet("/register")
+public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public loginServlet() {
+    public RegisterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,17 +35,24 @@ public class loginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("login.jsp").forward(request, response);
+		request.getRequestDispatcher("/view/registro.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		boolean validado = true;
-		String email = request.getParameter("user");
+		
+		String email = request.getParameter("usuario");
 		String pass1 = request.getParameter("pass1");
+		String pass2 = request.getParameter("pass2");
+		String nombre = request.getParameter("nombre");
+		String apellidos = request.getParameter("apellidos");
+		
+		StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
+		String passwordCifrada = encryptor.encryptPassword(pass1);
 		
 		Enumeration <?> nombres = request.getParameterNames();
 		UsuarioDAO UsuarioDAO = new UsuarioDAO();
@@ -52,7 +61,6 @@ public class loginServlet extends HttpServlet {
 		while(nombres.hasMoreElements()) {
 			
 			String parametro = (String) nombres.nextElement();
-			
 			
 			if(request.getParameter(parametro).isEmpty()) {
 				request.setAttribute("error".concat(parametro), "El parametro " + parametro + " esta vacio.");
@@ -65,16 +73,21 @@ public class loginServlet extends HttpServlet {
 		
 		if(validado) {
 			if(email.contains("@")) {
-					if(UsuarioDAO.findByEmail(email, pass1)) {
-						propiedades.loginAccess(email);
-						request.getRequestDispatcher("logeado.jsp").forward(request, response);
+				if( pass1.equals(pass2)) {
+					
+					if(UsuarioDAO.insert(passwordCifrada, email, nombre, apellidos)) {
+						propiedades.registerAccess(email);
+						request.getRequestDispatcher("/view/login.jsp").forward(request, response);
 					}
+				} else {
+					request.setAttribute("error".concat(pass2), "la contrase�a no coincide.");
+					request.getRequestDispatcher("/view/register.jsp").forward(request, response);
+				}
 			} else {
 				request.setAttribute("error".concat(email), "El " + email + " no es correcto.");
-				request.getRequestDispatcher("register.jsp").forward(request, response);
+				request.getRequestDispatcher("/view/register.jsp").forward(request, response);
 			}
 		}
-		
 		
 	}
 

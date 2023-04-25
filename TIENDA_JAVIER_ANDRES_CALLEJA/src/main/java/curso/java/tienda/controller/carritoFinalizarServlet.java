@@ -27,10 +27,9 @@ public class carritoFinalizarServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if(request.getSession().getAttribute("usuario") == null) {
-			
-			request.getRequestDispatcher("/view/login.jsp").forward(request, response);
-		}
+		
+		
+		request.getRequestDispatcher("/view/carrito.jsp").forward(request, response);
 		
 	}
 
@@ -38,8 +37,11 @@ public class carritoFinalizarServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		if(request.getSession().getAttribute("usuario") == null) {
+			
+			request.getRequestDispatcher("/view/login.jsp").forward(request, response);
+		}
 	}
 
 }

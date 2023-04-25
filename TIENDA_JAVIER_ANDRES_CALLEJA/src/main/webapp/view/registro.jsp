@@ -21,7 +21,7 @@
 	<main class="form-signin w-100 m-auto text-center">
 		<section class="container bg-dark p-2 rounded">
 			<section class="form-signin w-100 m-auto text-center text-white">
-				<form action="login" method="post">
+				<form action="register" method="post">
 					<img class="mb-4" src="webroot/img/logo.jpg" alt="" width="140"
 						height="100">
 					<h1 class="h3 mb-3 fw-normal">Iniciar Sesion</h1>
@@ -41,31 +41,61 @@
 
 					</section>
 					<section class="form-floating p-1 text-dark">
-						<input type="password" class="form-control" name="password1"
-							id="password1" placeholder="Password">
+						<section class="form-group">
+							<input type="text" class="form-control" name="nombre"
+								id="nombre" placeholder="Pedro">
+							<%
+							if (request.getAttribute("errornombre") != null) {
+							%>
+							<span class="invalid feedback text-white"><%=request.getAttribute("errornombre")%></span>
+							<%
+							}
+							%>
+							<em></em> <label for="user">Nombre:</label>
+						</section>
+
+					</section>
+					<section class="form-floating p-1 text-dark">
+						<section class="form-group">
+							<input type="text" class="form-control" name="apellidos"
+								id="apellidos" placeholder="Martinez De la Rosa">
+							<%
+							if (request.getAttribute("errorapellidos") != null) {
+							%>
+							<span class="invalid feedback text-white"><%=request.getAttribute("errorapellidos")%></span>
+							<%
+							}
+							%>
+							<em></em> <label for="user">Apellidos:</label>
+						</section>
+
+					</section>
+					<section class="form-floating p-1 text-dark">
+						<input type="password" class="form-control" name="pass1"
+							id="pass1" placeholder="Password">
 						<%
-						if (request.getAttribute("errorpassword1") != null) {
+						if (request.getAttribute("errorpass1") != null) {
 						%>
-						<span class="invalid feedback is-invalid text-white"><%=request.getAttribute("errorpassword1")%></span>
+						<span class="invalid feedback is-invalid text-white"><%=request.getAttribute("errorpass1")%></span>
 						<%
 						}
 						%>
 						<em></em> <label for="pass">Contraseña:</label>
 					</section>
 					<section class="form-floating p-1 text-dark">
-						<input type="password" class="form-control" name="password2"
-							id="password1" placeholder="Password">
+						<input type="password" class="form-control" name="pass2"
+							id="pass2" >
 						<%
-						if (request.getAttribute("errorpassword2") != null) {
+						if (request.getAttribute("errorpass2") != null) {
 						%>
-						<span class="invalid feedback is-invalid text-white"><%=request.getAttribute("errorpassword2")%></span>
+						<span class="invalid feedback is-invalid text-white"><%=request.getAttribute("errorpass2")%></span>
 						<%
 						}
 						%>
 						<em></em> <label for="pass">Repetir contraseña:</label>
 					</section>
 					<button class="w-100 btn btn-lg btn-warning text-dark"
-						type="enviar">Iniciar sesion</button>
+						type="enviar">Registrarse</button>
 					<p class="mt-5 mb-3 text-white">&copy; 2023</p>
 				</form>
 			</section>

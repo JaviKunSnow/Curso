@@ -12,10 +12,19 @@
 		<label for="user">Usuario: </label>
 		<input type="text" name="user">
 		</P>
+		<% if(request.getAttribute("erroruser") != null) {
+			request.getAttribute("erroruser");
+		}%>
 		<P>
 		<label for="user">Password: </label>
 		<input type="password" name="pass">
 		</P>
+		<% if(request.getAttribute("errorpass1") != null) {
+			request.getAttribute("errorpass1");
+		}%>
+		<p>
+			<input type="submit" value="iniciar sesion">
+		</p>
 	</form>
 </body>
 </html>

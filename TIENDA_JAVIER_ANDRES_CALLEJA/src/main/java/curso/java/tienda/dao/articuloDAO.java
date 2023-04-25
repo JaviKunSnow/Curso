@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import curso.java.tienda.config.Conexion;
-import curso.java.tienda.model.articulo;
+import curso.java.tienda.model.Articulo;
 
 
 public class articuloDAO {
@@ -30,15 +30,15 @@ public class articuloDAO {
 //		}
 	}
 	
-	public List<articulo> obtenerCatalogo() {
+	public List<Articulo> obtenerCatalogo() {
 		
 		con = Conexion.getConexion();
 		
-		List<articulo> catalogo = new ArrayList<>();
+		List<Articulo> catalogo = new ArrayList<>();
 		try {
 			
 			Statement statement = con.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM productos");
+			ResultSet resultSet = statement.executeQuery("SELECT * FROM producto");
 			
 			while (resultSet.next()) {
 				
@@ -46,9 +46,11 @@ public class articuloDAO {
 				String nombre = resultSet.getString("nombre");
 				String descripcion = resultSet.getString("descripcion");
 				double precio = resultSet.getDouble("precio");
-				String imagen = resultSet.getString("imagen");
+				double impuesto = resultSet.getDouble("impuesto");
+				int stock = resultSet.getInt("stock");
+				boolean baja = resultSet.getBoolean("baja");
 				
-				articulo articulo = new articulo(id, nombre, descripcion, precio, imagen);
+				Articulo articulo = new Articulo(id, nombre, descripcion, precio, impuesto, stock, baja);
 				catalogo.add(articulo);
 				
 			}
@@ -60,13 +62,13 @@ public class articuloDAO {
 		return catalogo;
 	}
 	
-	public articulo devolverArticuloId(int id) {
+	public Articulo devolverArticuloId(int id) {
 		con = Conexion.getConexion();
 		
-		articulo articulo = new articulo(0, null, null, 0, null);
+		Articulo articulo = new Articulo();
 		
 		try {
-			PreparedStatement sentenciaSQL = con.prepareStatement("select * from productos where id = ?");
+			PreparedStatement sentenciaSQL = con.prepareStatement("select * from producto where id = ?");
 			
 			sentenciaSQL.setInt(1, id);
 			
@@ -74,8 +76,11 @@ public class articuloDAO {
 			if (rs.next()) {
 				articulo.setId(rs.getInt("id"));
 				articulo.setNombre(rs.getString("nombre"));
+				articulo.setDescripcion(rs.getString("descripcion"));
 				articulo.setPrecio(rs.getDouble("precio"));
-				articulo.setImagen(rs.getString("imagen"));
+				articulo.setPrecio(rs.getDouble("impuesto"));
+				articulo.setStock(rs.getInt("stock"));
+				articulo.setBaja(rs.getBoolean("baja"));
 
 			}
 			
