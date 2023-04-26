@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jasypt.util.password.StrongPasswordEncryptor;
+
 import curso.java.tienda.config.Conexion;
 import curso.java.tienda.model.Usuario;
 
@@ -55,7 +57,7 @@ public class UsuarioDAO {
 			while (resultSet.next()) {
 				
 				int id = resultSet.getInt("id");
-				int id_rol = resultSet.getInt("id_rol");
+				int id_rol = resultSet.getInt("rol_id");
 				String email = resultSet.getString("email");
 				String clave = resultSet.getString("clave");
 				String nombre = resultSet.getString("nombre");
@@ -80,6 +82,7 @@ public class UsuarioDAO {
 		
 		Usuario usuario = new Usuario();
 		
+		
 		try {
 			
 			PreparedStatement sentenciaSQL = con.prepareStatement("SELECT * FROM usuario where email = ?");
@@ -91,7 +94,7 @@ public class UsuarioDAO {
 			while (resultSet.next()) {
 				
 				usuario.setId(resultSet.getInt("id"));
-				usuario.setId_rol(resultSet.getInt("id_rol"));
+				usuario.setId_rol(resultSet.getInt("rol_id"));
 				usuario.setEmail(resultSet.getString("email"));
 				usuario.setClave(resultSet.getString("clave"));
 				usuario.setNombre(resultSet.getString("nombre"));
@@ -110,28 +113,30 @@ public class UsuarioDAO {
 	public Usuario validarUsuario(String nombre, String clave) {
 		
 		con = Conexion.getConexion();
+		StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
 		
 		try {
 			
-			PreparedStatement sentenciaSQL = con.prepareStatement("SELECT * FROM usuario where email = ? AND clave = ?");
+			PreparedStatement sentenciaSQL = con.prepareStatement("SELECT * FROM usuario where email = ?");
 			
 			sentenciaSQL.setString(1, nombre);
-			sentenciaSQL.setString(2, clave);
 			
 			ResultSet resultSet = sentenciaSQL.executeQuery();
 			
 			if(resultSet.next()) {
-				Usuario usuario = new Usuario();
-				
-				usuario.setId(resultSet.getInt("id"));
-				usuario.setId_rol(resultSet.getInt("id_rol"));
-				usuario.setEmail(resultSet.getString("email"));
-				usuario.setClave(resultSet.getString("clave"));
-				usuario.setNombre(resultSet.getString("nombre"));
-				usuario.setApellidos(resultSet.getString("apellidos"));
-				usuario.setBaja(resultSet.getBoolean("baja"));
-				
-				return usuario;
+				if(encryptor.checkPassword(clave, resultSet.getString("clave"))) {
+					Usuario usuario = new Usuario();
+					
+					usuario.setId(resultSet.getInt("id"));
+					usuario.setId_rol(resultSet.getInt("rol_id"));
+					usuario.setEmail(resultSet.getString("email"));
+					usuario.setClave(resultSet.getString("clave"));
+					usuario.setNombre(resultSet.getString("nombre"));
+					usuario.setApellidos(resultSet.getString("apellidos"));
+					usuario.setBaja(resultSet.getBoolean("baja"));
+					
+					return usuario;
+				}
 			}
 			
 			

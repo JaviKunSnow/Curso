@@ -36,7 +36,7 @@
 							<%
 							}
 							%>
-							<em></em> <label for="user">Usuario:</label>
+							<em></em> <label for="usuario">Usuario:</label>
 						</section>
 
 					</section>
@@ -50,10 +50,10 @@
 						<%
 						}
 						%>
-						<em></em> <label for="pass">Contraseña:</label>
+						<em></em> <label for="password">Contraseña:</label>
 					</section>
-					<button class="w-100 btn btn-lg btn-warning text-dark"
-						type="enviar">Iniciar sesion</button>
+					<input type="submit" class="w-100 btn btn-lg btn-warning text-dark"
+						value="iniciar sesion">
 					<p class="mt-5 mb-3 text-white">&copy; 2023</p>
 				</form>
 			</section>

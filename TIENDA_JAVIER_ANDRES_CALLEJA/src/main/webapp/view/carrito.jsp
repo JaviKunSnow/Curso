@@ -48,7 +48,7 @@
                                     <td>
                                         <div class="price-wrap"> <var class="price"><%= entry.getValue().getPrecio() %>$</var></div>
                                     </td>
-                                    <td class="text-right d-none d-md-block"> <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip" data-abc="true"> <i class="fa fa-heart"></i></a> <a href="" class="btn btn-light btn-round" data-abc="true"> Remove</a> </td>
+                                    <td class="text-right d-none d-md-block"> <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip" data-abc="true"> <i class="fa fa-heart"></i></a> <a href="" class="btn btn-light btn-round" data-abc="true"> Eliminar</a> </td>
                                 </tr>
                                 <% } %>
                             </tbody>
@@ -65,9 +65,19 @@
                             <dt>Precio total:</dt>
                             <dd class="text-right ml-3">$99.99</dd>
                         </dl>
-                        <hr> 
-                        <a href="#" class="btn btn-out btn-primary btn-square btn-main" data-abc="true">Continua comprando</a> 
-                        <a href="carritoFinalizar" class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Finalizar compra</a>
+                        <form action="carritoFinal" method="post">
+                            <div class="mb-3">
+                                <label for="pago" class="form-label">Metodo de pago:</label>
+                                <select class="form-select form-select-lg" name="pago" id="pago">
+                                    <option selected>Selecciona uno</option>
+                                    <option value="tarjeta">Tarjeta de credito</option>
+                                    <option value="paypal">Paypal</option>
+                                </select>
+                            </div>
+                            <hr> 
+                            <a href="#" class="btn btn-out btn-primary btn-square btn-main" data-abc="true">Continua comprando</a> 
+                            <input type="submit" class="btn btn-out btn-success btn-square btn-main mt-2" value="finalizar compra">
+                        </form>
                     </div>
                 </div>
             </aside>

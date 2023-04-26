@@ -78,7 +78,7 @@ public class articuloDAO {
 				articulo.setNombre(rs.getString("nombre"));
 				articulo.setDescripcion(rs.getString("descripcion"));
 				articulo.setPrecio(rs.getDouble("precio"));
-				articulo.setPrecio(rs.getDouble("impuesto"));
+				articulo.setImpuesto(rs.getDouble("impuesto"));
 				articulo.setStock(rs.getInt("stock"));
 				articulo.setBaja(rs.getBoolean("baja"));
 

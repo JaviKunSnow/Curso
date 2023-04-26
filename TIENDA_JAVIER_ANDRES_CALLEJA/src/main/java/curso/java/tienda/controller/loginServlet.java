@@ -44,6 +44,9 @@ public class loginServlet extends HttpServlet {
 		Enumeration <?> nombres = request.getParameterNames();
 		UsuarioDAO UsuarioDAO = new UsuarioDAO();
 		
+		String usuarioNombre = request.getParameter("usuario");
+		String password = request.getParameter("password");
+		
 		while(nombres.hasMoreElements()) {
 			
 			String parametro = (String) nombres.nextElement();
@@ -61,7 +64,7 @@ public class loginServlet extends HttpServlet {
 		if(!validado) {
 			request.getRequestDispatcher("/view/login.jsp").forward(request, response);
 		} else {
-			Usuario usuario = UsuarioDAO.validarUsuario(request.getParameter("usuario"), request.getParameter("password"));
+			Usuario usuario = UsuarioDAO.validarUsuario(usuarioNombre, password);
 			if(usuario == null) {
 				request.setAttribute("errorusuario", "el usuario es incorrecto.");
 				request.setAttribute("errorpassword", "la contraseña es incorrecta.");
