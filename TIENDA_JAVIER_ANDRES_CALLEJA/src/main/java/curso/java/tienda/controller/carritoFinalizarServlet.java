@@ -64,6 +64,12 @@ public class carritoFinalizarServlet extends HttpServlet {
 				for(Entry<Integer, Articulo> entry : carrito.entrySet()) {
 					Articulo articulo = entry.getValue();
 					
+					if(articulo.getCantidad() > articulo.getStock()) {
+						articulo.setCantidad(articulo.getStock());
+					} 
+					
+					articulo.setStock(articulo.getStock() - articulo.getCantidad());
+					
 					detallePedidoDAO.insert(numPedido, articulo);
 					
 				}

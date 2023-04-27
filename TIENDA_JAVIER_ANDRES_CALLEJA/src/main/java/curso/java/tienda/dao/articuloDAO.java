@@ -101,4 +101,34 @@ public class articuloDAO {
 		return null;
 
 	}
+	
+	public void update(Articulo articulo) {
+		con = Conexion.getConexion();
+		
+		try {
+			PreparedStatement sentenciaSQL = con.prepareStatement("UPDATE producto SET nombre = ?, descripcion = ?, precio = ?, impuesto = ?, stock = ?, baja = ?");
+			
+			sentenciaSQL.setString(1, articulo.getNombre());
+			sentenciaSQL.setString(2, articulo.getDescripcion());
+			sentenciaSQL.setDouble(3, articulo.getPrecio());
+			sentenciaSQL.setDouble(4, articulo.getImpuesto());
+			sentenciaSQL.setInt(5, articulo.getStock());
+			sentenciaSQL.setBoolean(6, articulo.isBaja());
+			
+			sentenciaSQL.executeQuery();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			if (con != null) {
+				try {
+					con.rollback();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		}
+		
+	}
 }
