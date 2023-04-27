@@ -71,9 +71,9 @@ public class loginServlet extends HttpServlet {
 				request.getRequestDispatcher("/view/login.jsp").forward(request, response);
 			} else {
 				request.getSession().setAttribute("usuario", usuario);
-				if(request.getSession().getAttribute("comprando") != null) {
+				if(request.getParameter("comprando") != null) {
 					request.getRequestDispatcher("/view/carrito.jsp").forward(request, response);
-				} else if(request.getSession().getAttribute("perfil") != null) {
+				} else if(request.getParameter("perfil") != null) {
 					request.getRequestDispatcher("/view/perfil.jsp").forward(request, response);
 				} else {
 					request.getRequestDispatcher("").forward(request, response);

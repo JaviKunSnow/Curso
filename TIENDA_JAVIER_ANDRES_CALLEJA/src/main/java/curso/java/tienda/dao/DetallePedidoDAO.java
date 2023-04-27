@@ -9,12 +9,13 @@ import java.time.LocalDateTime;
 
 import curso.java.tienda.config.Conexion;
 import curso.java.tienda.model.Articulo;
+import curso.java.tienda.model.DetallePedido;
 
 public class DetallePedidoDAO {
 
 		Connection con;
 	
-		public void insert(int idPedido, Articulo articulo) {
+		public void insert(DetallePedido detalle) {
 		
 		con = Conexion.getConexion();
 		
@@ -22,14 +23,12 @@ public class DetallePedidoDAO {
 		
 			PreparedStatement sentenciaSQL = con.prepareStatement("insert into detalle (pedido_id, producto_id, unidades, preciounidad, impuesto, total) values(?, ?, ?, ?, ?, ?)");
 			
-			Double total = (articulo.getPrecio() * articulo.getImpuesto()) + (articulo.getCantidad() * articulo.getPrecio());
-			
-			sentenciaSQL.setInt(1, idPedido);
-			sentenciaSQL.setInt(2, articulo.getId());
-			sentenciaSQL.setInt(3, articulo.getCantidad());
-			sentenciaSQL.setDouble(4, articulo.getPrecio());
-			sentenciaSQL.setDouble(5, articulo.getImpuesto());
-			sentenciaSQL.setDouble(6, total);
+			sentenciaSQL.setInt(1, detalle.getPedidoId());
+			sentenciaSQL.setInt(2, detalle.getProductoId());
+			sentenciaSQL.setInt(3, detalle.getUnidades());
+			sentenciaSQL.setDouble(4, detalle.getPrecioUnidad());
+			sentenciaSQL.setDouble(5, detalle.getImpuesto());
+			sentenciaSQL.setDouble(6, detalle.getTotal());
 			
 			sentenciaSQL.executeUpdate();
 			

@@ -8,8 +8,6 @@
 </head>
 <body>
 	<p>Compra realizada</p>
-	<form action="" method="get">
-		<input type="submit" value="Volver al inicio">
-	</form>
+	<a href="?inicio=1">volver al inicio</a>
 </body>
 </html>

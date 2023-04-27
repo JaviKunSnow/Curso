@@ -45,12 +45,14 @@ public class articuloDAO {
 				int id = resultSet.getInt("id");
 				String nombre = resultSet.getString("nombre");
 				String descripcion = resultSet.getString("descripcion");
+				String marca = resultSet.getString("marca");
+				int categoria_id = resultSet.getInt("categoria_id");
 				double precio = resultSet.getDouble("precio");
 				double impuesto = resultSet.getDouble("impuesto");
 				int stock = resultSet.getInt("stock");
 				boolean baja = resultSet.getBoolean("baja");
 				
-				Articulo articulo = new Articulo(id, nombre, descripcion, precio, impuesto, stock, baja);
+				Articulo articulo = new Articulo(id, nombre, descripcion, marca, categoria_id, precio, impuesto, stock, baja);
 				catalogo.add(articulo);
 				
 			}
@@ -62,7 +64,7 @@ public class articuloDAO {
 		return catalogo;
 	}
 	
-	public Articulo devolverArticuloId(int id) {
+	public Articulo get(int id) {
 		con = Conexion.getConexion();
 		
 		Articulo articulo = new Articulo();
@@ -77,6 +79,8 @@ public class articuloDAO {
 				articulo.setId(rs.getInt("id"));
 				articulo.setNombre(rs.getString("nombre"));
 				articulo.setDescripcion(rs.getString("descripcion"));
+				articulo.setMarca(rs.getString("marca"));
+				articulo.setCategoria_id(rs.getInt("categoria_id"));
 				articulo.setPrecio(rs.getDouble("precio"));
 				articulo.setImpuesto(rs.getDouble("impuesto"));
 				articulo.setStock(rs.getInt("stock"));
@@ -106,29 +110,98 @@ public class articuloDAO {
 		con = Conexion.getConexion();
 		
 		try {
-			PreparedStatement sentenciaSQL = con.prepareStatement("UPDATE producto SET nombre = ?, descripcion = ?, precio = ?, impuesto = ?, stock = ?, baja = ?");
+			PreparedStatement sentenciaSQL = con.prepareStatement("UPDATE producto SET nombre = ?, descripcion = ?, marca = ?, categoria_id = ?, precio = ?, impuesto = ?, stock = ?, baja = ?");
 			
 			sentenciaSQL.setString(1, articulo.getNombre());
 			sentenciaSQL.setString(2, articulo.getDescripcion());
-			sentenciaSQL.setDouble(3, articulo.getPrecio());
-			sentenciaSQL.setDouble(4, articulo.getImpuesto());
-			sentenciaSQL.setInt(5, articulo.getStock());
-			sentenciaSQL.setBoolean(6, articulo.isBaja());
+			sentenciaSQL.setString(3, articulo.getMarca());
+			sentenciaSQL.setInt(4, articulo.getCategoria_id());
+			sentenciaSQL.setDouble(5, articulo.getPrecio());
+			sentenciaSQL.setDouble(6, articulo.getImpuesto());
+			sentenciaSQL.setInt(7, articulo.getStock());
+			sentenciaSQL.setBoolean(8, articulo.isBaja());
 			
 			sentenciaSQL.executeQuery();
+			
+			Conexion.desconectar();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			if (con != null) {
-				try {
-					con.rollback();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
 		}
+		
+	}
+	
+	public List<Articulo> masComprados() {
+		
+		con = Conexion.getConexion();
+		
+		List<Articulo> catalogo = new ArrayList<>();
+		try {
+			
+			Statement statement = con.createStatement();
+			ResultSet resultSet = statement.executeQuery("SELECT * FROM producto ORDER BY (SELECT SUM(unidades) FROM detalle WHERE producto_id = producto.id) DESC");
+			
+			while (resultSet.next()) {
+				
+				int id = resultSet.getInt("id");
+				String nombre = resultSet.getString("nombre");
+				String descripcion = resultSet.getString("descripcion");
+				String marca = resultSet.getString("marca");
+				int categoria_id = resultSet.getInt("categoria_id");
+				double precio = resultSet.getDouble("precio");
+				double impuesto = resultSet.getDouble("impuesto");
+				int stock = resultSet.getInt("stock");
+				boolean baja = resultSet.getBoolean("baja");
+				
+				Articulo articulo = new Articulo(id, nombre, descripcion, marca, categoria_id, precio, impuesto, stock, baja);
+				catalogo.add(articulo);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return catalogo;
+		
+	}
+	
+	public List<Articulo> findByCategoria(int id_categoria) {
+		
+		con = Conexion.getConexion();
+		
+		List<Articulo> catalogo = new ArrayList<>();
+		try {
+			
+			PreparedStatement sentenciaSQL = con.prepareStatement("SELECT * FROM producto where categoria_id = ?");
+			
+			sentenciaSQL.setInt(1, id_categoria);
+			
+			ResultSet resultSet = sentenciaSQL.executeQuery();
+			
+			while (resultSet.next()) {
+				
+				int id = resultSet.getInt("id");
+				String nombre = resultSet.getString("nombre");
+				String descripcion = resultSet.getString("descripcion");
+				String marca = resultSet.getString("marca");
+				int categoria_id = resultSet.getInt("categoria_id");
+				double precio = resultSet.getDouble("precio");
+				double impuesto = resultSet.getDouble("impuesto");
+				int stock = resultSet.getInt("stock");
+				boolean baja = resultSet.getBoolean("baja");
+				
+				Articulo articulo = new Articulo(id, nombre, descripcion, marca, categoria_id, precio, impuesto, stock, baja);
+				catalogo.add(articulo);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return catalogo;
 		
 	}
 }

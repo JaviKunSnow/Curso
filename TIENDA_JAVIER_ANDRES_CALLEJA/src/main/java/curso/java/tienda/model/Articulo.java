@@ -4,6 +4,8 @@ public class Articulo {
     private int id;
     private String nombre;
     private String descripcion;
+    private String marca;
+    private int categoria_id;
     private double precio;
     private double impuesto;
     private int stock;
@@ -13,72 +15,92 @@ public class Articulo {
     public Articulo() {
     	
     }
-    
-    public Articulo(int id, String nombre, String descripcion, double precio, double impuesto, int stock, boolean baja) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.impuesto = impuesto;
-        this.stock = stock;
-        this.baja = baja;
-    }
 
-    public int getId() {
-        return id;
-    }
+	public Articulo(int id, String nombre, String descripcion, String marca, int categoria_id, double precio,
+			double impuesto, int stock, boolean baja) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.marca = marca;
+		this.categoria_id = categoria_id;
+		this.precio = precio;
+		this.impuesto = impuesto;
+		this.stock = stock;
+		this.baja = baja;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+	public String getDescripcion() {
+		return descripcion;
+	}
 
-    public double getPrecio() {
-        return precio;
-    }
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
+	public String getMarca() {
+		return marca;
+	}
 
-    public double getImpuesto() {
-        return impuesto;
-    }
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
 
-    public void setImpuesto(double impuesto) {
-        this.impuesto = impuesto;
-    }
+	public int getCategoria_id() {
+		return categoria_id;
+	}
 
-    public int getStock() {
-        return stock;
-    }
+	public void setCategoria_id(int categoria_id) {
+		this.categoria_id = categoria_id;
+	}
 
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
+	public double getPrecio() {
+		return precio;
+	}
 
-    public boolean isBaja() {
-        return baja;
-    }
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
 
-    public void setBaja(boolean baja) {
-        this.baja = baja;
-    }
+	public double getImpuesto() {
+		return impuesto;
+	}
+
+	public void setImpuesto(double impuesto) {
+		this.impuesto = impuesto;
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+
+	public boolean isBaja() {
+		return baja;
+	}
+
+	public void setBaja(boolean baja) {
+		this.baja = baja;
+	}
 
 	public int getCantidad() {
 		return cantidad;
@@ -87,5 +109,5 @@ public class Articulo {
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
-   
+    
 }

@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import curso.java.tienda.dao.DetallePedidoDAO;
 import curso.java.tienda.dao.PedidoDAO;
+import curso.java.tienda.dao.articuloDAO;
 import curso.java.tienda.model.Articulo;
+import curso.java.tienda.model.DetallePedido;
 import curso.java.tienda.model.Usuario;
 
 /**
@@ -35,9 +37,11 @@ public class carritoFinalizarServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		
-		request.getRequestDispatcher("/view/carrito.jsp").forward(request, response);
+		if(request.getParameter("inicio") != null) {
+			response.sendRedirect(request.getContextPath());
+		} else {
+			request.getRequestDispatcher("/view/carrito.jsp").forward(request, response);
+		}
 		
 	}
 
@@ -47,11 +51,12 @@ public class carritoFinalizarServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if(request.getSession().getAttribute("usuario") == null) {
-			
+			request.setAttribute("comprando", "comprando");
 			request.getRequestDispatcher("/view/login.jsp").forward(request, response);
 		} else {
 			PedidoDAO pedidoDAO = new PedidoDAO();
 			DetallePedidoDAO detallePedidoDAO = new DetallePedidoDAO();
+			articuloDAO articuloDAO = new articuloDAO();
 			Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 			String metodoPago = request.getParameter("pago");
 			
@@ -70,7 +75,13 @@ public class carritoFinalizarServlet extends HttpServlet {
 					
 					articulo.setStock(articulo.getStock() - articulo.getCantidad());
 					
-					detallePedidoDAO.insert(numPedido, articulo);
+					Double total = (articulo.getPrecio() * articulo.getImpuesto()) + (articulo.getCantidad() * articulo.getPrecio());
+					
+					DetallePedido detalle = new DetallePedido(0, numPedido, articulo.getId(), articulo.getCantidad(), articulo.getPrecio(), articulo.getImpuesto(), total);
+					
+					detallePedidoDAO.insert(detalle);
+					
+					articuloDAO.update(articulo);
 					
 				}
 				

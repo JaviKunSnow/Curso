@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="curso.java.tienda.model.Articulo" %>
 <%@ page import="curso.java.tienda.model.Usuario" %>
+<%@ page import="curso.java.tienda.model.Categorias" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -13,12 +14,49 @@
 <body style="padding-bottom: 70px; padding-top: 70px;">
     <%@ include file="/view/fragments/header.jsp"%>
     <main>
-   			<div class="album py-5 bg-body-tertiary">
-    <div class="container">
+   	<div class="container my-4">
+   	<form action="HomeServlet" method="post" class="my-4" id="form">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="input-numerico" class="form-label" >Precio</label>
+                        <input type="number" class="form-control" id="buscador" name="buscador">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="select" class="form-label">Categorias</label>
+                        <select class="form-select" id="categorias" name="categorias">
+                            <option value="0" selected>Seleccione una</option>
+                        <% List <Categorias> categorias = (List<Categorias>) request.getAttribute("categorias");
+                        	for(Categorias categoria : categorias) {%>
+                            <option value="<%= categoria.getId() %>"><%= categoria.getNombre() %></option>
+                           <% } %>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                      <label class="form-check-label" for="valorados">
+                        Mas valorados
+                      </label>
+                      <input class="form-check-input" type="checkbox" value="valorados" id="valorados" name="valorados">
+                    </div>
+                    <div class="col-md-2">
+                      <label class="form-check-label" for="comprados">
+                        Mas comprados
+                      </label>
+                      <input class="form-check-input" type="checkbox" value="comprados" id="" name="comprados">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="submit" id="enviar" class="filtrar" value="filtrar">
+                    </div>
+                </div>
+            </form>
+   	
+   	</div>
+   	<div class="album py-5 bg-body-tertiary">
+    	<div class="container">
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <% List<Articulo> catalogo = (List<Articulo>) request.getAttribute("catalogo"); %>
         <% for (Articulo articulo : catalogo) { %>
+        	<a href="carrito?id=<%=articulo.getId()%>" class="text-decoration-none text-black">
         	<div class="col">
                 <div class="card shadow-sm">
                     <img src=""></img>
@@ -36,6 +74,8 @@
                         </div>
                     </div>
                 </div>
+              </div>
+              </a>
              <% } %>
      	</div>
      </div>

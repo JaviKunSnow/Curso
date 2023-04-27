@@ -22,6 +22,12 @@
 		<section class="container bg-dark p-2 rounded">
 			<section class="form-signin w-100 m-auto text-center text-white">
 				<form action="login" method="post">
+					<% 
+					if(request.getAttribute("comprando") != null) {%>
+						<input type="hidden" name="comprando" value="<%=request.getAttribute("comprando")%>">
+					<%} else if(request.getAttribute("perfil") != null) { %>
+						<input type="hidden" name="perfil" value="<%=request.getAttribute("perfil")%>">
+					<% }%>
 					<img class="mb-4" src="webroot/img/logo.jpg" alt="" width="140"
 						height="100">
 					<h1 class="h3 mb-3 fw-normal">Iniciar Sesion</h1>

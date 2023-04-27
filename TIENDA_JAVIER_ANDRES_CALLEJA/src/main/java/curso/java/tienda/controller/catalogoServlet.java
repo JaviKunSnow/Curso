@@ -16,8 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import curso.java.tienda.config.Propiedades;
 import curso.java.tienda.config.PropiedadesLog;
+import curso.java.tienda.dao.CategoriasDAO;
 import curso.java.tienda.dao.articuloDAO;
 import curso.java.tienda.model.Articulo;
+import curso.java.tienda.model.Categorias;
 
 /**
  * Servlet implementation class catalogoServlet
@@ -26,6 +28,7 @@ import curso.java.tienda.model.Articulo;
 public class catalogoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     articuloDAO articuloDAO;   
+    CategoriasDAO categoriasDAO;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -37,7 +40,7 @@ public class catalogoServlet extends HttpServlet {
     
     public void init() {
     	articuloDAO = new articuloDAO();
-    	
+    	categoriasDAO = new CategoriasDAO();
     }
 
 	/**
@@ -53,6 +56,7 @@ public class catalogoServlet extends HttpServlet {
 		proLog.darRuta(ruta);
 		
 		List <Articulo> catalogo = articuloDAO.obtenerCatalogo();
+		List <Categorias> categorias = categoriasDAO.get();
 		
 		if(request.getSession(false) == null) {
 			request.getSession();
@@ -60,6 +64,7 @@ public class catalogoServlet extends HttpServlet {
 		} 
 		
 		request.setAttribute("catalogo", catalogo);
+		request.setAttribute("categorias", categorias);
 		
 		request.getRequestDispatcher("/view/index.jsp").forward(request, response);
 	

@@ -36,9 +36,18 @@ public class carritoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+		articuloDAO articuloDAO = new articuloDAO();
+		
+		Articulo articulo = new Articulo();
+		articulo = articuloDAO.get(id);
+		
+		request.setAttribute("articulo", articulo);
+		
+		request.getRequestDispatcher("/view/ProductView.jsp").forward(request, response);
+		
 	}
 
 	/**
@@ -67,7 +76,7 @@ public class carritoServlet extends HttpServlet {
 			articulo.setCantidad(articulo.getCantidad() + 1);
 			carrito.replace(id, articulo);
 		} else {
-			Articulo articulo = articuloDAO.devolverArticuloId(id);
+			Articulo articulo = articuloDAO.get(id);
 			articulo.setCantidad(1);
 			carrito.put(id, articulo);
 		}

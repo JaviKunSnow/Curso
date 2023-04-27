@@ -23,8 +23,8 @@ public class PedidoDAO {
 			
 			sentenciaSQL.setInt(1, idUser);
 			sentenciaSQL.setObject(2, LocalDateTime.now());
-			sentenciaSQL.setInt(3, 1);
-			sentenciaSQL.setString(4, metodoPago);
+			sentenciaSQL.setString(3, metodoPago);
+			sentenciaSQL.setInt(4, 1);
 			
 			sentenciaSQL.executeUpdate();
 			
