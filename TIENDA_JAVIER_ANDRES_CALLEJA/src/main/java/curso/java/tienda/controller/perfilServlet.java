@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import curso.java.tienda.dao.UsuarioDAO;
+import curso.java.tienda.model.Usuario;
+
 /**
  * Servlet implementation class perfilServlet
  */
@@ -39,8 +42,32 @@ public class perfilServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		boolean validado = false;
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		
+		String nombre = request.getParameter("nombre");
+		String apellidos = request.getParameter("apellidos");
+		
+		if(!nombre.isEmpty()) {
+			if(!apellidos.isEmpty()) {
+				validado = true;
+			}
+		}
+		
+		if(validado) {
+			Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+			
+			usuario.setNombre(nombre);
+			usuario.setApellidos(apellidos);
+			usuarioDAO.update(usuario);
+			
+			request.getRequestDispatcher("").forward(request, response);
+			
+		} else {
+			request.getRequestDispatcher("/view/perfil.jsp").forward(request, response);
+		}
+		
 	}
 
 }

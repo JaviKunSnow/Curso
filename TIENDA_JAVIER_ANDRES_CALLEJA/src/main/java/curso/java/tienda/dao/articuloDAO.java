@@ -110,7 +110,7 @@ public class articuloDAO {
 		con = Conexion.getConexion();
 		
 		try {
-			PreparedStatement sentenciaSQL = con.prepareStatement("UPDATE producto SET nombre = ?, descripcion = ?, marca = ?, categoria_id = ?, precio = ?, impuesto = ?, stock = ?, baja = ?");
+			PreparedStatement sentenciaSQL = con.prepareStatement("UPDATE producto SET nombre = ?, descripcion = ?, marca = ?, categoria_id = ?, precio = ?, impuesto = ?, stock = ?, baja = ? where id = ?");
 			
 			sentenciaSQL.setString(1, articulo.getNombre());
 			sentenciaSQL.setString(2, articulo.getDescripcion());
@@ -120,6 +120,7 @@ public class articuloDAO {
 			sentenciaSQL.setDouble(6, articulo.getImpuesto());
 			sentenciaSQL.setInt(7, articulo.getStock());
 			sentenciaSQL.setBoolean(8, articulo.isBaja());
+			sentenciaSQL.setInt(9, articulo.getId());
 			
 			sentenciaSQL.executeQuery();
 			

@@ -23,7 +23,7 @@ public class UsuarioDAO {
 		
 		try {
 		
-			PreparedStatement sentenciaSQL = con.prepareStatement("insert into usuario (id, rol_id, clave, email, nombre, apellidos, baja) values(null, null, ?, ?, ?, ?, 1)");
+			PreparedStatement sentenciaSQL = con.prepareStatement("insert into usuario (id, rol_id, clave, email, nombre, apellidos, baja) values(null, 1, ?, ?, ?, ?, 0)");
 			
 			sentenciaSQL.setString(1, clave);
 			sentenciaSQL.setString(2, email);
@@ -74,6 +74,31 @@ public class UsuarioDAO {
 		}
 		
 		return usuarios;
+	}
+	
+	public void update(Usuario usuario) {
+		
+		con = Conexion.getConexion();
+		
+		try {
+		
+			PreparedStatement sentenciaSQL = con.prepareStatement("UPDATE usuario SET rol_id=?, email=?, clave=?, nombre=?, apellidos=?, baja=? WHERE id=?");
+			
+			sentenciaSQL.setInt(1, usuario.getId_rol());
+			sentenciaSQL.setString(2, usuario.getEmail());
+			sentenciaSQL.setString(3, usuario.getClave());
+			sentenciaSQL.setString(4, usuario.getNombre());
+			sentenciaSQL.setString(5, usuario.getApellidos());
+			sentenciaSQL.setBoolean(6, usuario.getBaja());
+			sentenciaSQL.setInt(7, usuario.getId());
+			
+			sentenciaSQL.executeUpdate();
+			
+			Conexion.desconectar();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public Usuario recogerUsuarioPorEmail(String email) {

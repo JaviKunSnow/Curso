@@ -6,16 +6,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
+import java.time.Year;
 
 import curso.java.tienda.config.Conexion;
 
 public class PedidoDAO {
 
-	Connection con;
+	static Connection con;
+	private static int numFactura = maxPedidos();
 	
 	public int insert(int idUser, String metodoPago) {
 		
 		con = Conexion.getConexion();
+		
+		int year = Year.now().getValue();
+		String numFacturaFormat = String.format("%03d", ++numFactura);
+		String numeroFactura = "F-" + year + "-" + numFacturaFormat;
 		
 		try {
 		
@@ -24,7 +30,7 @@ public class PedidoDAO {
 			sentenciaSQL.setInt(1, idUser);
 			sentenciaSQL.setObject(2, LocalDateTime.now());
 			sentenciaSQL.setString(3, metodoPago);
-			sentenciaSQL.setInt(4, 1);
+			sentenciaSQL.setString(4, numeroFactura);
 			
 			sentenciaSQL.executeUpdate();
 			
@@ -44,6 +50,28 @@ public class PedidoDAO {
 		
 	}
 	
-	
+	public static int maxPedidos() {
+		
+		con = Conexion.getConexion();
+		
+		try {
+		
+			PreparedStatement sentenciaSQL = con.prepareStatement("SELECT COUNT(*) FROM pedido");
+			
+			int rs = sentenciaSQL.executeUpdate();
+			
+			Conexion.desconectar();
+			
+			if(rs != 0) {
+				return rs;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return 1;
+		
+	}
 	
 }
