@@ -17,30 +17,32 @@ import javax.servlet.http.HttpServletResponse;
 import curso.java.tienda.config.Propiedades;
 import curso.java.tienda.config.PropiedadesLog;
 import curso.java.tienda.dao.CategoriasDAO;
-import curso.java.tienda.dao.articuloDAO;
+import curso.java.tienda.dao.ArticuloDAO;
 import curso.java.tienda.model.Articulo;
 import curso.java.tienda.model.Categorias;
+import curso.java.tienda.service.ArticuloService;
+import curso.java.tienda.service.CategoriaService;
 
 /**
  * Servlet implementation class catalogoServlet
  */
 @WebServlet("")
-public class catalogoServlet extends HttpServlet {
+public class CatalogoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    articuloDAO articuloDAO;   
-    CategoriasDAO categoriasDAO;
+    private ArticuloService articuloService; 
+    private CategoriaService categoriaService;
 	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public catalogoServlet() {
+    public CatalogoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
     
     public void init() {
-    	articuloDAO = new articuloDAO();
-    	categoriasDAO = new CategoriasDAO();
+    	articuloService = new ArticuloService();
+    	categoriaService = new CategoriaService();
     }
 
 	/**
@@ -55,8 +57,8 @@ public class catalogoServlet extends HttpServlet {
 		propiedades.darRuta(ruta);
 		proLog.darRuta(ruta);
 		
-		List <Articulo> catalogo = articuloDAO.obtenerCatalogo();
-		List <Categorias> categorias = categoriasDAO.get();
+		List <Articulo> catalogo = articuloService.getAll();
+		List <Categorias> categorias = categoriaService.getAll();
 		
 		if(request.getSession(false) == null) {
 			request.getSession();

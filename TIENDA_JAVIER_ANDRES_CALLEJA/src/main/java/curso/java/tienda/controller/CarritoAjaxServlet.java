@@ -1,3 +1,4 @@
+package curso.java.tienda.controller;
 //package curso.java.tienda.controller;
 //
 //import java.io.IOException;

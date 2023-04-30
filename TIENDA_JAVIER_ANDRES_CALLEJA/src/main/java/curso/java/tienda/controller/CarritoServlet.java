@@ -13,23 +13,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import curso.java.tienda.dao.articuloDAO;
+import curso.java.tienda.dao.ArticuloDAO;
 import curso.java.tienda.model.Articulo;
+import curso.java.tienda.service.ArticuloService;
 
 /**
  * Servlet implementation class carritoServlet
  */
 @WebServlet("/carrito")
-public class carritoServlet extends HttpServlet {
+public class CarritoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	int contadorCarrito = 0;
+	private ArticuloService articuloService;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public carritoServlet() {
+	public CarritoServlet() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	
+	public void init() {
+		articuloService = new ArticuloService();
 	}
 
 	/**
@@ -39,10 +45,9 @@ public class carritoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int id = Integer.parseInt(request.getParameter("id"));
-		articuloDAO articuloDAO = new articuloDAO();
 		
 		Articulo articulo = new Articulo();
-		articulo = articuloDAO.get(id);
+		articulo = articuloService.get(id);
 		
 		request.setAttribute("articulo", articulo);
 		
@@ -58,7 +63,6 @@ public class carritoServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		articuloDAO articuloDAO = new articuloDAO();
 
 		HttpSession sesion = request.getSession();
 		HashMap<Integer, Articulo> carrito = (HashMap<Integer, Articulo>) session.getAttribute("carrito");
@@ -76,7 +80,7 @@ public class carritoServlet extends HttpServlet {
 			articulo.setCantidad(articulo.getCantidad() + 1);
 			carrito.replace(id, articulo);
 		} else {
-			Articulo articulo = articuloDAO.get(id);
+			Articulo articulo = articuloService.get(id);
 			articulo.setCantidad(1);
 			carrito.put(id, articulo);
 		}

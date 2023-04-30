@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import curso.java.tienda.dao.CategoriasDAO;
-import curso.java.tienda.dao.articuloDAO;
+import curso.java.tienda.dao.ArticuloDAO;
 import curso.java.tienda.model.Articulo;
 import curso.java.tienda.model.Categorias;
+import curso.java.tienda.service.ArticuloService;
+import curso.java.tienda.service.CategoriaService;
 
 /**
  * Servlet implementation class HomeServlet
@@ -21,6 +23,8 @@ import curso.java.tienda.model.Categorias;
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	 private ArticuloService articuloService; 
+	 private CategoriaService categoriaService;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -29,6 +33,10 @@ public class HomeServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    public void init() {
+    	articuloService = new ArticuloService();
+    	categoriaService = new CategoriaService();
+    }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -42,13 +50,12 @@ public class HomeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		articuloDAO articuloDAO = new articuloDAO();
-		CategoriasDAO categoriasDAO = new CategoriasDAO();
+		ArticuloDAO articuloDAO = new ArticuloDAO();
 		String comprados = request.getParameter("comprados");
 		int categoria = Integer.parseInt(request.getParameter("categorias"));
 		System.out.println(comprados);
 		
-		List<Categorias> categorias = categoriasDAO.get();
+		List<Categorias> categorias = categoriaService.getAll();
 		request.setAttribute("categorias", categorias);
 		
 		if(comprados != null) {

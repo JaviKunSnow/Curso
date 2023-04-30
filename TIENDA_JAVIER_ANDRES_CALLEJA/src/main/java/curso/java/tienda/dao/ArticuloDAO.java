@@ -13,11 +13,11 @@ import curso.java.tienda.config.Conexion;
 import curso.java.tienda.model.Articulo;
 
 
-public class articuloDAO {
+public class ArticuloDAO {
 
 	private Connection con;
 	
-	public articuloDAO() {
+	public ArticuloDAO() {
 //		try {
 //			//Class.forName("com.mysql.cj.jdbc.Driver");
 //			String url = "jdbc:mysql://localhost:3306/tienda";
@@ -30,7 +30,7 @@ public class articuloDAO {
 //		}
 	}
 	
-	public List<Articulo> obtenerCatalogo() {
+	public List<Articulo> getAll() {
 		
 		con = Conexion.getConexion();
 		
@@ -122,7 +122,7 @@ public class articuloDAO {
 			sentenciaSQL.setBoolean(8, articulo.isBaja());
 			sentenciaSQL.setInt(9, articulo.getId());
 			
-			sentenciaSQL.executeQuery();
+			sentenciaSQL.executeUpdate();
 			
 			Conexion.desconectar();
 

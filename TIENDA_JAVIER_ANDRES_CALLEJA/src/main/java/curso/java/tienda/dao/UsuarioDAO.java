@@ -45,7 +45,8 @@ public class UsuarioDAO {
 		
 	}
 	
-	public List<Usuario> obtenerUsuarios() {
+	public List<Usuario> getAll() {
+		
 		con = Conexion.getConexion();
 		
 		List<Usuario> usuarios = new ArrayList<>();
@@ -76,6 +77,41 @@ public class UsuarioDAO {
 		return usuarios;
 	}
 	
+	public Usuario get(int id) {
+		
+		con = Conexion.getConexion();
+		StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
+		
+		try {
+			
+			PreparedStatement sentenciaSQL = con.prepareStatement("SELECT * FROM usuario where id = ?");
+			
+			sentenciaSQL.setInt(1, id);
+			
+			ResultSet resultSet = sentenciaSQL.executeQuery();
+			
+			if(resultSet.next()) {
+					Usuario usuario = new Usuario();
+					
+					usuario.setId(resultSet.getInt("id"));
+					usuario.setId_rol(resultSet.getInt("rol_id"));
+					usuario.setEmail(resultSet.getString("email"));
+					usuario.setClave(resultSet.getString("clave"));
+					usuario.setNombre(resultSet.getString("nombre"));
+					usuario.setApellidos(resultSet.getString("apellidos"));
+					usuario.setBaja(resultSet.getBoolean("baja"));
+					
+					return usuario;
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 	public void update(Usuario usuario) {
 		
 		con = Conexion.getConexion();
@@ -91,6 +127,25 @@ public class UsuarioDAO {
 			sentenciaSQL.setString(5, usuario.getApellidos());
 			sentenciaSQL.setBoolean(6, usuario.getBaja());
 			sentenciaSQL.setInt(7, usuario.getId());
+			
+			sentenciaSQL.executeUpdate();
+			
+			Conexion.desconectar();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void delete(int id) {
+		
+		con = Conexion.getConexion();
+		
+		try {
+		
+			PreparedStatement sentenciaSQL = con.prepareStatement("delete usuario where id = ?");
+			
+			sentenciaSQL.setInt(1, id);
 			
 			sentenciaSQL.executeUpdate();
 			
@@ -171,5 +226,6 @@ public class UsuarioDAO {
 		
 		return null;
 	}
+
 
 }

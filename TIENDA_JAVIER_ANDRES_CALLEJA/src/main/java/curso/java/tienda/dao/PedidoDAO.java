@@ -13,14 +13,13 @@ import curso.java.tienda.config.Conexion;
 public class PedidoDAO {
 
 	static Connection con;
-	private static int numFactura = maxPedidos();
 	
 	public int insert(int idUser, String metodoPago) {
 		
 		con = Conexion.getConexion();
 		
 		int year = Year.now().getValue();
-		String numFacturaFormat = String.format("%03d", ++numFactura);
+		String numFacturaFormat = String.format("%03d", 1);
 		String numeroFactura = "F-" + year + "-" + numFacturaFormat;
 		
 		try {
@@ -50,28 +49,6 @@ public class PedidoDAO {
 		
 	}
 	
-	public static int maxPedidos() {
-		
-		con = Conexion.getConexion();
-		
-		try {
-		
-			PreparedStatement sentenciaSQL = con.prepareStatement("SELECT COUNT(*) FROM pedido");
-			
-			int rs = sentenciaSQL.executeUpdate();
-			
-			Conexion.desconectar();
-			
-			if(rs != 0) {
-				return rs;
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return 1;
-		
-	}
+	
 	
 }

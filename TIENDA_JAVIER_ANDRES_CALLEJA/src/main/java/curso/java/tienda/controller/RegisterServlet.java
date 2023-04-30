@@ -14,6 +14,7 @@ import org.jasypt.util.password.StrongPasswordEncryptor;
 import curso.java.tienda.config.PropiedadesLog;
 import curso.java.tienda.dao.UsuarioDAO;
 import curso.java.tienda.model.Usuario;
+import curso.java.tienda.service.UserService;
 
 /**
  * Servlet implementation class registerServlet
@@ -21,6 +22,7 @@ import curso.java.tienda.model.Usuario;
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private UserService userService;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -30,6 +32,9 @@ public class RegisterServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    public void init() {
+    	userService = new UserService();
+    }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -55,7 +60,6 @@ public class RegisterServlet extends HttpServlet {
 		String passwordCifrada = encryptor.encryptPassword(pass1);
 		
 		Enumeration <?> nombres = request.getParameterNames();
-		UsuarioDAO UsuarioDAO = new UsuarioDAO();
 		PropiedadesLog propiedades = new PropiedadesLog();
 		
 		while(nombres.hasMoreElements()) {
@@ -74,8 +78,7 @@ public class RegisterServlet extends HttpServlet {
 		if(validado) {
 			if(email.contains("@")) {
 				if( pass1.equals(pass2)) {
-					
-					if(UsuarioDAO.insert(passwordCifrada, email, nombre, apellidos)) {
+					if(userService.insertUser(passwordCifrada, email, nombre, apellidos)) {
 						propiedades.registerAccess(email);
 						request.getRequestDispatcher("/view/login.jsp").forward(request, response);
 					}

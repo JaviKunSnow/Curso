@@ -11,22 +11,29 @@ import javax.servlet.http.HttpServletResponse;
 
 import curso.java.tienda.dao.UsuarioDAO;
 import curso.java.tienda.model.Usuario;
+import curso.java.tienda.service.ArticuloService;
+import curso.java.tienda.service.CategoriaService;
+import curso.java.tienda.service.UserService;
 
 /**
  * Servlet implementation class loginServlet
  */
 @WebServlet("/login")
-public class loginServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	UserService userService;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public loginServlet() {
+    public LoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
+    public void init() {
+    	userService = new UserService();
+    }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -42,7 +49,6 @@ public class loginServlet extends HttpServlet {
 		
 		boolean validado = true;
 		Enumeration <?> nombres = request.getParameterNames();
-		UsuarioDAO UsuarioDAO = new UsuarioDAO();
 		
 		String usuarioNombre = request.getParameter("usuario");
 		String password = request.getParameter("password");
@@ -64,7 +70,7 @@ public class loginServlet extends HttpServlet {
 		if(!validado) {
 			request.getRequestDispatcher("/view/login.jsp").forward(request, response);
 		} else {
-			Usuario usuario = UsuarioDAO.validarUsuario(usuarioNombre, password);
+			Usuario usuario = userService.login(usuarioNombre, password);
 			if(usuario == null) {
 				request.setAttribute("errorusuario", "el usuario es incorrecto.");
 				request.setAttribute("errorpassword", "la contraseña es incorrecta.");

@@ -7,17 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import curso.java.tienda.service.UserService;
+
 /**
  * Servlet implementation class cerrarSesionServlet
  */
 @WebServlet("/cerrar")
-public class cerrarSesionServlet extends HttpServlet {
+public class LogOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public cerrarSesionServlet() {
+    public LogOutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

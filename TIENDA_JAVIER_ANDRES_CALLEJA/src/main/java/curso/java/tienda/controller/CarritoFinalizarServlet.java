@@ -12,26 +12,37 @@ import javax.servlet.http.HttpServletResponse;
 
 import curso.java.tienda.dao.DetallePedidoDAO;
 import curso.java.tienda.dao.PedidoDAO;
-import curso.java.tienda.dao.articuloDAO;
+import curso.java.tienda.dao.ArticuloDAO;
 import curso.java.tienda.model.Articulo;
 import curso.java.tienda.model.DetallePedido;
 import curso.java.tienda.model.Usuario;
+import curso.java.tienda.service.ArticuloService;
+import curso.java.tienda.service.DetallePedidoService;
+import curso.java.tienda.service.PedidoService;
 
 /**
  * Servlet implementation class carritoFinalizarServlet
  */
 @WebServlet("/carritoFinal")
-public class carritoFinalizarServlet extends HttpServlet {
+public class CarritoFinalizarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private ArticuloService articuloService;
+	private DetallePedidoService detalleService;
+	private PedidoService pedidoService;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public carritoFinalizarServlet() {
+    public CarritoFinalizarServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
+    public void init() {
+		articuloService = new ArticuloService();
+		detalleService = new DetallePedidoService();
+		pedidoService = new PedidoService();
+	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -54,16 +65,13 @@ public class carritoFinalizarServlet extends HttpServlet {
 			request.setAttribute("comprando", "comprando");
 			request.getRequestDispatcher("/view/login.jsp").forward(request, response);
 		} else {
-			PedidoDAO pedidoDAO = new PedidoDAO();
-			DetallePedidoDAO detallePedidoDAO = new DetallePedidoDAO();
-			articuloDAO articuloDAO = new articuloDAO();
 			Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 			String metodoPago = request.getParameter("pago");
 			
 			HashMap <Integer, Articulo> carrito = new HashMap<Integer, Articulo>();
 			carrito = (HashMap<Integer, Articulo>) request.getSession().getAttribute("carrito");
 			
-			int numPedido = pedidoDAO.insert(usuario.getId(), metodoPago);
+			int numPedido = pedidoService.insert(usuario.getId(), metodoPago);
 			
 			if(numPedido != 0) {
 				for(Entry<Integer, Articulo> entry : carrito.entrySet()) {
@@ -79,9 +87,9 @@ public class carritoFinalizarServlet extends HttpServlet {
 					
 					DetallePedido detalle = new DetallePedido(0, numPedido, articulo.getId(), articulo.getCantidad(), articulo.getPrecio(), articulo.getImpuesto(), total);
 					
-					detallePedidoDAO.insert(detalle);
+					detalleService.insert(detalle);
 					
-					articuloDAO.update(articulo);
+					articuloService.update(articulo);
 					
 				}
 				

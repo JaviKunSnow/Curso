@@ -9,22 +9,27 @@ import javax.servlet.http.HttpServletResponse;
 
 import curso.java.tienda.dao.UsuarioDAO;
 import curso.java.tienda.model.Usuario;
+import curso.java.tienda.service.UserService;
 
 /**
  * Servlet implementation class perfilServlet
  */
 @WebServlet("/perfil")
-public class perfilServlet extends HttpServlet {
+public class ProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	UserService userService;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public perfilServlet() {
+    public ProfileServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
+    public void init() {
+    	userService = new UserService();
+    }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -44,7 +49,6 @@ public class perfilServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		boolean validado = false;
-		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		
 		String nombre = request.getParameter("nombre");
 		String apellidos = request.getParameter("apellidos");
@@ -60,7 +64,7 @@ public class perfilServlet extends HttpServlet {
 			
 			usuario.setNombre(nombre);
 			usuario.setApellidos(apellidos);
-			usuarioDAO.update(usuario);
+			userService.update(usuario);
 			
 			request.getRequestDispatcher("").forward(request, response);
 			
