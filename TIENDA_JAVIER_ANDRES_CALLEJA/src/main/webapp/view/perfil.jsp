@@ -54,6 +54,12 @@
                             	<label class="labels">Localidad</label>
                             	<input type="text" class="form-control" value="">
                             </div>
+                            <div class="col-md-12">
+                            	<label class="labels">Contraseña</label>
+                            	<input type="password" class="form-control" name="viejaPassword" value="">
+                            	<label class="labels">nueva Contraseña</label>
+                            	<input type="password" class="form-control" name="nuevaPassword" value="">
+                            </div>
                         </div>
                         <div class="mt-5 text-center">
                         	<a href="HomeServlet" class="btn btn-warning profile-button">Volver</a>

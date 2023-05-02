@@ -18,8 +18,14 @@
    	<form action="HomeServlet" method="post" class="my-4" id="form">
                 <div class="row">
                     <div class="col-md-3">
-                        <label for="input-numerico" class="form-label" >Precio</label>
-                        <input type="number" class="form-control" id="buscador" name="buscador">
+                        <div data-role="rangeslider">
+					        <label for="price-min">Precio min</label>
+					        <input type="range" name="price-min" id="price-min" value="100" min="0" max="1000">
+					    </div>
+					    <div data-role="rangeslider">
+					        <label for="price-max">Precio max</label>
+					    	<input type="range" name="price-max" id="price-max" value="800" min="0" max="1000">
+					    </div>
                     </div>
                     <div class="col-md-3">
                         <label for="select" class="form-label">Categorias</label>

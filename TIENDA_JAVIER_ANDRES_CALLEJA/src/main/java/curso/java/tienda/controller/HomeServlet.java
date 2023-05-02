@@ -51,27 +51,41 @@ public class HomeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ArticuloDAO articuloDAO = new ArticuloDAO();
+		
+		boolean filtrado  = false;
 		String comprados = request.getParameter("comprados");
 		int categoria = Integer.parseInt(request.getParameter("categorias"));
+		
 		System.out.println(comprados);
 		
 		List<Categorias> categorias = categoriaService.getAll();
 		request.setAttribute("categorias", categorias);
 		
+		StringBuilder consulta = new StringBuilder("SELECT * FROM producto");
+		
+		if(categoria != 0) {
+			if(consulta.toString().contains("WHERE")) {
+				consulta.append(" AND categoria_id = " + categoria);
+			} else {
+				consulta.append(" WHERE categoria_id = " + categoria);
+			}
+		}
+		
 		if(comprados != null) {
+			if(consulta.toString().contains("WHERE")) {
+				consulta.append(" AND categoria_id = " + categoria);
+			} else {
+				consulta.append(" WHERE categoria_id = " + categoria);
+			}
+		}
+		
+		if(filtrado) {
 			List <Articulo> catalogo = articuloDAO.masComprados();
 			request.setAttribute("catalogo", catalogo);
 			request.getRequestDispatcher("/view/index.jsp").forward(request, response);
-		} else if(categoria != 0) {
-			List <Articulo> catalogo = articuloDAO.findByCategoria(categoria);
-			request.setAttribute("catalogo", catalogo);
-			request.getRequestDispatcher("/view/index.jsp").forward(request, response);
-			
 		} else {
 			request.getRequestDispatcher("").forward(request, response);
 		}
-		
-		
 		
 	}
 

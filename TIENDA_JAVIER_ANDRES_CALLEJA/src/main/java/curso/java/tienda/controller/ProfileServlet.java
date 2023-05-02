@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jasypt.util.password.StrongPasswordEncryptor;
+
 import curso.java.tienda.dao.UsuarioDAO;
 import curso.java.tienda.model.Usuario;
 import curso.java.tienda.service.UserService;
@@ -52,6 +54,11 @@ public class ProfileServlet extends HttpServlet {
 		
 		String nombre = request.getParameter("nombre");
 		String apellidos = request.getParameter("apellidos");
+		String viejaPassword = request.getParameter("viejaPassword");
+		String nuevaPassword = request.getParameter("nuevaPassword");
+		
+		StrongPasswordEncryptor encryptor = new StrongPasswordEncryptor();
+		String passwordCifrada = encryptor.encryptPassword(nuevaPassword);
 		
 		if(!nombre.isEmpty()) {
 			if(!apellidos.isEmpty()) {
@@ -62,11 +69,20 @@ public class ProfileServlet extends HttpServlet {
 		if(validado) {
 			Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 			
-			usuario.setNombre(nombre);
-			usuario.setApellidos(apellidos);
-			userService.update(usuario);
+			if(encryptor.checkPassword(viejaPassword, usuario.getClave())) {
+				
+				usuario.setNombre(nombre);
+				usuario.setApellidos(apellidos);
+				usuario.setClave(passwordCifrada);
+				
+				userService.update(usuario);
+				
+				request.getRequestDispatcher("").forward(request, response);
+			} else {
+				request.getRequestDispatcher("/view/perfil.jsp").forward(request, response);
+			}
 			
-			request.getRequestDispatcher("").forward(request, response);
+			
 			
 		} else {
 			request.getRequestDispatcher("/view/perfil.jsp").forward(request, response);

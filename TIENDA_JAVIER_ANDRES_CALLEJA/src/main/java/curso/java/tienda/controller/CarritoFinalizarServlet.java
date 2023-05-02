@@ -48,11 +48,10 @@ public class CarritoFinalizarServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		if(request.getParameter("inicio") != null) {
-			response.sendRedirect(request.getContextPath());
-		} else {
-			request.getRequestDispatcher("/view/carrito.jsp").forward(request, response);
-		}
+		
+
+		request.getRequestDispatcher("/view/carrito.jsp").forward(request, response);
+
 		
 	}
 
