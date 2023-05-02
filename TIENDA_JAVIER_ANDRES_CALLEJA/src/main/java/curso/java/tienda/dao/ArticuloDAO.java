@@ -133,7 +133,7 @@ public class ArticuloDAO {
 		
 	}
 	
-	public List<Articulo> masComprados() {
+	public List<Articulo> getFilter(String consulta) {
 		
 		con = Conexion.getConexion();
 		
@@ -141,7 +141,7 @@ public class ArticuloDAO {
 		try {
 			
 			Statement statement = con.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM producto ORDER BY (SELECT SUM(unidades) FROM detalle WHERE producto_id = producto.id) DESC");
+			ResultSet resultSet = statement.executeQuery(consulta);
 			
 			while (resultSet.next()) {
 				

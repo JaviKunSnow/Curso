@@ -62,7 +62,7 @@
                             </div>
                         </div>
                         <div class="mt-5 text-center">
-                        	<a href="HomeServlet" class="btn btn-warning profile-button">Volver</a>
+                        	<a href="verPedidosServlet" class="btn btn-warning profile-button">Mis pedidos</a>
                         	<input type="submit" class="btn btn-warning profile-button" value="Guardar cambios">
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 package curso.java.tienda.controller;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -15,6 +16,7 @@ import curso.java.tienda.dao.PedidoDAO;
 import curso.java.tienda.dao.ArticuloDAO;
 import curso.java.tienda.model.Articulo;
 import curso.java.tienda.model.DetallePedido;
+import curso.java.tienda.model.Pedido;
 import curso.java.tienda.model.Usuario;
 import curso.java.tienda.service.ArticuloService;
 import curso.java.tienda.service.DetallePedidoService;
@@ -48,7 +50,22 @@ public class CarritoFinalizarServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		Double total = new Double(0);
+		DecimalFormat df = new DecimalFormat("#.##");
+		HashMap <Integer, Articulo> carrito = new HashMap<Integer, Articulo>();
+		carrito = (HashMap<Integer, Articulo>) request.getSession().getAttribute("carrito");
 		
+		for(Entry<Integer, Articulo> entry : carrito.entrySet()) {
+			Articulo articulo = entry.getValue();
+			
+			total += (articulo.getPrecio() * articulo.getImpuesto()) + (articulo.getCantidad() * articulo.getPrecio());
+		}
+		
+		String result = df.format(total);
+		result = result.replace(",", ".");
+		Double totalParseado = Double.parseDouble(result);
+		
+		request.setAttribute("total", totalParseado);
 
 		request.getRequestDispatcher("/view/carrito.jsp").forward(request, response);
 
@@ -66,6 +83,7 @@ public class CarritoFinalizarServlet extends HttpServlet {
 		} else {
 			Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 			String metodoPago = request.getParameter("pago");
+			Double totalFactura = new Double(0);
 			
 			HashMap <Integer, Articulo> carrito = new HashMap<Integer, Articulo>();
 			carrito = (HashMap<Integer, Articulo>) request.getSession().getAttribute("carrito");
@@ -83,6 +101,7 @@ public class CarritoFinalizarServlet extends HttpServlet {
 					articulo.setStock(articulo.getStock() - articulo.getCantidad());
 					
 					Double total = (articulo.getPrecio() * articulo.getImpuesto()) + (articulo.getCantidad() * articulo.getPrecio());
+					totalFactura += total;
 					
 					DetallePedido detalle = new DetallePedido(0, numPedido, articulo.getId(), articulo.getCantidad(), articulo.getPrecio(), articulo.getImpuesto(), total);
 					
@@ -91,6 +110,12 @@ public class CarritoFinalizarServlet extends HttpServlet {
 					articuloService.update(articulo);
 					
 				}
+				
+				Pedido pedido = pedidoService.get(numPedido);
+				
+				pedido.setTotal(totalFactura);
+				
+				pedidoService.update(pedido);
 				
 				request.getSession().setAttribute("carrito", new HashMap<Integer, Articulo>());
 				request.getRequestDispatcher("/view/compraRealizada.jsp").forward(request, response);

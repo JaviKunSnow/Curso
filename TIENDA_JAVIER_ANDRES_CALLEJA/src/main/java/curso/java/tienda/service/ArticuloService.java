@@ -24,4 +24,8 @@ public class ArticuloService {
 	public void update(Articulo articulo) {
 		articuloDAO.update(articulo);
 	}
+	
+	public List<Articulo> getFilter(String consulta) {
+		return articuloDAO.getFilter(consulta);
+	}
 }

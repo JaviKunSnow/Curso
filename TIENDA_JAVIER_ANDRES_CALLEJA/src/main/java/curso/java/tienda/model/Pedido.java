@@ -1,16 +1,17 @@
 package curso.java.tienda.model;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class Pedido {
     private int id;
     private int usuarioId;
-    private LocalDateTime fecha;
+    private Timestamp fecha;
     private String metodoPago;
     private String numFactura;
     private double total;
 
-    public Pedido(int id, int usuarioId, LocalDateTime fecha, String metodoPago, String numFactura, double total) {
+    public Pedido(int id, int usuarioId, Timestamp fecha, String metodoPago, String numFactura, double total) {
         this.id = id;
         this.usuarioId = usuarioId;
         this.fecha = fecha;
@@ -35,11 +36,11 @@ public class Pedido {
         this.usuarioId = usuarioId;
     }
 
-    public LocalDateTime getFecha() {
+    public Timestamp getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(Timestamp fecha) {
         this.fecha = fecha;
     }
 

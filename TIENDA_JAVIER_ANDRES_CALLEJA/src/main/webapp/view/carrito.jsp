@@ -63,7 +63,7 @@
                     <div class="card-body">
                         <dl class="dlist-align">
                             <dt>Precio total:</dt>
-                            <dd class="text-right ml-3">$99.99</dd>
+                            <dd class="text-right ml-3"><%= request.getAttribute("total") %></dd>
                         </dl>
                         <form action="carritoFinal" method="post">
                             <div class="mb-3">

@@ -55,6 +55,8 @@ public class HomeServlet extends HttpServlet {
 		boolean filtrado  = false;
 		String comprados = request.getParameter("comprados");
 		int categoria = Integer.parseInt(request.getParameter("categorias"));
+		int precioMin = Integer.parseInt(request.getParameter("price-min"));
+		int precioMax = Integer.parseInt(request.getParameter("price-max"));
 		
 		System.out.println(comprados);
 		
@@ -63,30 +65,32 @@ public class HomeServlet extends HttpServlet {
 		
 		StringBuilder consulta = new StringBuilder("SELECT * FROM producto");
 		
+		if(precioMax != 0 && precioMin < precioMax) {
+			consulta.append(" WHERE precio BETWEEN " + precioMin + " AND " + precioMax);
+			filtrado = true;
+		}
+		
 		if(categoria != 0) {
 			if(consulta.toString().contains("WHERE")) {
 				consulta.append(" AND categoria_id = " + categoria);
 			} else {
 				consulta.append(" WHERE categoria_id = " + categoria);
 			}
+			filtrado = true;
 		}
 		
 		if(comprados != null) {
-			if(consulta.toString().contains("WHERE")) {
-				consulta.append(" AND categoria_id = " + categoria);
-			} else {
-				consulta.append(" WHERE categoria_id = " + categoria);
-			}
+			consulta.append(" ORDER BY (SELECT SUM(unidades) FROM detalle WHERE producto_id = producto.id) DESC");
+			filtrado = true;
 		}
 		
 		if(filtrado) {
-			List <Articulo> catalogo = articuloDAO.masComprados();
+			List<Articulo> catalogo = articuloService.getFilter(consulta.toString());
 			request.setAttribute("catalogo", catalogo);
-			request.getRequestDispatcher("/view/index.jsp").forward(request, response);
+			request.getRequestDispatcher("view/index.jsp").forward(request, response);
 		} else {
 			request.getRequestDispatcher("").forward(request, response);
 		}
-		
 	}
 
 }
