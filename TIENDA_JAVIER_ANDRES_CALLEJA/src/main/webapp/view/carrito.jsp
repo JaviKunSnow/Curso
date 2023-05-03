@@ -2,7 +2,7 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="curso.java.tienda.model.Articulo" %>
 <%@ page import="curso.java.tienda.model.Usuario" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <!doctype html>
     <html lang="es">
 
@@ -46,9 +46,11 @@
                                     <td><%= entry.getValue().getDescripcion() %></td>
                                     <td><%= entry.getValue().getCantidad() %></td>
                                     <td>
-                                        <div class="price-wrap"> <var class="price"><%= entry.getValue().getPrecio() %>$</var></div>
+                                        <div class="price-wrap"> <var class="price"><%= entry.getValue().getPrecio() %> €</var></div>
                                     </td>
-                                    <td class="text-right d-none d-md-block"> <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip" data-abc="true"> <i class="fa fa-heart"></i></a> <a href="" class="btn btn-light btn-round" data-abc="true"> Eliminar</a> </td>
+                                    <td class="text-right d-none d-md-block"> 
+                                    	<a href="CarritoEliminarServlet" class="btn btn-light btn-round" data-abc="true"> Eliminar</a> 
+                                    </td>
                                 </tr>
                                 <% } %>
                             </tbody>
@@ -63,7 +65,7 @@
                     <div class="card-body">
                         <dl class="dlist-align">
                             <dt>Precio total:</dt>
-                            <dd class="text-right ml-3"><%= request.getAttribute("total") %></dd>
+                            <dd class="text-right ml-3"><%= request.getAttribute("total") %> €</dd>
                         </dl>
                         <form action="carritoFinal" method="post">
                             <div class="mb-3">

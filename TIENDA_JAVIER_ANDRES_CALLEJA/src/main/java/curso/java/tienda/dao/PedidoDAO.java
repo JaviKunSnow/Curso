@@ -76,7 +76,7 @@ public class PedidoDAO {
 				String numFactura = rs.getString("numfactura");
 				Double total = rs.getDouble("total");
 				
-				Pedido pedido = new Pedido(id, idUser, fecha, numFactura, numFactura, total);
+				Pedido pedido = new Pedido(id, idUser, fecha, metodoPago, numFactura, total);
 				pedidos.add(pedido);
 			}
 			
@@ -110,7 +110,7 @@ public class PedidoDAO {
 				String numFactura = rs.getString("numfactura");
 				Double total = rs.getDouble("total");
 				
-				Pedido pedido = new Pedido(id, idUser, fecha, numFactura, numFactura, total);
+				Pedido pedido = new Pedido(id, idUser, fecha, metodoPago, numFactura, total);
 
 				return pedido;
 			}
@@ -164,12 +164,13 @@ public class PedidoDAO {
 		
 		try {
 			
-			PreparedStatement sentenciaSQL = con.prepareStatement("update pedido set usuario_id = ?, metodopago = ?, numfactura = ?, total = ?");
+			PreparedStatement sentenciaSQL = con.prepareStatement("update pedido set usuario_id = ?, metodopago = ?, numfactura = ?, total = ? where id = ?");
 			
 			sentenciaSQL.setInt(1, pedido.getUsuarioId());
 			sentenciaSQL.setString(2, pedido.getMetodoPago());
 			sentenciaSQL.setString(3, pedido.getNumFactura());
 			sentenciaSQL.setDouble(4, pedido.getTotal());
+			sentenciaSQL.setInt(5, pedido.getId());
 			
 			sentenciaSQL.executeUpdate();
 			

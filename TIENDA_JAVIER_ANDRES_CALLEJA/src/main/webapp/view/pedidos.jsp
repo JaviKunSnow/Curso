@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="curso.java.tienda.model.Articulo" %>
 <%@ page import="curso.java.tienda.model.Pedido" %>
@@ -14,11 +15,12 @@
 <body style="padding-bottom: 70px; padding-top: 70px;">
     <%@ include file="/view/fragments/header.jsp"%>
 	<main>
+	<h1 class="mt-4">Mis pedidos</h1>
 		<form action="verPedidosServlet" method="post" class="my-4" id="form">
                 <div class="row justify-content-end">
                     <div class="col-md-3 align-self-center">
                         <label for="date">Fecha: </label>
-                        <input type="datetime-local" class="form-control" id="fecha1" name="fecha1">
+                        <input type="date" class="form-control" id="fecha" name="fecha">
                     </div>
                     <div class="col-md-3 align-self-end">
                         <input type="submit" value="filtrar">
@@ -43,7 +45,8 @@
                         <td><%= pedido.getFecha() %></td>
                         <td><%= pedido.getMetodoPago() %></td>
                         <td></td>
-                        <td><a href="">Detalles</a></td>
+                        <td><%= pedido.getTotal() %></td>
+                        <td><a href="VerDetalleServlet?id=<%= pedido.getId() %>" class="btn btn-light text-dark">Detalles</a></td>
                     </tr>
              	<% } %>
                 </tbody>

@@ -59,8 +59,11 @@ public class VerPedidosServlet extends HttpServlet {
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 		
 		if(fecha != null) {
-			System.out.println(fecha);
+//			String[] partes = fecha.split("T");
+//			String fechaParse = partes[0];
 			List <Pedido> pedidos = pedidoService.getByDate(fecha, usuario.getId());
+			
+			request.setAttribute("pedidos", pedidos);
 		}
 		
 		request.getRequestDispatcher("view/pedidos.jsp").forward(request, response);

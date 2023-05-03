@@ -55,17 +55,21 @@ public class CarritoFinalizarServlet extends HttpServlet {
 		HashMap <Integer, Articulo> carrito = new HashMap<Integer, Articulo>();
 		carrito = (HashMap<Integer, Articulo>) request.getSession().getAttribute("carrito");
 		
-		for(Entry<Integer, Articulo> entry : carrito.entrySet()) {
-			Articulo articulo = entry.getValue();
+		if(carrito != null) {
+			for(Entry<Integer, Articulo> entry : carrito.entrySet()) {
+				Articulo articulo = entry.getValue();
+				
+				total += (articulo.getPrecio() * articulo.getImpuesto()) + (articulo.getCantidad() * articulo.getPrecio());
+			}
 			
-			total += (articulo.getPrecio() * articulo.getImpuesto()) + (articulo.getCantidad() * articulo.getPrecio());
+			String result = df.format(total);
+			result = result.replace(",", ".");
+			Double totalParseado = Double.parseDouble(result);
+			
+			request.setAttribute("total", totalParseado);
 		}
 		
-		String result = df.format(total);
-		result = result.replace(",", ".");
-		Double totalParseado = Double.parseDouble(result);
 		
-		request.setAttribute("total", totalParseado);
 
 		request.getRequestDispatcher("/view/carrito.jsp").forward(request, response);
 

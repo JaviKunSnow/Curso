@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="curso.java.tienda.model.Articulo" %>
 <%@ page import="curso.java.tienda.model.Usuario" %>
 <html>
@@ -30,13 +29,13 @@
                                 <div class="product p-4">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="d-flex align-items-center">
-                                            <input name="" id="" class="btn bg-warning" type="button" value="Volver">
+                                            <a href="HomeServlet" class="btn bg-warning">Volver</a>
                                         </div>
                                     </div>
                                     <div class="mt-4 mb-3"> <span class="text-uppercase text-muted brand"><%= articulo.getMarca() %></span>
                                         <h5 class="text-uppercase"><%= articulo.getNombre() %></h5>
                                         <div class="price d-flex flex-row align-items-center"> 
-                                            <span class="act-price"><%= articulo.getPrecio() %></span>
+                                            <span class="act-price"><%= articulo.getPrecio() %> €</span>
                                         </div>
                                     </div>
                                     <p class="about"><%= articulo.getDescripcion() %></p>
@@ -71,7 +70,7 @@
                                     <div class="cart mt-4 align-items-center"> 
                                     	<form action="carrito" method="post">
                                     		<input type="hidden" name="id" value="<%= articulo.getId() %>">
-                                    		<input type="submit" class="btn btn-warning text-uppercase mr-2 px-4" value="A�adir al carrito">
+                                    		<input type="submit" class="btn btn-warning text-uppercase mr-2 px-4" value="Añadir al carrito">
                                     	</form>
                                     </div>
                                 </div>

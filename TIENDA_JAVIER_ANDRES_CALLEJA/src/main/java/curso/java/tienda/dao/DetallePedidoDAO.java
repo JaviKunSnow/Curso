@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import curso.java.tienda.config.Conexion;
 import curso.java.tienda.model.Articulo;
@@ -13,9 +15,9 @@ import curso.java.tienda.model.DetallePedido;
 
 public class DetallePedidoDAO {
 
-		Connection con;
+	Connection con;
 	
-		public void insert(DetallePedido detalle) {
+	public void insert(DetallePedido detalle) {
 		
 		con = Conexion.getConexion();
 		
@@ -39,6 +41,45 @@ public class DetallePedidoDAO {
 			e.printStackTrace();
 		}
 		
+	}
+		
+	public List<DetallePedido> getByIdPedido(int id) {
+			
+		con = Conexion.getConexion();
+			
+		List <DetallePedido> detalles = new ArrayList<>();
+		try {
+			
+				PreparedStatement sentenciaSQL = con.prepareStatement("select * from detalle where pedido_id = ?");
+				
+				sentenciaSQL.setInt(1, id);
+				
+				ResultSet rs = sentenciaSQL.executeQuery();
+				
+				while(rs.next()) {
+					
+					int idDetalle = rs.getInt("id");
+					int idPedido = rs.getInt("pedido_id");
+					int idProducto = rs.getInt("producto_id");
+					int unidades = rs.getInt("unidades");
+					Double precioUnidad = rs.getDouble("preciounidad");
+					Double impuesto = rs.getDouble("impuesto");
+					Double total = rs.getDouble("total");
+					
+					DetallePedido detalle = new DetallePedido(id, idPedido, idProducto, unidades, precioUnidad, impuesto, total);
+					
+					detalles.add(detalle);
+					
+				}
+				
+				Conexion.desconectar();
+				
+				return detalles;
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		return null;	
 	}
 	
 }
