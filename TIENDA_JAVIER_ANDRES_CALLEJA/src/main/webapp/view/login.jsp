@@ -14,9 +14,10 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
 	crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/view/css/sign-in.css">
+	<link rel="stylesheet" type="text/css" href="view/css/sign-in.css">
+	<link rel="stylesheet" type="text/css" href="view/css/colores.css">
 </head>
-<body style="padding-bottom: 70px; padding-top: 70px;">
+<body style="padding-bottom: 70px;">
 	<%@ include file="/view/fragments/header.jsp"%>
 	<main class="form-signin w-100 m-auto text-center">
 		<section class="container bg-dark p-2 rounded">
@@ -58,7 +59,7 @@
 						%>
 						<em></em> <label for="password">Contraseña:</label>
 					</section>
-					<input type="submit" class="w-100 btn btn-lg btn-warning text-dark"
+					<input type="submit" class="w-100 btn btn-lg btn-outline-light colorfondo text-white"
 						value="iniciar sesion">
 					<p class="mt-5 mb-3 text-white">&copy; 2023</p>
 				</form>

@@ -3,5 +3,9 @@
 }
 
 .colorfondo {
-    background-color: #D40C32;
+    background-color: #ff3058;
+}
+
+.colorfondo:hover {
+    background-color: #ff3058;
 }
