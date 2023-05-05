@@ -125,7 +125,7 @@ public class UsuarioDAO {
 			sentenciaSQL.setString(3, usuario.getClave());
 			sentenciaSQL.setString(4, usuario.getNombre());
 			sentenciaSQL.setString(5, usuario.getApellidos());
-			sentenciaSQL.setBoolean(6, usuario.getBaja());
+			sentenciaSQL.setBoolean(6, usuario.isBaja());
 			sentenciaSQL.setInt(7, usuario.getId());
 			
 			sentenciaSQL.executeUpdate();

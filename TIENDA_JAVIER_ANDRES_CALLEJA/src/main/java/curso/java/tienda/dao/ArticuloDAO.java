@@ -42,17 +42,18 @@ public class ArticuloDAO {
 			
 			while (resultSet.next()) {
 				
-				int id = resultSet.getInt("id");
-				String nombre = resultSet.getString("nombre");
-				String descripcion = resultSet.getString("descripcion");
-				String marca = resultSet.getString("marca");
-				int categoria_id = resultSet.getInt("categoria_id");
-				double precio = resultSet.getDouble("precio");
-				double impuesto = resultSet.getDouble("impuesto");
-				int stock = resultSet.getInt("stock");
-				boolean baja = resultSet.getBoolean("baja");
+				Articulo articulo = new Articulo();
 				
-				Articulo articulo = new Articulo(id, nombre, descripcion, marca, categoria_id, precio, impuesto, stock, baja);
+				articulo.setId(resultSet.getInt("id"));
+				articulo.setNombre(resultSet.getString("nombre"));
+				articulo.setDescripcion(resultSet.getString("descripcion"));
+				articulo.setMarca(resultSet.getString("marca"));
+				articulo.setCategoria_id(resultSet.getInt("categoria_id"));
+				articulo.setPrecio(resultSet.getDouble("precio"));
+				articulo.setImpuesto(resultSet.getDouble("impuesto"));
+				articulo.setStock(resultSet.getInt("stock"));
+				articulo.setBaja(resultSet.getBoolean("baja"));
+				
 				catalogo.add(articulo);
 				
 			}
@@ -145,17 +146,18 @@ public class ArticuloDAO {
 			
 			while (resultSet.next()) {
 				
-				int id = resultSet.getInt("id");
-				String nombre = resultSet.getString("nombre");
-				String descripcion = resultSet.getString("descripcion");
-				String marca = resultSet.getString("marca");
-				int categoria_id = resultSet.getInt("categoria_id");
-				double precio = resultSet.getDouble("precio");
-				double impuesto = resultSet.getDouble("impuesto");
-				int stock = resultSet.getInt("stock");
-				boolean baja = resultSet.getBoolean("baja");
+				Articulo articulo = new Articulo();
 				
-				Articulo articulo = new Articulo(id, nombre, descripcion, marca, categoria_id, precio, impuesto, stock, baja);
+				articulo.setId(resultSet.getInt("id"));
+				articulo.setNombre(resultSet.getString("nombre"));
+				articulo.setDescripcion(resultSet.getString("descripcion"));
+				articulo.setMarca(resultSet.getString("marca"));
+				articulo.setCategoria_id(resultSet.getInt("categoria_id"));
+				articulo.setPrecio(resultSet.getDouble("precio"));
+				articulo.setImpuesto(resultSet.getDouble("impuesto"));
+				articulo.setStock(resultSet.getInt("stock"));
+				articulo.setBaja(resultSet.getBoolean("baja"));
+				
 				catalogo.add(articulo);
 				
 			}
@@ -183,17 +185,18 @@ public class ArticuloDAO {
 			
 			while (resultSet.next()) {
 				
-				int id = resultSet.getInt("id");
-				String nombre = resultSet.getString("nombre");
-				String descripcion = resultSet.getString("descripcion");
-				String marca = resultSet.getString("marca");
-				int categoria_id = resultSet.getInt("categoria_id");
-				double precio = resultSet.getDouble("precio");
-				double impuesto = resultSet.getDouble("impuesto");
-				int stock = resultSet.getInt("stock");
-				boolean baja = resultSet.getBoolean("baja");
+				Articulo articulo = new Articulo();
 				
-				Articulo articulo = new Articulo(id, nombre, descripcion, marca, categoria_id, precio, impuesto, stock, baja);
+				articulo.setId(resultSet.getInt("id"));
+				articulo.setNombre(resultSet.getString("nombre"));
+				articulo.setDescripcion(resultSet.getString("descripcion"));
+				articulo.setMarca(resultSet.getString("marca"));
+				articulo.setCategoria_id(resultSet.getInt("categoria_id"));
+				articulo.setPrecio(resultSet.getDouble("precio"));
+				articulo.setImpuesto(resultSet.getDouble("impuesto"));
+				articulo.setStock(resultSet.getInt("stock"));
+				articulo.setBaja(resultSet.getBoolean("baja"));
+				
 				catalogo.add(articulo);
 				
 			}

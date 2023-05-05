@@ -75,7 +75,7 @@
                             <div class="btn-group">
                             <form id="form" action="carrito" method="post">
                                 <input type="hidden" id="id" name="id" value="<%=articulo.getId()%>">
-                                <input type="submit" class="btn btn-sm text-light colorfondo" id="enviar" value="Comprar">
+                                <input type="submit" class="btn rounded btn-sm colorfondo text-light" id="enviar" value="Comprar">
                             </form>
                             </div>
                         </div>

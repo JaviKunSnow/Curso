@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import curso.java.tienda.config.PropiedadesLog;
 import curso.java.tienda.dao.UsuarioDAO;
 import curso.java.tienda.model.Usuario;
 import curso.java.tienda.service.ArticuloService;
@@ -23,6 +24,7 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	UserService userService;
+	private PropiedadesLog propiedades;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -33,6 +35,7 @@ public class LoginServlet extends HttpServlet {
 
     public void init() {
     	userService = new UserService();
+    	propiedades = new PropiedadesLog();
     }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -76,6 +79,7 @@ public class LoginServlet extends HttpServlet {
 				request.setAttribute("errorpassword", "la contraseña es incorrecta.");
 				request.getRequestDispatcher("/view/login.jsp").forward(request, response);
 			} else {
+				propiedades.loginAccess(usuarioNombre);
 				request.getSession().setAttribute("usuario", usuario);
 				if(request.getParameter("comprando") != null) {
 					request.getRequestDispatcher("/view/carrito.jsp").forward(request, response);

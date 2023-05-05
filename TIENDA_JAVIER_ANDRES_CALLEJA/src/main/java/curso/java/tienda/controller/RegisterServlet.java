@@ -23,7 +23,7 @@ import curso.java.tienda.service.UserService;
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserService userService;
-       
+    private PropiedadesLog propiedades;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -34,6 +34,7 @@ public class RegisterServlet extends HttpServlet {
 
     public void init() {
     	userService = new UserService();
+    	propiedades = new PropiedadesLog();
     }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -60,7 +61,6 @@ public class RegisterServlet extends HttpServlet {
 		String passwordCifrada = encryptor.encryptPassword(pass1);
 		
 		Enumeration <?> nombres = request.getParameterNames();
-		PropiedadesLog propiedades = new PropiedadesLog();
 		
 		while(nombres.hasMoreElements()) {
 			

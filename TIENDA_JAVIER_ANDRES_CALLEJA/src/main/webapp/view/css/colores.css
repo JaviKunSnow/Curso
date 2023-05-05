@@ -8,4 +8,5 @@
 
 .colorfondo:hover {
     background-color: #ff3058;
+    filter: brightness(0.8);
 }

@@ -16,6 +16,7 @@
 	crossorigin="anonymous"></script>
 	<link rel="stylesheet" type="text/css" href="view/css/sign-in.css">
 	<link rel="stylesheet" type="text/css" href="view/css/colores.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body style="padding-bottom: 70px;">
 	<%@ include file="/view/fragments/header.jsp"%>
@@ -59,13 +60,13 @@
 						%>
 						<em></em> <label for="password">Contraseña:</label>
 					</section>
-					<input type="submit" class="w-100 btn btn-lg btn-outline-light colorfondo text-white"
-						value="iniciar sesion">
+					<Button type="submit" id="enviar" class="w-100 btn btn-lg btn-outline-light colorfondo text-white">iniciar sesion</Button>
 					<p class="mt-5 mb-3 text-white">&copy; 2023</p>
 				</form>
 			</section>
 		</section>
 	</main>
 	<%@ include file="/view/fragments/footer.jsp"%>
+	<script src="view/js/loginFilter.js"></script>
 </body>
 </html>

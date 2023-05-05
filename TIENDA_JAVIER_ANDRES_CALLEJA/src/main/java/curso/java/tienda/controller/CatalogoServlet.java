@@ -65,6 +65,8 @@ public class CatalogoServlet extends HttpServlet {
 			request.getSession().setAttribute("carrito", new HashMap<Integer, Articulo>());
 		} 
 		
+		//System.out.println(request.getServletContext().getRealPath(""));
+		
 		request.setAttribute("catalogo", catalogo);
 		request.setAttribute("categorias", categorias);
 		

@@ -32,13 +32,13 @@ public class CarritoEliminarServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int id = Integer.parseInt(request.getParameter("id"));
+		String id = request.getParameter("id");
 		
 		HashMap <Integer, Articulo> carrito = (HashMap<Integer, Articulo>) request.getSession().getAttribute("carrito");
 		
-		carrito.remove(id);
+		carrito.remove(Integer.parseInt(id));
 		
-		request.getRequestDispatcher("/view/carrito.jsp").forward(request, response);
+		request.getRequestDispatcher("/carritoFinal").forward(request, response);
 		
 	}
 

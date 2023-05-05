@@ -50,7 +50,7 @@
                                         <div class="price-wrap"> <var class="price"><%= entry.getValue().getPrecio() %> €</var></div>
                                     </td>
                                     <td class="text-right d-none d-md-block"> 
-                                    	<a href="CarritoEliminarServlet" class="btn btn-light btn-round" data-abc="true"> Eliminar</a> 
+                                    	<a href="CarritoEliminarServlet?id=<%= entry.getValue().getId() %>" class="btn btn-dark text-white btn-round">Eliminar</a> 
                                     </td>
                                 </tr>
                                 <% } %>
@@ -79,10 +79,10 @@
                             </div>
                             <hr> 
                             <div class="col-12">
-                            	<a href="#" class="btn btn-out colorfondo btn-square btn-main" data-abc="true">Continua comprando</a> 
+                            	<a href="#" class="btn btn-out colorfondo text-white btn-square btn-main" data-abc="true">Continua comprando</a> 
                             </div>
                             <div class="col-12">
-                            	<input type="submit" class="btn btn-out colorfondo btn-square btn-main mt-2" value="finalizar compra">
+                            	<input type="submit" class="btn btn-out colorfondo text-white btn-square btn-main mt-2" value="finalizar compra">
                             </div>
                         </form>
                     </div>
