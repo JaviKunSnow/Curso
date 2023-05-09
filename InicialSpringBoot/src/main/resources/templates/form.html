@@ -1,0 +1,13 @@
+<form th:action="@{/sesion2b/submit}" method="post" th:object="${usuario}">
+  
+  	Nombre
+	<input type="text" placeholder="Nombre de usuario" name="name" autofocus>
+	<br><br>
+	
+	Contraseña
+	<input type="password" placeholder="Contraseña de usuario" name="pass">
+	<br><br>
+	
+    <button type="submit">Logarse</button>
+
+</form>

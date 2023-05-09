@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+<body>
+
+	<h1>Nuevo usuario</h1>
+	<form th:action="@{/usuario/crear/summit}" method="post" th:object="${usuario}">
+	  
+	  	Nombre
+		<input type="text" placeholder="Nombre de usuario" name="name">
+		<br><br>
+		
+		Contraseña
+		<input type="password" placeholder="Contraseña de usuario" name="pass">
+		<br><br>
+		
+	    <button type="submit">Alta</button>
+	
+	</form>
+
+</body>
+</html>

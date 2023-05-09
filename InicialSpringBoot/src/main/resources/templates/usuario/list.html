@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+<body>
+	<p><a th:href="@{/usuario/crear}">nuevo</a></p>
+	
+	<table th:each="usuario : ${lista}">
+		<tr>
+			<td th:text="${usuario.name}"></td>
+			<td th:text="${usuario.pass}"></td>
+			<td><a th:href="@{/usuario/editar/}+${usuario.id}">editar</a></td>
+			<td><a th:href="@{/usuario/borrar}+'?id='+${usuario.id}">borrar</a></td>
+			
+			<td><a th:href="@{/usuario/editar(id=${usuario.id})}">editar</a></td>
+			<td><a th:href="@{/usuario/borrar/{id}(id=${usuario.id})}">borrar</a></td>
+			
+		</tr>
+	</table>
+</body>
+</html>

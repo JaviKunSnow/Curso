@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<table th:each="usuario : ${list}">
+		<tr>
+			<td th:text="${usuario.nombre}"></td>
+			<td>editar</td>
+			<td>borrar</td>
+		</tr>
+	</table>
+	<p th:text="'Otro: ' + ${otro?.nombre}"></p>
+	<p th:text="'Lista[0]: ' + ${list[0].nombre}"></p>
+</body>
+</html>

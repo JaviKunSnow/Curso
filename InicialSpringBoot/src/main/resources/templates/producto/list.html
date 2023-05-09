@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+<body>
+	<p><a th:href="@{/producto4/crear}">nuevo</a></p>
+	
+	<table th:each="producto : ${lista}">
+		<tr>
+			<td th:text="${producto.nombre}"></td>
+			<td th:text="${producto.precio}"></td>
+			<td><a th:href="@{/producto4/borrar/}+${producto.id}">borrar</a></td>
+		</tr>
+	</table>
+</body>
+</html>
