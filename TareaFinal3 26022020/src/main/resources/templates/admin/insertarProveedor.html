@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/css/estilos.css">
+</head>
+<body>
+
+	<form th:object=${proveedor} action="/admin/insertarProveedor" method="GET">
+		
+		<p>Idproveedor: <input type="text" th:field="*{idproveedor}"/> </p>
+		<p>Nombre: <input type="text" th:field="*{nombre}"/> </p>
+		<p>Apellidos: <input type="text" th:field="*{apellidos}"/> </p>
+		<p>NIF: <input type="text" th:field="*{nif}"/> </p>
+		<p>fecha: <input type="date" th:field="*{fecha}"/> </p>
+		
+		<p> <input type="submit" value="Inserta Proveedor"/></p>
+	</form>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<table>
+	<tr>
+			<th>ID</th>
+			<th>Nombre</th>
+			<th>Apellidos</th>
+			<th>Nif</th>
+			<th>Fecha</th>
+		</tr>
+	<tr th:each="proveedor: ${lista}">
+		<td th:text="${proveedor.idproveedor}"></td>
+		<td th:text="${proveedor.nombre}"></td>
+		<td th:text="${proveedor.apellidos}"></td>
+		<td th:text="${proveedor.nif}"></td>
+		<td th:text="${proveedor.fecha}"></td>
+		<td><a th:href="@{/registrado/modificarForm(idproveedor=${proveedor.idproveedor})}">Modificar	
+		
+		</tr>
+	</table>
+	<a th:href="@{/registrado}">Volver al menu principal</a>
+</body>
+</html>

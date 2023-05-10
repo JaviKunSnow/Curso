@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/css/estilos.css">
+</head>
+<body>
+	<h1 th:text="${idproveedora}" ></h1>
+	<form th:object=${proveedor} action="/admin/modificar" method="GET">
+		
+		 <input type="text"  th:field="*{idproveedor}" hidden/> 
+		<p>Nombre: <input type="text" th:field="*{nombre}" /> </p>
+		<p>Apellidos: <input type="text" th:field="*{apellidos}"  /> </p>
+		<p>NIF: <input type="text" th:field="*{nif}"/> </p>
+		<p>fecha: <input type="date" th:field="*{fecha}"/> </p>
+		
+		<p> <input type="submit" value="Modificar"/></p>
+	</form>
+	<a href="javascript:history.back()"> Volver Atrás</a>.
+</body>
+</html>

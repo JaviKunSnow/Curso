@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<table>
+	<div th:if="${param.id}">
+		<p th:text="${idproveedor}"></p>
+	</div>
+	<tr>
+			<th>ID</th>
+			<th>Nombre</th>
+			<th>Apellidos</th>
+			<th>Nif</th>
+			<th>Fecha</th>
+			<th>Elimar</th>
+		</tr>
+	<tr th:each="proveedor: ${lista}">
+		<td th:text="${proveedor.idproveedor}"></td>
+		<td th:text="${proveedor.nombre}"></td>
+		<td th:text="${proveedor.apellidos}"></td>
+		<td th:text="${proveedor.nif}"></td>
+		<td th:text="${proveedor.fecha}"></td>
+		<td><a th:href="@{/admin/borrarProveedor(idproveedor=${proveedor.idproveedor})}">Eliminar</a></td>
+		<td><a th:href="@{/admin/modificarForm(idproveedor=${proveedor.idproveedor})}">Modificar	</a></td>
+		</tr>
+	</table>
+	<a th:href="@{/admin/insertarForm}">Crear nuevo</a>
+	<a th:href="@{/admin}">Volver al menu principal</a>
+</body>
+</html>
