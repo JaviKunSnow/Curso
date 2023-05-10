@@ -18,7 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="view/css/colores.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
-<body style="padding-bottom: 70px;">
+<body style="padding-bottom: 70px; padding-top: 70px;">
 	<%@ include file="/view/fragments/header.jsp"%>
 	<main class="form-signin w-100 m-auto text-center">
 		<section class="container bg-dark p-2 rounded">

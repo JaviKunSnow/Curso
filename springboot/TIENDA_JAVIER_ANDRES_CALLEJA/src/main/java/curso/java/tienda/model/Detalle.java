@@ -22,6 +22,7 @@ public class Detalle {
 
     private Integer unidades;
 
+    @Column(name = "preciounidad")
     private Double precioUnidad;
 
     private Double impuesto;

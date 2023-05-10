@@ -48,6 +48,9 @@
                         <td></td>
                         <td><%= pedido.getTotal() %></td>
                         <td><a href="VerDetalleServlet?id=<%= pedido.getId() %>" class="btn btn-light text-dark">Detalles</a></td>
+                        <% if(pedido.getEstado() == "E" || pedido.getEstado() != "PC") { %>
+                        <td><a href="CancelarServlet?id=<%= pedido.getId() %>" class="btn btn-light text-dark">Cancelar Pedido</a></td>
+                        <% } %>
                     </tr>
              	<% } %>
                 </tbody>

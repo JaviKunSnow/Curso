@@ -20,8 +20,12 @@ public class Pedido {
 
     private LocalDateTime fecha;
 
+    @Column(name = "metodopago")
     private String metodoPago;
+    
+    private String estado;
 
+    @Column(name = "numfactura")
     private String numFactura;
 
     private Double total;

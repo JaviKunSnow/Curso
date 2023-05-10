@@ -29,6 +29,11 @@
     background-color: #ff3058;
   }
   
+.fondo:hover {
+	background-color: #ff3058;
+    filter: brightness(0.8)
+  }
+  
   #sidebar-wrapper {
     min-height: 100vh;
     margin-left: -15rem;
